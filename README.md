@@ -1,1 +1,2 @@
-# mango_disease_web_app
+# Mango Disease Web App 🥭
+Project in progress. 
