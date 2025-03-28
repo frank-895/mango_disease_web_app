@@ -1,0 +1,18 @@
+{% extends "diseasedetails.html" %}
+
+{%block page_title%} {{disease.name}} {% endblock %}
+
+{%block disease_body %}
+    <div class="container cols">
+        <div class='col'>
+            <img src="{{disease.image}}"> <!--Disease Image Link-->
+        </div>
+        <div class='col'>
+            <h1 class="disease">
+            {{disease.name}}    <!--Disease Name-->
+            </h1>
+            <p>{{disease.ldesc}}</p> <!--Disease Long Description-->
+        </div>
+        <!--This to be expanded based on other fields we include-->
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseases</title>
+</head>
+<body style="margin:0; padding: 0;">
+    <!--We could prob include an entire header/nav bar in block-->
+    <header class = 'header' style="height: 8vh; border: 1px black solid;">
+        <nav class = 'navbar'>
+            <div>THIS IS WHERE AN LOGO SHOULD GO</div>
+            <div class="navitem"><a href="{% url 'home' %}">Home</a></div>
+            <div class="navitem"><a href="{% url 'diseases'%}">Diseases and Pests</a></div> <!--Perhaps dropdown to link to each disease?-->
+            <div class="navitem"><a href="{% url 'about' %}">About</a></div>
+        </nav>
+    </header>
+    <main style="margin: auto;">
+        <!--Hero Splash maybe unnecessary for content?-->
+        <section style="height: 5vh; border: 1px black solid;" >
+            <div class="container hero" style="height: 100%;">
+                <div class ="hero-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('Mangopile2.avif');height: 100%; max-width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
+                <div class ="hero-text" >
+                    <h1 style="margin: 0;">Common Mango Pests and Diseases</h1>
+                </div>
+            </div>
+        </section>
+        <!--Links to Diseases-->
+        <section>
+            <div class = "container">
+                {% block content %}
+                    {% for disease in object_list %}
+                            <div class = "card">
+                                <div class="disease-image">{{%disease.image%}}</div> <!-- Disease Image Link-->
+                                <div class="disease-title">{{%disease.name%}}</div> <!-- Disease Name-->
+                                <div class="disease-bdesc">{{%disease.bdesc%}}</div> <!-- Disease Brief Description-->
+                                <div class="disease-link">{{%disease.link%}}</div> <!--Url link with content passthrough-->
+                            </div>
+                    {% endfor %}
+                {% endblock %}
+            </div>
+        </section>
+    </main>
+    <footer style="height: 50px; border: 1px black solid;"> <!--Could also just be an include-->
+        <div class="container">
+            <p>Group 2 the best</p> 
+        </div>
+    </footer>
+</body>
+</html>
