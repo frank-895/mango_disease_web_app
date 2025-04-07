@@ -29,6 +29,10 @@ nav .navitem a.active {
     color: white;
 }
 
+nav .logo {
+    height: 40px;
+}
+
 header {
     background-image: url("../images/header-background.avif");
     background-size: cover;
