@@ -5,3 +5,8 @@
 {% block page_title %}About Us{% endblock %}
 {% block page_header %}About Us{% endblock %}
 
+{% block content %}
+{% for item in cards %}
+<p>{{ item.name }}</p>
+{% endfor %}
+{% endblock %}
