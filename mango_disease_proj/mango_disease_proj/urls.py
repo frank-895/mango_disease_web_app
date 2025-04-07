@@ -24,3 +24,13 @@ urlpatterns = [
     path('diseases/', views.diseases, name='diseases'),
     path('about/', views.about, name='about'),
 ]
+
+
+# Code from https://how.dev/answers/how-to-upload-images-in-django
+# This is because Django does not servce media files by defauly in development. 
+# It instructs Django to serve files from /media/ to be viewed in the browser.
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

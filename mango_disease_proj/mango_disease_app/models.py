@@ -42,3 +42,4 @@ from django.db import models
 class AuthorCard(models.Model):
     name = models.CharField(max_length=30)
     interests = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='author_images/', default='author_images/default.png')

@@ -8,7 +8,7 @@
 {% block content %}
     {% for item in cards %}
         <div class="card">
-            <img class="author_img" src="">
+            <img class="author_img" src="{{ item.image.url }}">
             <div class="card-container">
                 <h3>{{ item.name }}</h3>
                 <p>{{ item.interests }} 
