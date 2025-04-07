@@ -39,7 +39,38 @@ from django.db import models
 ######## AUTHOR CLASS #########
 # Snelling, April 7 2025
 
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+# add help text
 class AuthorCard(models.Model):
     name = models.CharField(max_length=30)
-    interests = models.CharField(max_length=100)
+    degree = models.CharField(max_length=30, default="Computer Science")
+    interests = models.CharField(max_length=100, default="No interests")
     image = models.ImageField(upload_to='author_images/', default='author_images/default.png')
+
+    # PERSONALITY TRAITS
+    # scored on 0 to 10 scale: 0 is leftmost, 10 is rightmost.
+
+    # Collaborator - Independent
+    CI = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+        )
+    
+    # Big picture - Detail oriented
+    BD = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+        )
+    
+    # Communicator - Listener
+    CI = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+        )
+    
+    # Creative - Practical
+    CI = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+        )
