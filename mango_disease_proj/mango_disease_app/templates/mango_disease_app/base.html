@@ -1,28 +1,30 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block page_title %}Disease Title {% endblock %}</title>
-    <link rel="stylesheet" href="static/css/styles.css">
+    <title>{% block page_title %}Disease Title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block custom_head_entries %}{% endblock %}
 </head>
 <body>
-    <!--We could prob include an entire header/nav bar in block-->
-    <header class = 'header' style="height: 8vh; border: 1px black solid;">
-        <nav class = 'navbar'>
-            <div>THIS IS WHERE AN LOGO SHOULD GO</div>
-            <div class="navitem"><a href="{% url 'home' %}">Home</a></div>
-            <div class="navitem"><a href="{% url 'diseases'%}">Diseases and Pests</a></div> <!--Perhaps dropdown to link to each disease?-->
-            <div class="navitem"><a href="{% url 'about' %}">About</a></div>
-        </nav>
+    <nav class='navbar'>
+        <div><a href="{% url 'home' %}">MangoDiseaseOrg</a></div>
+        <div class="navitem"><a href="{% url 'home' %}">Home</a></div>
+        <div class="navitem"><a href="{% url 'diseases'%}">Diseases and Pests</a></div> <!--Perhaps dropdown to link to each disease?-->
+        <div class="navitem"><a href="{% url 'about' %}">About</a></div>
+    </nav>
+    <header class='header'>
+        <h1>{% block page_header %}Mango Diseases{% endblock %}</h1>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer style="height: 50px; border: 1px black solid;"> <!--Could also just be an include-->
-        <div class="container">
-            <p>Group 2 the best</p> 
-        </div>
+    <footer>
+        <p>Website Created By Group 2 for learning purposes only</p>
+        <p>HIT237 Charles Darwin University</p>
     </footer>
 </body>
 </html>
