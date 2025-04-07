@@ -6,7 +6,14 @@
 {% block page_header %}About Us{% endblock %}
 
 {% block content %}
-{% for item in cards %}
-<p>{{ item.name }}</p>
-{% endfor %}
+    {% for item in cards %}
+        <div class="card">
+            <img class="author_img" src="">
+            <div class="card-container">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.interests }} 
+            </div>
+        </div>
+    
+    {% endfor %}
 {% endblock %}
