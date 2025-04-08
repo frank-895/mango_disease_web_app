@@ -9,7 +9,10 @@
     <h2>Our Team</h2>
     {% for item in cards %}
         <div class="card">
-            <img class="author_img" src="{{ item.image.url }}">
+            <div class="image-wrapper">
+                <img class="author_img" src="{{ item.image.url }}">
+                <p class="overlay-text">{{ item.student_number }}</p>
+            </div>
             <div class="card-container">
                 <h3>{{ item.name }}</h3>
                 <h4>{{ item.degree }}</h4>
