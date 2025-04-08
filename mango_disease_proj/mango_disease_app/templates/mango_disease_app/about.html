@@ -1,4 +1,4 @@
-<!-- HTML file last updated by Snelling April 7 2025 -->
+<!-- HTML file last updated by Snelling April 8 2025 -->
 
 {% extends 'mango_disease_app/base.html' %}
 
@@ -8,35 +8,37 @@
 {% block content %}
     <h2>Our Team</h2>
     {% for item in cards %}
-        <div class="card">
-            <div class="image-wrapper">
-                <img class="author_img" src="{{ item.image.url }}">
-                <p class="overlay-text">{{ item.student_number }}</p>
-            </div>
-            <div class="card-container">
-                <h3>{{ item.name }}</h3>
-                <h4>{{ item.degree }}</h4>
-                <p>{{ item.interests }}</p>
-                
-                <div class="traits-box">
-                    <h5>PERSONALITY TRAITS</h5>
-                    <label for="meter">Collaborator - Independent</label>
-                    <div class="meter">
-                        <span 
-                        style="width:{{ item.collaborator_independent }}%">
-                        </span>
-                    </div>
-                    <label for="meter">Big Picture - Detail Oriented</label>
-                    <div class="meter">
-                        <span style="width:{{ item.bigPicture_detailOriented }}%"></span>
-                    </div>
-                    <label for="meter">Communicator - Listener</label>
-                    <div class="meter">
-                        <span style="width:{{ item.communicator_listener }}%"></span>
-                    </div>
-                    <label for="meter">Creative - Practical</label>
-                    <div class="meter">
-                        <span style="width:{{ item.creative_practical }}%"></span>
+        <div class="card-container">
+            <div class="card">
+                <div class="image-wrapper">
+                    <img class="author_img" src="{{ item.image.url }}">
+                    <p class="overlay-text">{{ item.student_number }}</p>
+                </div>
+                <div class="card-container">
+                    <h3>{{ item.name }}</h3>
+                    <h4>{{ item.degree }}</h4>
+                    <p>{{ item.interests }}</p>
+                    
+                    <div class="traits-box">
+                        <h5>PERSONALITY TRAITS</h5>
+                        <label for="meter">Collaborator - Independent</label>
+                        <div class="meter">
+                            <span 
+                            style="width: {{ item.collaborator_independent }}%">
+                            </span>
+                        </div>
+                        <label for="meter">Big Picture - Detail Oriented</label>
+                        <div class="meter">
+                            <span style="width: {{ item.bigPicture_detailOriented }}%"></span>
+                        </div>
+                        <label for="meter">Communicator - Listener</label>
+                        <div class="meter">
+                            <span style="width: {{ item.communicator_listener }}%"></span>
+                        </div>
+                        <label for="meter">Creative - Practical</label>
+                        <div class="meter">
+                            <span style="width: {{ item.creative_practical }}%"></span>
+                        </div>
                     </div>
                 </div>
             </div>
