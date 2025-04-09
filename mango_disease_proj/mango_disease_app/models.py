@@ -1,45 +1,64 @@
 from django.db import models
 
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 ######## DISEASE CLASS #########
 # Patrick, March 2025
 
-# class data_item():
+class DiseaseItem(models.Model):
     
-#     def __init__(self,name,pest=False,snip='Brief Description / Snippet',ldesc='Long Description',image='Image URL',severity='Severe',control='Control method'):
+    # Disease / Pest Details
+    name = models.CharField(
+        max_length=30,
+        default="No Name Entered",
+        help_text="Enter disease or pest name.",
+    )
+    
+    pest = models.BooleanField(
+        default=False,
+        help_text="Set to TRUE if this is a pest, FALSE if this is a disease.",
+    )
+    
+    severity = models.SmallIntegerField(
+        validators=[MinValueValidator(1),MaxValueValidator(10)],
+        default=1,
+        help_text="Severity of disease / pest on a scale from from 1 to 10, with 10 being most severe.",
+    )
+    
+    spreadability = models.SmallIntegerField(
+        validators=[MinValueValidator(1),MaxValueValidator(10)],
+        default=1,
+        help_text="How quickly the disease / pest spreads on a scale from from 1 to 10, with 10 being the fastest.",
+    )
+    
+    image = models.ImageField(
+        upload_to="disease_images/",
+        default="author_images/default_disease.jpg",
+        help_text="Upload an image or a default disease (Anthracnose) will be provided."
         
-#         self.name=name          # Name of the disease / pest
-        
-#         if pest:                # Whether the item is a pest or a disease
-#             self.pd = 'Pest'
-#         else:
-#             self.pd = 'Disease'
-        
-#         self.snip=snip          # Snippet of information to be displayed on the list page
-        
-#         self.ldesc=ldesc        # Longer description to be displayed on the disease / pest's specific page
-        
-#         self.image=image        # Related image
-        
-#         self.severity=severity  # Severity of threat
-        
-#         self.control=control    # Method of controlling / removing the disease / pest
-        
-# # Creation of 7 data items
-# item1 = data_item('Item One')
-# item2 = data_item('Item Two')
-# item3 = data_item('Item Three')
-# item4 = data_item('Item Four')
-# item5 = data_item('Item Five')
-# item6 = data_item('Item Six')
-# item7 = data_item('Item Seven')
+    )
+    
+    # Disease / Pest Information
+    sdesc = models.TextField(
+        default="No description given",
+        help_text="Enter a short description of the disease or pest to be displayed on a list.",
+    )
+    
+    ldesc = models.TextField(
+        default="No description given",
+        help_text="Enter a long description of the disease or pest to be displayed on an individual page.",
+    )
+    
+    control = models.TextField(
+        default="No control method given",
+        help_text="Method(s) of controlling or eliminating the disease / pest.",
+    )
 
-# # List of all items
-# item_list = [item1,item2,item3,item4,item5,item6,item7]
+
 
 ######## AUTHOR CLASS #########
 # Snelling, April 7 2025
 
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 # add help text
 class AuthorCard(models.Model):

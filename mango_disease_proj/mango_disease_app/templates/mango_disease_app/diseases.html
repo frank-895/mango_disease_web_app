@@ -1,3 +1,15 @@
 <!--Patrick-->
 
 {% extends 'mango_disease_app/base.html' %}
+
+{% block page_title %}Disease and Pest List{% endblock %}
+{% block page_header %}Disease and Pest List{% endblock %}
+
+{% block content %}
+    {% for item in diseases %}
+        <img class="author_img" src="{{ disease.image.url }}">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.sdesc }}</p>
+        <br>
+    {% endfor %}
+{% endblock %}

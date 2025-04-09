@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from .models import AuthorCard
+from .models import AuthorCard, DiseaseItem
 
 def home(request):
     return render(request, 'mango_disease_app/index.html')
 
 def diseases(request):
-    return render(request, 'mango_disease_app/diseases.html')
+    diseases = DiseaseItem.objects.all()
+    page_data = {'diseases': diseases}
+    return render(request, 'mango_disease_app/diseases.html', page_data)
 
 def about(request):
     cards = AuthorCard.objects.all()
