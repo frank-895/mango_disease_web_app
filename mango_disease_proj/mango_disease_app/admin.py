@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import AuthorCard, DiseaseItem
+from .models import DiseaseItem
 
-admin.site.register(AuthorCard)
 admin.site.register(DiseaseItem)

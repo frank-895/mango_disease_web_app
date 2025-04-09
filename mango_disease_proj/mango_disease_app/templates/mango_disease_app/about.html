@@ -5,19 +5,21 @@
 {% block page_title %}About Us{% endblock %}
 {% block page_header %}About Us{% endblock %}
 
+{% load static %}
+
 {% block content %}
     <h2>Our Team</h2>
     {% for item in cards %}
         <div class="card-container">
             <div class="card">
                 <div class="image-wrapper">
-                    <img class="author_img" src="{{ item.image.url }}">
+                    <img class="author_img" src="{% static 'images/' %}{{ item.image }}">
                     <p class="overlay-text">{{ item.student_number }}</p>
                 </div>
                 <div class="card-container">
                     <h3>{{ item.name }}</h3>
                     <h4>{{ item.degree }}</h4>
-                    <p>{{ item.interests }}</p>
+                    <p>Interests: {{ item.interests }}</p>
                     
                     <div class="traits-box">
                         <h5>PERSONALITY TRAITS</h5>
