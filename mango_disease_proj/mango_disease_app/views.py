@@ -11,7 +11,9 @@ class AuthorCard:
                  student_number:str,
                  degree:str, 
                  interests:str,
-                 image:str, # place image in static/images and pass file name here. 
+                 image:str, # place image in static/images and pass file name here
+                 
+                 # score on a scale of 0 to 100, where 0 is leftmost attribute and 100 is rightmost attribute
                  collaborator_independent:int,
                  bigPicture_detailOriented:int, 
                  communicator_listener:int,
