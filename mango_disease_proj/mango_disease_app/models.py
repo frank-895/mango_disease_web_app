@@ -53,3 +53,74 @@ class DiseaseItem(models.Model):
         default="No control method given",
         help_text="Method(s) of controlling or eliminating the disease / pest.",
     )
+
+
+
+######## AUTHOR CLASS #########
+# Snelling, April 7 2025
+
+
+# add help text
+class AuthorCard(models.Model):
+    
+    # AUTHOR DETAILS
+    name = models.CharField(
+        max_length=30,
+        default="No Name Entered",
+        help_text="Enter contributor name.",
+    )
+    
+    student_number = models.CharField(
+        max_length=7,
+        default="S000000",
+        help_text="Enter CDU Student Number from ID card.",
+    )
+    
+    degree = models.CharField(
+        max_length=30, 
+        default="Computer Science",
+        help_text="Enter degree at CDU.",
+    )
+    
+    interests = models.CharField(
+        max_length=100,
+        default="No interests",
+        help_text="Enter a few interests in less than 100 characters.",
+    )
+    
+    image = models.ImageField(
+        upload_to="author_images/",
+        default="author_images/default.png",
+        help_text="Upload an image or a default empty profile will be provided."
+    )
+
+    # PERSONALITY TRAITS
+    # scored on 0 to 10 scale: 0 is leftmost, 10 is rightmost.
+
+    # Collaborator - Independent
+    collaborator_independent = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+            help_text="0 is for a strong collaborator, 10 is for most independent.",
+        )
+    
+    # Big picture - Detail oriented
+    bigPicture_detailOriented = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+            help_text="0 is for focus on big picture, 10 is for focus on details.",
+        )
+    
+    # Communicator - Listener
+    communicator_listener = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+            help_text="0 is for a strong communicator, 10 is for a strong listener.",
+        )
+    
+    # Creative - Practical
+    creative_practical = models.SmallIntegerField(
+            validators=[MinValueValidator(0), MaxValueValidator(10)],
+            default=5,
+            help_text="0 is for most creative, 10 is for most practical.",
+        )
