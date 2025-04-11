@@ -14,7 +14,18 @@ frank = AuthorCard("Frank Snelling",
                    10,
                    90)
 
-authors = [frank]
+michael = AuthorCard("Michael Lewis",
+                   "S342724",
+                   "Secondary Education",
+                   "Ludology, Squash, Hiking",
+                   "blank.png",
+                   50,
+                   80,
+                   60,
+                   70)
+
+
+authors = [frank, michael]
 
 def home(request):
     return render(request, 'mango_disease_app/index.html')

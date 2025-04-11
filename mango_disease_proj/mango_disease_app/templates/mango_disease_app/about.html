@@ -9,14 +9,14 @@
 
 {% block content %}
     <h2>Our Team</h2>
-    {% for item in cards %}
-        <div class="card-container">
+    <div class="card-container">
+        {% for item in cards %}
             <div class="card">
                 <div class="image-wrapper">
                     <img class="author_img" src="{% static 'images/' %}{{ item.image }}">
                     <p class="overlay-text">{{ item.student_number }}</p>
                 </div>
-                <div class="card-container">
+                <div class="card-content">
                     <h3>{{ item.name }}</h3>
                     <h4>{{ item.degree }}</h4>
                     <p>Interests: {{ item.interests }}</p>
@@ -44,6 +44,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
