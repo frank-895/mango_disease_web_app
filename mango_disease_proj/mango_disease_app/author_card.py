@@ -29,7 +29,7 @@ class AuthorCard:
         self.bigPicture_detailOriented = self.validate_int(bigPicture_detailOriented, "bigPicture_detailOriented", 0, 100)
         self.communicator_listener = self.validate_int(communicator_listener, "communicator_listener", 0, 100)
         self.creative_practical = self.validate_int(creative_practical, "creative_practical", 0, 100)
-        self.image = image
+        self.image = self.validate_img(image)
 
     def validate_string(self, string:str, var_name:str, max_len:int):
         """Function checks that string is type string and has length of less than max_len."""
@@ -48,3 +48,16 @@ class AuthorCard:
             raise ValueError("%s must be between %d and %d" % (var_name, min_val, max_val))
         
         return integer
+
+    def validate_img(self, filename:str):
+        """Function checks that image exists in the static/images directory."""
+        if filename is None or filename is "":
+            return None
+        
+        path = os.path.join(settings.BASE_DIR, 'mango_disease_app', "static", "images", filename)
+        print(f"Checking if the image exists at: {path}")
+        
+        if not os.path.isfile(path):
+            raise FileNotFoundError("%s not found in static/images/" % filename)
+        
+        return filename
