@@ -13,11 +13,11 @@
         {% for item in cards %}
             <div class="card">
                 <div class="image-wrapper">
-                    <img class="author_img" src="{% static 'images/' %}{{ item.image }}">
+                    <img class="author_img" src="{% static 'images/' %}{{ item.image|default:"blank.png" }}">
                     <p class="overlay-text">{{ item.student_number }}</p>
                 </div>
                 <div class="card-content">
-                    <h3>{{ item.name }}</h3>
+                    <h3>{{ item.name|upper }}</h3>
                     <h4>{{ item.degree }}</h4>
                     <p>Interests: {{ item.interests }}</p>
                     

@@ -3,22 +3,21 @@ from .models import DiseaseItem
 from .author_card import AuthorCard
 import os
     
-# Define Authors
+######### Define Authors #########
 frank = AuthorCard("Frank Snelling",
                    "S367853",
                    "Computer Science",
-                   "Python, Travel, Food & Wine",
-                   "Frank.png",
+                   "Travel, Food & Wine",
                    50,
                    30,
                    10,
-                   90)
+                   90,
+                   "Frank.png")
 
 michael = AuthorCard("Michael Lewis",
                    "S342724",
                    "Secondary Education",
                    "Ludology, Squash, Hiking",
-                   "blank.png",
                    50,
                    80,
                    60,
