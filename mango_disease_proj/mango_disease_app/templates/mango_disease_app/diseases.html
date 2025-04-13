@@ -2,14 +2,30 @@
 
 {% extends 'mango_disease_app/base.html' %}
 
+{% load static %}
+
 {% block page_title %}Disease and Pest List{% endblock %}
 {% block page_header %}Disease and Pest List{% endblock %}
 
 {% block content %}
+    <h2>Diseases</h2>
     {% for item in diseases %}
-        <img class="author_img" src="{{ disease.image.url }}">
-        <h3>{{ item.name }}</h3>
-        <p>{{ item.sdesc }}</p>
-        <br>
+        {% if item.pest == False %}
+            <div class="list_item">
+                <div><img class="disease_list_img" src="{% static 'images/' %}{{ item.image|default:'defualt_disease.jpg' }}"></div>
+                <div><h3>{{ item.name }}</h3>
+                <p>{{ item.sdesc }}</p></div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h2>Pests</h2>
+    {% for item in diseases %}
+        {% if item.pest == True %}
+        <div class="list_item">
+            <div><img class="disease_list_img" src="{% static 'images/' %}{{ item.image|default:'defualt_disease.jpg' }}"></div>
+            <div><h3>{{ item.name }}</h3>
+            <p>{{ item.sdesc }}</p></div>
+        </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}
