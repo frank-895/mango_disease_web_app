@@ -20,7 +20,7 @@ main {
     background-color: white;
     color: black;
     margin: 2rem auto;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 90vw;
@@ -29,7 +29,28 @@ main {
 }
 /* End Reference */
 
+.large-nav {
+    display: block;
+}
+
+.small-nav {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .large-nav {
+        display: none;
+    }
+    .small-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+    }
+}
+
 /* CSS adapted from https://www.w3schools.com/howto/howto_js_topnav.asp */
+
 nav {
     background-color: #333;
     overflow: hidden;
@@ -47,17 +68,15 @@ nav a {
     display: flex;
     align-items: center;
     height:100%;
-    display: flex;
-    align-items: center;
     padding: 0px 15px;
 }
 
-.navitem a:hover {
+nav a:hover:not(.img-logo) {
     background-color: #ddd;
     color: black;
 }
 
-.navitem a.active {
+nav a.active:not(.img-logo) {
     background-color: #04AA6D;
     color: white;
 }
@@ -126,7 +145,7 @@ h2 {
 
 @media (max-width: 500px) {
     .card {
-        width: 90vw;
+        width: 80vw;
     }
 }
 
