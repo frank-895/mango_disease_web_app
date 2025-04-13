@@ -5,16 +5,21 @@
 {%block page_title%} {{disease.name}} {% endblock %}
 
 {%block content %}
-    <div class="container cols">
-        <div class='col'>
-            <img src="{% static 'images/' %}{{ disease.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
-        </div>
-        <div class='col'>
-            <h1 class="disease">
+    <div class="container cols ">
+        <h2 class="disease inddiseasetitle">
             {{disease.name}}    <!--Disease Name-->
-            </h1>
-            <p>{{disease.ldesc}}</p> <!--Disease Long Description-->
-            <p>{{disease.control}}</p> <!--Disease Long Description-->
+            
+        </h2>
+        <br>
+        <div class='diseaseinfo'>
+            <div class='col'>
+                <img class='diseaseimage'src="{% static 'images/' %}{{ disease.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
+            </div>
+            <div class='col'>
+    
+                <p>{{disease.ldesc}}</p> <!--Disease Long Description-->
+                <p>{{disease.control}}</p> <!--Disease Long Description-->
+            </div>
         </div>
         <!--This to be expanded based on other fields we include-->
     </div>
