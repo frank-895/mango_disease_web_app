@@ -20,7 +20,7 @@ class data_model:
         self.severity = validate_int(severity, "severity", 1, 10)
         self.spreadability = validate_int(spreadability, "spreadability", 1, 10)
         
-        self.sdesc = validate_string(sdesc, "sdesc", 100)
+        self.sdesc = validate_string(sdesc, "sdesc", 150)
         self.ldesc = validate_string(ldesc, "ldesc", 1000)
         self.control = validate_string(control, "control", 1000)
         
