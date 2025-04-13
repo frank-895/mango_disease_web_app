@@ -1,11 +1,13 @@
 {% extends 'mango_disease_app/base.html' %}
 
+{% load static %}
+
 {%block page_title%} {{disease.name}} {% endblock %}
 
 {%block content %}
     <div class="container cols">
         <div class='col'>
-            <img src="{{disease.image}}"> <!--Disease Image Link-->
+            <img src="{% static 'images/' %}{{ item.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
         </div>
         <div class='col'>
             <h1 class="disease">

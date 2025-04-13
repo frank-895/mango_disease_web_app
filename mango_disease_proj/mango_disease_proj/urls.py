@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('diseases/', views.diseases, name='diseases'),
     path('about/', views.about, name='about'),
+    path('disease/<str:name>', views.ind_disease, name='ind_disease'),
 ]

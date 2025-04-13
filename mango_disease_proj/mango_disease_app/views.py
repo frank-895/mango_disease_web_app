@@ -43,8 +43,11 @@ def diseases(request):
     page_data = {'diseases': disease_list}
     return render(request, 'mango_disease_app/diseases.html', page_data)
 
-def ind_disease(request):
+def ind_disease(request, name):
     page_data={}
+    for i in disease_list:
+        if name == i.name:
+            page_data['disease'] = i
     return render(request, 'mango_disease_app/ind_disease.html',page_data)
 
 def about(request):       
