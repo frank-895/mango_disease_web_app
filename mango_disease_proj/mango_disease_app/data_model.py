@@ -1,6 +1,7 @@
+### Data model class ###
+# Dunn, April 13 2025
 
-import os
-from django.conf import settings # to get path to static files
+from .validate import validate_img, validate_int, validate_string
 
 class data_model:
     def __init__ (self,
@@ -14,13 +15,13 @@ class data_model:
         image:str=None
     ):
         # assigning and validating attributes
-        self.name = name
+        self.name = validate_string(name, "name", 30)
         self.pest = pest
-        self.severity = severity
-        self.spreadability = spreadability
+        self.severity = validate_int(severity, "severity", 1, 10)
+        self.spreadability = validate_int(spreadability, "spreadability", 1, 10)
         
-        self.sdesc = sdesc
-        self.ldesc = ldesc
-        self.control = control
+        self.sdesc = validate_string(sdesc, "sdesc", 100)
+        self.ldesc = validate_string(ldesc, "ldesc", 1000)
+        self.control = validate_string(control, "control", 1000)
         
-        self.image = image
+        self.image = validate_img(image)
