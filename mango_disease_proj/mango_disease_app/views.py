@@ -33,7 +33,7 @@ fakepest = data_model("Name (PEST)",True,4,8,"SDESC-P","LDESC-P","CONTROL-P")
 fakepest2 = data_model("NAME 2 (PEST)",True,4,8,"SDESC-P 2","LDESC-P 2","CONTROL-P 2")
 fakedisease = data_model("NAME (DISEASE)",False,2,7,"SDESC-D","LDESC-D","CONTROL-D")
 fakedisease2 = data_model("NAME 2 (DISEASE)",False,2,7,"SDESC-D 2","LDESC-D 2","CONTROL-D 2")
-disease1 = data_model("Mango Pink Scale",False,4,6,
+disease1 = data_model("Mango Pink Scale",True,4,6,
                       "Small pink insects which are common all year round throughout the growth cycle. ",
                       "Mango scale is caused by mango scale insects; the female mango scale insects can lay up to 200 eggs in a spot which look like a tiny pink mound. After hatching the insects will suck the sap from the plant. Heavy infestation can cause drying of leaves and twigs, poor flowers and reduce quality of fruit due to pink blemishes forming on the fruit. ",
                       "Due to Mango scale being a threat throughout the growth cycle, frequent monitoring is recommended every fortnight, inspecting leaves and twigs less than 1 year old,  5 Branches on 10 tress per hectare. Pyriproxyfen is the recommended sprayed, targeted on the insects locations and additionally throughout the branches, fruit and foliage. No more than 2 applications per season with 4 weeks between.",
@@ -43,9 +43,21 @@ disease2 = data_model("Bacterial Black Spot",False,4,4,
                       "Bacterial Black Spot is caused by the fungus Xanthomonas campestris pv. mangiferae-indicae and causes black scabby spots to form on leaves. These spots commonly develop into secondary rots and futher form into deep fruit decay. In extreme cases fruit with Bacterial Black Spot can become unmarketable. ",
                       "The bacteria can lie dormant on stem lesions and as the mango trees develop it then spreads to the leaves and fruit; it can then further spread from tree to tree in a field by strong winds in rain or tools used for management. Copper Oxychloride spray recommends for treatment every 4 weeks during the flowering to fruit stages. To reduce the risk of initial infection it is also recommended to frequently clean pruning and harvesting equipment or plant resistant fruit.",
                       'BlackSpot.png')
+disease3 = data_model("Mango Scab",False,4,7,
+                      "Mango scab is a fungal infection that appears in damp, low-lying orchards and only young tissue is susceptible to infection.  ",
+                      "Mango scab is caused by the fungus of Elsinoe Mangiferae and it causes small black lesions, especially on young fruit. These infected fruits are unmarketable and orchards without chemical control have been known to lose 90% of their crop. ",
+                      "To control the spread of mango scab, infected plant parts (i.e., fruit, leaves or stems) must be removed and destroyed. Ideally, resistant varieties should be planted to prevent the formation of this disease in the first place. ",
+                      "MangoScab.jpg"
+)
+disease4 = data_model("Mango Seed Weevil",True,3,4,
+                      "Mango seed weevils are 6-9mm long with a lifespan of 2 years, meaning they can survive a crop failure into the following year. ",
+                      "The mango seed weevil causes minimal damage to fruit and is therefore classified as a minor pest. However, the mango seed weevil does increase early fruit drop and decrease germination, causing a financial impact to mango growers.",
+                      "The mango seed weevil can be controlled with chemical sprays. The weevil has a limited ability to fly, so spread of the pest is only done via the transport of infected fruit, which should be properly contained.",
+                      "MangoSeedWeevil.jpg"
+)
 
 
-disease_list = [disease1, disease2, fakepest,fakedisease,fakepest2,fakedisease2]
+disease_list = [disease1, disease2, disease3, disease4, fakepest,fakedisease,fakepest2,fakedisease2]
 
 def home(request):
     return render(request, 'mango_disease_app/index.html')
