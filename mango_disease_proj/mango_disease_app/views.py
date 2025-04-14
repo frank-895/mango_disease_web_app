@@ -23,10 +23,27 @@ michael = AuthorCard("Michael Lewis",
                    60,
                    70)
 
+opeoluwa = AuthorCard("Opeoluwa Adebiyi",
+                      "S373330",
+                      "Computer Science",
+                      "Puzzles, Event planning, Fishing",
+                      50,
+                      70,
+                      90,
+                      70)
 
-authors = [frank, michael]
+patrick = AuthorCard("Patrick Dunn",
+                     "S378262",
+                     "Computer Science",
+                     "Gaming, Animation, Cooking",
+                     80,
+                     70,
+                     80,
+                     40,
+                     "Patrick.jpg")
 
 
+authors = [frank, michael, opeoluwa, patrick]
 
 ######### Define Diseases / Pests #########
 fakepest = data_model("Name (PEST)",True,4,8,"SDESC-P","LDESC-P","CONTROL-P")
