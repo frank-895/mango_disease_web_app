@@ -11,8 +11,7 @@ frank = AuthorCard("Frank Snelling",
                    50,
                    30,
                    10,
-                   90,
-                   "Frank.png")
+                   90)
 
 michael = AuthorCard("Michael Lewis",
                    "S342724",
@@ -31,7 +30,8 @@ opeoluwa = AuthorCard("Opeoluwa Adebiyi",
                       50,
                       70,
                       90,
-                      70)
+                      70,
+                      "Ope.jpeg")
 
 patrick = AuthorCard("Patrick Dunn",
                      "S378262",
