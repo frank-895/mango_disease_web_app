@@ -1,3 +1,43 @@
 <!-- Ope !-->
 
 {% extends 'mango_disease_app/base.html' %}
+{% load static %} 
+
+{% block title %}Home | Mango Pest & Disease Watch{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <img src="{% static 'images/logo.png' %}" alt="Mango Pest & Disease Watch Logo" class="logo">
+    </div>
+    <p>This site is dedicated to helping mango growers stay informed about common pests and diseases that threaten mango crops in the NT .</p>
+
+    <section>
+        <h2>The Importance of Mangoes in the NT</h2>
+        <p>Mangoes are the largest horticultural commodity in the Territory, contributing over $128 million to the economy and employing 3500 workers during harvest. Territory mango farmers produce 52% of Australia's crop and supply the first crop of the season to Australian consumers.</p>
+      </section>
+
+    <section>
+        <h2>What’s This Website About?</h2>
+        <p>Mangoes are vulnerable to various pests and fungal diseases that affect crop yield and quality. This website lists 8 major mango pests and diseases and provides helpful information to support early detection and management. The goal is to support the mango industry in the NT by improving crop yeilds, enhancing fruit quality and increasing economic benefits.</p>
+    </section>
+
+    <section>
+        <h2>What You’ll Find</h2>
+        <ul>
+            <li>List of 8 common mango pests and diseases</li>
+            <li>Detailed info pages for each pest/disease</li>
+            <li>Images and symptoms to help identification</li>
+            <li>No data collection – fully static educational resource</li>
+        </ul>
+    </section>
+
+    <section style="margin-top: 2rem;">
+        <a href="{% url 'diseases' %}" class="btn">View All Pests & Diseases</a>
+        </section>
+
+        <section>
+        <a href="{% url 'about' %}" class="btn">About This Project</a>
+    </section>
+</div>
+{% endblock %}
