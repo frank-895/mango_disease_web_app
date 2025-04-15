@@ -47,12 +47,10 @@ patrick = AuthorCard("Patrick Dunn",
 authors = [frank, michael, opeoluwa, patrick]
 
 ######### Define Diseases / Pests #########
-fakepest = data_model("Name (PEST)",True,4,8,"SDESC-P","LDESC-P","CONTROL-P")
-fakepest2 = data_model("NAME 2 (PEST)",True,4,8,"SDESC-P 2","LDESC-P 2","CONTROL-P 2")
-fakedisease = data_model("NAME (DISEASE)",False,2,7,"SDESC-D","LDESC-D","CONTROL-D")
-fakedisease2 = data_model("NAME 2 (DISEASE)",False,2,7,"SDESC-D 2","LDESC-D 2","CONTROL-D 2")
+examplepest = data_model("Name (PEST)",True,4,8,"SDESC-P","LDESC-P","CONTROL-P")
+exampledisease = data_model("NAME (DISEASE)",False,2,7,"SDESC-D","LDESC-D","CONTROL-D")
 disease1 = data_model("Mango Pink Scale",True,4,6,
-                      "Small pink insects which are common all year round throughout the growth cycle. ",
+                      "Small insects that cause pink scale which are common all year round throughout the growth cycle. ",
                       "Mango scale is caused by mango scale insects; the female mango scale insects can lay up to 200 eggs in a spot which look like a tiny pink mound. After hatching the insects will suck the sap from the plant. Heavy infestation can cause drying of leaves and twigs, poor flowers and reduce quality of fruit due to pink blemishes forming on the fruit. ",
                       "Due to Mango scale being a threat throughout the growth cycle, frequent monitoring is recommended every fortnight, inspecting leaves and twigs less than 1 year old,  5 Branches on 10 tress per hectare. Pyriproxyfen is the recommended sprayed, targeted on the insects locations and additionally throughout the branches, fruit and foliage. No more than 2 applications per season with 4 weeks between.",
                       'Mangoscale.png')
@@ -79,8 +77,20 @@ disease5 = data_model("Mango Shoot Caterpillar",True,4,7,
                       "Insecticide is the recommended control method for mango shoot caterpillars but is only to be used if eggs or larvae are found. If there is only branch damage or not enough eggs or larvae present, insecticide should still be avoided. ",
                       "MangoShootCaterpillar.png"
 )
+disease6 = data_model("Mango Anthracnose",False,4,7,
+                      "Most widespread and serious postharvest disease of tropical fruits, including mango",
+                      "Mango shoot caterpillars are brown and white moths which damage young fruit and can especially hurt new growths. They are often signified by branches they have affected dying or breaking off. The eggs and larvae are both brightly coloured, bright yellow and light green respectively, and often found on new growths or leaves. ",
+                      "Insecticide is the recommended control method for mango shoot caterpillars but is only to be used if eggs or larvae are found. If there is only branch damage or not enough eggs or larvae present, insecticide should still be avoided. ",
+                      "MangoAnthracnose.jpg"
+)
+disease7 = data_model("Mango Planthopper",True,4,7,
+                      "Small Nymphs roughly 1 to 7mm with pointed triangular heads and a tent-like body",
+                      "Both adults and nymphs are plant suckers sometimes transferring plant diseases. They are a pest of a range of plants, attacking maturing fruit and causing spotting on new leaves and flowers. They need to be in great numbers to cause significant damage. They produce honeydew which causes sooty mould on the leaves and stems of the plant.",
+                      "- Spray with neem - Spray with pyrethrum - Diatomaceous earth - Keep weeds down to reduce breeding areas - They like warm dry conditions so keep water up to plants.",
+                      "MangoPlanthopper.jpg"
+)
 
-disease_list = [disease1, disease2, disease3, disease4, disease5, fakepest,fakedisease,fakepest2,fakedisease2]
+disease_list = [disease1, disease2, disease3, disease4, disease5, disease6, disease7]
 
 def home(request):
     return render(request, 'mango_disease_app/index.html')
