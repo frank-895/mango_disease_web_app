@@ -5,31 +5,39 @@
 {%block page_title%} {{disease.name}} {% endblock %}
 
 {%block content %}
-    <div class="container cols ">
-        <h2 class="disease inddiseasetitle">
+    <div class="disease-detail">
+        <h2 class="disease-title">
             {{disease.name}}    <!--Disease Name-->
         </h2>
-        <label for="meter">Severity</label>
-        <div class="meter">
-            <span 
-            style="width: {{ disease.severity}}%">
-            </span>
-        </div>
-        <label for="meter">Spreadability</label>
-        <div class="meter">
-            <span 
-            style="width: {{ disease.spreadability}}%">
-            </span>
-        </div>
-        <br>
-        <div class='diseaseinfo'>
-            <div class='col'>
-                <img class='diseaseimage'src="{% static 'images/' %}{{ disease.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
+        <div class ="disease-main">
+            <div class="disease-image-box">
+                <img class="disease-image"src="{% static 'images/' %}{{ disease.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
+                <div class = "disease-stats">
+                    <div class = "stat">
+                        <label for="meter">Severity</label>
+                        <div class="meter">
+                            <span 
+                            class = "{{ disease.severityclass}}"style="width: {{disease.severity|add:'0' }}0%;"> <!--Disease Severity-->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <label for="meter">Spreadability</label>
+                        <div class="meter">
+                            <span 
+                            class = "{{ disease.spreadabilityclass}}" style="width: {{disease.spreadability|add:'0' }}0%;"> <!--Disease Spreadability-->
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class='col'>
+            <div class ="disease-text">
+                <h3 class = "slabel">Description</h3>
                 <p>{{disease.ldesc}}</p> <!--Disease Long Description-->
+                <h3 class = "slabel">Control Methods</h3>
                 <p>{{disease.control}}</p> <!--Disease Control Description-->
             </div>
+
         </div>
     </div>
 {% endblock %}

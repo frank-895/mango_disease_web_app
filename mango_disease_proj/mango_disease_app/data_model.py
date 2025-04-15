@@ -14,12 +14,21 @@ class data_model:
         # Image file path (will default if left empty)
         image:str=None
     ):
+        #Color meter UI
+        def meterclass(value):
+            if value >= 7:
+                return 'meter-high'
+            elif value >= 4:
+                return 'meter-med'
+            else:
+                return 'meter-low'
         # assigning and validating attributes
         self.name = validate_string(name, "name", 30)
         self.pest = pest
         self.severity = validate_int(severity, "severity", 1, 10)
+        self.severityclass = meterclass(self.severity)
         self.spreadability = validate_int(spreadability, "spreadability", 1, 10)
-        
+        self.spreadabilityclass = meterclass(self.spreadability)
         self.sdesc = validate_string(sdesc, "sdesc", 200)
         self.ldesc = validate_string(ldesc, "ldesc", 1000)
         self.control = validate_string(control, "control", 1000)
