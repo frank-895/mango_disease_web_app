@@ -86,7 +86,7 @@ disease5 = data_model("Mango Shoot Caterpillar",True,4,7,
 )
 
 
-disease_list = [disease1, disease2, disease3, disease4, fakepest,fakedisease,fakepest2,fakedisease2]
+disease_list = [disease1, disease2, disease3, disease4, disease5, fakepest,fakedisease,fakepest2,fakedisease2]
 
 def home(request):
     return render(request, 'mango_disease_app/index.html')
