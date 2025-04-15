@@ -76,15 +76,8 @@ disease5 = data_model("Mango Shoot Caterpillar",True,4,7,
                       "Brown and white moths signified by affected branches dying or breaking off. Their eggs are a bright yellow and the larvae are light green; both are often seen on leaves or new growths. ",
                       "Mango shoot caterpillars are brown and white moths which damage young fruit and can especially hurt new growths. They are often signified by branches they have affected dying or breaking off. The eggs and larvae are both brightly coloured, bright yellow and light green respectively, and often found on new growths or leaves. ",
                       "Insecticide is the recommended control method for mango shoot caterpillars but is only to be used if eggs or larvae are found. If there is only branch damage or not enough eggs or larvae present, insecticide should still be avoided. ",
-                      "MangoShootCaterpillar.jpg"
+                      "MangoShootCaterpillar.png"
 )
-disease5 = data_model("Mango Shoot Caterpillar",True,4,7,
-                      "Brown and white moths signified by affected branches dying or breaking off. Their eggs are a bright yellow and the larvae are light green; both are often seen on leaves or new growths. ",
-                      "Mango shoot caterpillars are brown and white moths which damage young fruit and can especially hurt new growths. They are often signified by branches they have affected dying or breaking off. The eggs and larvae are both brightly coloured, bright yellow and light green respectively, and often found on new growths or leaves. ",
-                      "Insecticide is the recommended control method for mango shoot caterpillars but is only to be used if eggs or larvae are found. If there is only branch damage or not enough eggs or larvae present, insecticide should still be avoided. ",
-                      "MangoShootCaterpillar.jpg"
-)
-
 
 disease_list = [disease1, disease2, disease3, disease4, disease5, fakepest,fakedisease,fakepest2,fakedisease2]
 
