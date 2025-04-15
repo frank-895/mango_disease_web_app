@@ -8,19 +8,28 @@
     <div class="container cols ">
         <h2 class="disease inddiseasetitle">
             {{disease.name}}    <!--Disease Name-->
-            
         </h2>
+        <label for="meter">Severity</label>
+        <div class="meter">
+            <span 
+            style="width: {{ disease.severity}}%">
+            </span>
+        </div>
+        <label for="meter">Spreadability</label>
+        <div class="meter">
+            <span 
+            style="width: {{ disease.spreadability}}%">
+            </span>
+        </div>
         <br>
         <div class='diseaseinfo'>
             <div class='col'>
                 <img class='diseaseimage'src="{% static 'images/' %}{{ disease.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
             </div>
             <div class='col'>
-    
                 <p>{{disease.ldesc}}</p> <!--Disease Long Description-->
-                <p>{{disease.control}}</p> <!--Disease Long Description-->
+                <p>{{disease.control}}</p> <!--Disease Control Description-->
             </div>
         </div>
-        <!--This to be expanded based on other fields we include-->
     </div>
 {% endblock %}
