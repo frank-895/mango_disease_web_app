@@ -15,13 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from mango_disease_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('diseases/', views.diseases, name='diseases'),
-    path('about/', views.about, name='about'),
-    path('disease/<str:name>', views.ind_disease, name='ind_disease'),
+    re_path(r'^$', views.home, name='home'),
+    re_path(r'^diseases/$', views.diseases, name='diseases'),
+    re_path(r'^about/$', views.about, name='about'),
+    re_path(r'^disease/(?P<name>.+)/$', views.ind_disease, name='ind_disease'),
 ]
