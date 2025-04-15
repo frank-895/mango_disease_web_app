@@ -361,3 +361,13 @@ h2 {
     font-size: 1.1em;
     color: #444;
 }
+
+.logo {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; /* optional: center it */
+}
+
+ul {
+    margin: 15px;
+}
