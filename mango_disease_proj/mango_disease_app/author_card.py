@@ -5,6 +5,7 @@ from .validate import validate_img, validate_int, validate_string
 
 class AuthorCard:
     def __init__(self,
+                 # basic details
                  name:str, 
                  student_number:str,
                  degree:str, 

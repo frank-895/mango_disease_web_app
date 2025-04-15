@@ -63,14 +63,12 @@ disease3 = data_model("Mango Scab",False,4,7,
                       "Mango scab is a fungal infection that appears in damp, low-lying orchards and only young tissue is susceptible to infection.  ",
                       "Mango scab is caused by the fungus of Elsinoe Mangiferae and it causes small black lesions, especially on young fruit. These infected fruits are unmarketable and orchards without chemical control have been known to lose 90% of their crop. ",
                       "To control the spread of mango scab, infected plant parts (i.e., fruit, leaves or stems) must be removed and destroyed. Ideally, resistant varieties should be planted to prevent the formation of this disease in the first place. ",
-                      "MangoScab.jpg"
-)
+                      "MangoScab.jpg")
 disease4 = data_model("Mango Seed Weevil",True,3,4,
                       "Mango seed weevils are 6-9mm long with a lifespan of 2 years, meaning they can survive a crop failure into the following year. ",
                       "The mango seed weevil causes minimal damage to fruit and is therefore classified as a minor pest. However, the mango seed weevil does increase early fruit drop and decrease germination, causing a financial impact to mango growers.",
                       "The mango seed weevil can be controlled with chemical sprays. The weevil has a limited ability to fly, so spread of the pest is only done via the transport of infected fruit, which should be properly contained.",
-                      "MangoSeedWeevil.jpg"
-)
+                      "MangoSeedWeevil.jpg")
 disease5 = data_model("Mango Shoot Caterpillar",True,4,7,
                       "Brown and white moths signified by affected branches dying or breaking off. Their eggs are a bright yellow and the larvae are light green; both are often seen on leaves or new growths. ",
                       "Mango shoot caterpillars are brown and white moths which damage young fruit and can especially hurt new growths. They are often signified by branches they have affected dying or breaking off. The eggs and larvae are both brightly coloured, bright yellow and light green respectively, and often found on new growths or leaves. ",
@@ -91,6 +89,7 @@ disease7 = data_model("Mango Planthopper",True,4,7,
 )
 
 disease_list = [disease1, disease2, disease3, disease4, disease5, disease6, disease7]
+
 
 def home(request):
     return render(request, 'mango_disease_app/index.html')
