@@ -1,10 +1,10 @@
 {% load static %}
 
 <nav class="large-nav">
-    <a href="{% url 'home' %}" class="img-logo"><img class="logo" src="{% static 'images/logo.png' %}"></a>
-    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'home' %}" class="nav-item img-logo"><img class="logo" src="{% static 'images/logo.png' %}"></a>
+    <a href="{% url 'home' %}" class="nav-item">Home</a>
 
-    <div class="dropdown">
+    <div class="dropdown nav-item">
         <a href="{% url 'diseases' %}" class="dropdown-button">Diseases and Pests ⌄</a>
         <ul class="disease-dropdown">
             {% for item in navs %}
@@ -12,5 +12,5 @@
             {% endfor %}
         </ul>
     </div>
-    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'about' %}" class="nav-item">About</a>
 </nav>
