@@ -58,7 +58,7 @@ This static web application is designed to provide farmers with information abou
    ```
    python manage.py runserver
    
-3. **Access the application.** Navigate to [http://127.0.0.1:8000] on your browser.
+3. **Access the application.** Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) on your browser.
 
 ## Disclaimer
 
