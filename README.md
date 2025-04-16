@@ -45,17 +45,18 @@ This static web application is designed to provide farmers with information abou
    cd your-repo
 
 2. **Set up a virtual environment (optional but recommended):**
-   ```python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate
+   ```python
+   python -m venv venv
+   source venv/bin/activate  # On Windows use venv\Scripts\activate
 
 3. **Install the required packages:**
-   ```
+   ```python
    pip install -r requirements.txt
 
 ### Usage
 1. **Navigate into the `mango_disease_proj` directory.**
 2. **Start the Django server.**
-   ```
+   ```python
    python manage.py runserver
    
 3. **Access the application.** Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) on your browser.
