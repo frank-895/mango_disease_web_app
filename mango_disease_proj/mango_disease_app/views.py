@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .author_card import AuthorCard
 from .data_model import data_model
-import os
     
 ######### Define Authors #########
 frank = AuthorCard("Frank Snelling",
