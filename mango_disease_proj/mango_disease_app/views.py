@@ -21,7 +21,7 @@ michael = AuthorCard("Michael Lewis",
                    80,
                    60,
                    70,
-                   "Michael.jpg")
+                   "author_images/Michael.jpg")
 
 opeoluwa = AuthorCard("Opeoluwa Adebiyi",
                       "S373330",
@@ -31,7 +31,7 @@ opeoluwa = AuthorCard("Opeoluwa Adebiyi",
                       70,
                       90,
                       70,
-                      "Ope.jpeg")
+                      "author_images/Ope.jpeg")
 
 patrick = AuthorCard("Patrick Dunn",
                      "S378262",
@@ -41,7 +41,7 @@ patrick = AuthorCard("Patrick Dunn",
                      70,
                      80,
                      40,
-                     "Patrick.jpg")
+                     "author_images/Patrick.jpg")
 
 
 authors = [frank, michael, opeoluwa, patrick]
