@@ -5,7 +5,7 @@
     <a href="{% url 'home' %}">Home</a>
 
     <div class="dropdown">
-        <div class="dropdown-button">Diseases and Pests ⌄</div>
+        <a href="{% url 'diseases' %}" class="dropdown-button">Diseases and Pests ⌄</a>
         <ul class="disease-dropdown">
             {% for item in navs %}
                 <li><a href="{% url 'ind_disease' name=item.name %}">{{ item.name }}</a></li>
