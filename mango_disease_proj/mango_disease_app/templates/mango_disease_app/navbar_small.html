@@ -3,5 +3,10 @@
 <nav class="small-nav">
     <a href="{% url 'home' %}">Home</a>
     <a href="{% url 'diseases'%}">Diseases</a>
+    {% block content %}
+    {% for item in diseases%}
+        <a href="{% url 'ind_disease' name=item.name %}">
+    {% endfor %}
+{% endblock %}
     <a href="{% url 'about' %}">About</a>
 </nav>
