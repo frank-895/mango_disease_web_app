@@ -7,7 +7,7 @@ Table User {
 Table Orchard {
   orchardId integer [primary key]
   name varchar
-  frequencyCheckDays integer // this is a temporary measure - we will replace this with other details of the vineyard
+  frequencyCheckDays integer // this is a temporary measure - we will replace this with other details of the orchard
 }
 
 Table OrchardUser {
