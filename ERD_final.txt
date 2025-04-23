@@ -1,0 +1,76 @@
+Table User {
+  userId integer [primary key]
+  email varchar [unique, not null]
+  password varchar [not null]
+}
+
+Table Orchard {
+  orchardId integer [primary key]
+  name varchar
+  noTreesRow integer
+  noTreesColumn integer
+  varietyId integer
+  locationId integer
+}
+
+Table Location {
+  locationId integer [primary key]
+  locationName varchar
+}
+
+Table LocationDisease {
+  // this table stores how susceptible each of the locations is to the diseases
+  locationId integer [primary key]
+  diseaseId integer [primary key]
+  susceptibility integer // 0 to 10 only
+}
+
+Table Variety {
+  varietyId integer [primary key]
+}
+
+Table VarietyDiseaseSusceptible {
+  // these are the diseases that each tree is susceptible too
+  varietyId integer [primary key]
+  diseaseId integer [primary key]
+}
+
+Table OrchardUser {
+  userId integer [primary key]
+  orchardId integer [primary key]
+}
+
+Table Record {
+  recordId integer [primary key]
+  orchardId integer
+  recordedAt timestamp [default: `now()`]
+  partOfPlant varchar // Options: 'leaf', 'stem', 'fruit'
+}
+
+Table Disease {
+  diseaseId integer [primary key]
+  diseaseName varchar
+  severity integer // 0 to 10 only
+  spreadability integer // 0 to 10 only
+  shortDescription varchar
+  longDescription varchar
+  controlMethod varchar
+}
+
+Table RecordDisease {
+  recordId integer [primary key]
+  diseaseId integer [primary key]
+}
+
+// Relationships
+Ref: OrchardUser.userId > User.userId
+Ref: OrchardUser.orchardId > Orchard.orchardId
+Ref: Record.orchardId > Orchard.orchardId
+Ref: RecordDisease.recordId > Record.recordId
+Ref: RecordDisease.diseaseId > Disease.diseaseId
+Ref: Orchard.varietyId > Variety.varietyId
+Ref: VarietyDiseaseSusceptible.varietyId > Variety.varietyId
+Ref: VarietyDiseaseSusceptible.diseaseId > Disease.diseaseId
+Ref: Orchard.locationId > Location.locationId
+Ref: LocationDisease.locationId > Location.locationId
+Ref: LocationDisease.diseaseId > Disease.diseaseId
