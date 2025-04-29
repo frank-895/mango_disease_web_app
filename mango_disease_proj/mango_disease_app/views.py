@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .author_card import AuthorCard
 from .data_model import data_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login
 
 ######### Define Authors #########
 frank = AuthorCard("Frank Snelling",
@@ -90,16 +91,25 @@ disease7 = data_model("Mango Planthopper",True,4,7,
 
 disease_list = [disease1, disease2, disease3, disease4, disease5, disease6, disease7]
 
+def userlogin(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'mango_disease_app/userlogin.html', {'form':form})
+
 def register(request):
+    #Register form posts to itself on submit
     if request.method == "POST":
         form = UserCreationForm(request.POST)
-        print("POST data:", request.POST)
+        #Info Validation
         if form.is_valid():
-            print("Form is valid")
-            form.save()
+            #Save to User DD and Login
+            login(request, form.save())
             return redirect("home")
-        else:
-            print("Form errors:", form.errors)
     else:
         form = UserCreationForm()
     return render(request, 'mango_disease_app/register.html', {'form':form})

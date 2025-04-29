@@ -21,9 +21,9 @@ from mango_disease_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', views.register, name="register"),
+    path('userlogin/', views.userlogin, name="userlogin"),
     re_path(r'^$', views.home, name='home'),
     re_path(r'^diseases/$', views.diseases, name='diseases'),
     re_path(r'^about/$', views.about, name='about'),
-    re_path(r'^disease/(?P<name>.+)/$', views.ind_disease, name='ind_disease'),
     re_path(r'^disease/(?P<name>.+)/$', views.ind_disease, name='ind_disease'),
 ]
