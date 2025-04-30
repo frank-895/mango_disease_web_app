@@ -36,6 +36,9 @@ class Disease(models.Model):
     shortDescription = models.CharField()
     longDescription = models.CharField()
     controlMethod = models.CharField()
+    
+    def __str__(self):
+        return self.diseaseName
 
 plantParts = {
     'leaf':'Leaf',

@@ -3,6 +3,7 @@ from .author_card import AuthorCard
 from .data_model import data_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
+from .forms import *
 
 ######### Define Authors #########
 frank = AuthorCard("Frank Snelling",
@@ -131,3 +132,14 @@ def ind_disease(request, name):
 def about(request):       
     page_data = {'cards': authors}
     return render(request, 'mango_disease_app/about.html', page_data)
+
+# Managing disease/pest records in database
+def display_record(request):
+    page_data = {'form':addDiseaseRecord()}
+    return render(request, 'mango_disease_app/add_record.html', page_data)    
+
+def add_record(request):
+    
+    # logic to add in database here
+    
+    return render(request, 'mango_disease_app/index.html') # change to myAccount.html

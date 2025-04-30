@@ -26,4 +26,6 @@ urlpatterns = [
     re_path(r'^diseases/$', views.diseases, name='diseases'),
     re_path(r'^about/$', views.about, name='about'),
     re_path(r'^disease/(?P<name>.+)/$', views.ind_disease, name='ind_disease'),
+    re_path(r'^display_record/$', views.display_record, name='display_record'),
+    re_path(r'^add_record/$', views.add_record, name='add_record'),
 ]
