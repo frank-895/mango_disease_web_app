@@ -28,4 +28,8 @@ urlpatterns = [
     re_path(r'^disease/(?P<name>.+)/$', views.ind_disease, name='ind_disease'),
     re_path(r'^display_record/$', views.display_record, name='display_record'),
     re_path(r'^add_record/$', views.add_record, name='add_record'),
+    re_path(r'^account/$', views.account, name='account'),
+    re_path(r'^plan/$', views.plan, name='plan'),
+    re_path(r'^build/$', views.build, name='build'),
+    re_path(r'^record/$', views.record, name='record'),
 ]

@@ -143,3 +143,15 @@ def add_record(request):
     # logic to add in database here
     
     return render(request, 'mango_disease_app/index.html') # change to myAccount.html
+
+def account(request):
+    return render(request, 'mango_disease_app/account.html')
+
+def plan(request):
+    return render(request, 'mango_disease_app/plan.html')
+
+def build(request):
+    return render(request, 'mango_disease_app/build.html')
+
+def record(request):
+    return render(request, 'mango_disease_app/record.html')

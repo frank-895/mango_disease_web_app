@@ -1,0 +1,12 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Account{% endblock %}
+{% block page_header %}Account{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+    <a href="{% url 'plan' %}" class="acc-button">Planner</a><br><br><br>
+    <a href="{% url 'record' %}" class="acc-button">Record Findings</a><br><br><br>
+    <a href="{% url 'build' %}" class="acc-button">Build Orchards</a><br><br><br>
+{% endblock %}
