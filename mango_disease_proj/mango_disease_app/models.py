@@ -1,6 +1,7 @@
 from django.db import models
 from django.core import validators
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Variety(models.Model):
     varietyID = models.AutoField(primary_key=True)
@@ -28,6 +29,12 @@ class Orchard(models.Model):
     locationID = models.ForeignKey(
         Location,
         on_delete=models.PROTECT
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,  # If a user is deleted, delete the orchard too
+        related_name='orchards',
+        null=True, blank=True
     )
     
     def __str__(self):
