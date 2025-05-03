@@ -8,7 +8,7 @@
 {% load static %} 
 
 {% block content %}
-    {% for item in page_data %}
-        <p>{{ item }}</p>
+    {% for key, val in new_record.items %}
+        <p><strong>{{ key }}:</strong> {{ val }}</p>
     {% endfor %}
 {% endblock %}

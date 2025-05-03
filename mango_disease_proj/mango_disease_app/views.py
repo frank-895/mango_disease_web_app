@@ -133,16 +133,23 @@ def about(request):
     page_data = {'cards': authors}
     return render(request, 'mango_disease_app/about.html', page_data)
 
-# Managing disease/pest records in database
-def record(request):
-    page_data = {'form':addDiseaseRecord()}
-    return render(request, 'mango_disease_app/record.html', page_data)    
-
 def add_record(request):
     
+    # remove csrf token for accepted
+    post_data = request.POST.copy()
+    post_data.pop('csrfmiddlewaretoken', None)
     
+    if request.method == 'POST':
+        form = addDiseaseRecord(request.POST)
+        if form.is_valid():
+            new_record = form.save()
+            return render(request, 'mango_disease_app/record_added.html', {'new_record': post_data})
+        else:
+            return render(request, 'mango_disease_app/record.html', {'form': form})
     
-    return render(request, 'mango_disease_app/record_added.html', {'page_data':request.POST})
+    else:
+        form = addDiseaseRecord()
+        return render(request, 'mango_disease_app/record.html', {'form': form})
 
 def account(request):
     return render(request, 'mango_disease_app/account.html')

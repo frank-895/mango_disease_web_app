@@ -55,6 +55,7 @@ plantParts = {
     'stem':'Stem',
     'fruit':'Fruit',
 }
+
 class Record(models.Model):
     recordID = models.AutoField(primary_key=True)
     orchardID = models.ForeignKey(
@@ -63,8 +64,8 @@ class Record(models.Model):
     )
     recordedAt = models.DateTimeField(default=timezone.now)
     partOfPlant = models.CharField(choices=plantParts)
-
-
+    diseases = models.ManyToManyField(Disease, related_name='records')
+    
 class LocationDisease(models.Model):
     locationID = models.ForeignKey(
         Location,
@@ -96,12 +97,3 @@ class OrchardUser(models.Model):
         on_delete=models.PROTECT
     )
 
-class RecordDisease(models.Model):
-    recordID = models.ForeignKey(
-        Record,
-        on_delete=models.PROTECT
-    )
-    diseaseID = models.ForeignKey(
-        Disease,
-        on_delete=models.PROTECT
-    )
