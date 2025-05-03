@@ -2,11 +2,6 @@ from django.db import models
 from django.core import validators
 from django.utils import timezone
 
-class User(models.Model):
-    userID = models.AutoField(primary_key=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField()
-
 class Variety(models.Model):
     varietyID = models.AutoField(primary_key=True)
     varietyName = models.CharField()
@@ -89,15 +84,3 @@ class VarietyDiseaseSusceptible(models.Model):
         Disease,
         on_delete=models.PROTECT
     )
-
-class OrchardUser(models.Model):
-    orchardID = models.ForeignKey(
-        Orchard,
-        on_delete=models.PROTECT
-    )
-    userID = models.ForeignKey(
-        User,
-        on_delete=models.PROTECT
-    )
-
-
