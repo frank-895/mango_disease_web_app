@@ -80,9 +80,9 @@ class LocationDisease(models.Model):
         Disease,
         on_delete=models.PROTECT
     )
-    locationSusecptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
+    locationSusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
 
-class VarietyDiseaseSusceptible(models.Model):
+class VarietyDisease(models.Model):
     varietyID = models.ForeignKey(
         Variety,
         on_delete=models.PROTECT
@@ -91,4 +91,4 @@ class VarietyDiseaseSusceptible(models.Model):
         Disease,
         on_delete=models.PROTECT
     )
-    varietySusecptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
+    varietySusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])

@@ -135,7 +135,7 @@ def about(request):
 
 def add_record(request):
     
-    # remove csrf token for accepted
+    # remove csrf token for accepted page
     post_data = request.POST.copy()
     post_data.pop('csrfmiddlewaretoken', None)
     
