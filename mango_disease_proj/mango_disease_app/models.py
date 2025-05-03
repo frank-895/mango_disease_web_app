@@ -64,7 +64,10 @@ class Record(models.Model):
     )
     recordedAt = models.DateTimeField(default=timezone.now)
     partOfPlant = models.CharField(choices=plantParts)
-    diseases = models.ManyToManyField(Disease, related_name='records')
+    disease = models.ForeignKey(Disease, related_name='records', on_delete=models.PROTECT)
+    
+    def __str__(self):
+        return f"{self.orchardID} - Disease: {self.disease}"
     
 class LocationDisease(models.Model):
     locationID = models.ForeignKey(
@@ -96,4 +99,5 @@ class OrchardUser(models.Model):
         User,
         on_delete=models.PROTECT
     )
+
 
