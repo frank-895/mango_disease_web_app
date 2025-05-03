@@ -57,7 +57,7 @@ class Record(models.Model):
         Orchard,
         on_delete=models.CASCADE
     )
-    recordedAt = models.DateTimeField(default=timezone.now)
+    recordedAt = models.DateField(default=timezone.now)
     partOfPlant = models.CharField(choices=PLANT_PARTS, max_length=5)
     disease = models.ForeignKey(Disease, related_name='records', on_delete=models.PROTECT)
     

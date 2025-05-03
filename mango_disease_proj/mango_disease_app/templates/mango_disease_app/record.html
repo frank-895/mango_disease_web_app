@@ -8,11 +8,21 @@
 {% load static %} 
 
 {% block content %}
-<form action="{% url 'add_record' %}" method="post" novalidate>
-	{% csrf_token %}
-	<table>
-		{{ form.as_table }}
-	</table>
-	<input type="submit" value="Add Record">
-</form>
+	<form action="{% url 'add_record' %}" method="post" novalidate>
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Add Record">
+	</form>
+
+	{% if new_record %}
+		<div class="record-success">
+			<h2>New Record Added!</h2>
+			<p>
+				On {{ new_record.time }} you have recorded {{ new_record.disease }}
+				on the {{ new_record.partOfPlant }} of your mango trees in {{ new_record.orchard }}.
+			</p>
+		</div>
+	{% endif %}
 {% endblock %}

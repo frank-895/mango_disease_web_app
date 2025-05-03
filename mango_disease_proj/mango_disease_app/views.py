@@ -134,22 +134,20 @@ def about(request):
     return render(request, 'mango_disease_app/about.html', page_data)
 
 def add_record(request):
+    post_data = None
+    form = addDiseaseRecord(request.POST or None)
     
-    # remove csrf token for accepted page
-    post_data = request.POST.copy()
-    post_data.pop('csrfmiddlewaretoken', None)
-    
-    if request.method == 'POST':
-        form = addDiseaseRecord(request.POST)
-        if form.is_valid():
-            new_record = form.save()
-            return render(request, 'mango_disease_app/record_added.html', {'new_record': post_data})
-        else:
-            return render(request, 'mango_disease_app/record.html', {'form': form})
-    
-    else:
+    if request.method == 'POST' and form.is_valid():
+        new_record = form.save()  
+        post_data = {
+            'orchard':new_record.orchardID,
+            'time':new_record.recordedAt,
+            'partOfPlant':new_record.partOfPlant,
+            'disease':new_record.disease,
+        }
         form = addDiseaseRecord()
-        return render(request, 'mango_disease_app/record.html', {'form': form})
+    
+    return render(request, 'mango_disease_app/record.html', {'form': form, 'new_record': post_data})
 
 def account(request):
     return render(request, 'mango_disease_app/account.html')

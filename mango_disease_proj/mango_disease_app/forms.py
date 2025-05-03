@@ -1,12 +1,22 @@
 from django import forms
 from .models import *
+from datetime import date
 
 class addDiseaseRecord(forms.ModelForm):
     class Meta:
         model = Record
-        exclude = []
+        #exclude = ['orchardID']
+        fields = ['orchardID', 'recordedAt', 'partOfPlant', 'disease']
         labels = {
-            'orchardId':"TEMPORARY - needs to be changed to whoever is logged in",
-            'recordedAt': "Enter time of recording: ",
-            'partOfPlant': "Choose which part of plant was impacted: ",
+            'orchardID':"Choose your orchard",
+            'recordedAt': "Enter date of recording",
+            'partOfPlant': "Choose which part of plant was impacted",
+            'disease': "Choose the disease affecting the plant",
+        }
+        widgets = {
+            'recordedAt': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control',
+                'max': date.today().isoformat()
+            }),
         }
