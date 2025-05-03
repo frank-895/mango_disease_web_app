@@ -134,15 +134,15 @@ def about(request):
     return render(request, 'mango_disease_app/about.html', page_data)
 
 # Managing disease/pest records in database
-def display_record(request):
+def record(request):
     page_data = {'form':addDiseaseRecord()}
-    return render(request, 'mango_disease_app/add_record.html', page_data)    
+    return render(request, 'mango_disease_app/record.html', page_data)    
 
 def add_record(request):
     
     # logic to add in database here
     
-    return render(request, 'mango_disease_app/index.html') # change to myAccount.html
+    return render(request, 'mango_disease_app/account.html')
 
 def account(request):
     return render(request, 'mango_disease_app/account.html')
@@ -152,6 +152,3 @@ def plan(request):
 
 def build(request):
     return render(request, 'mango_disease_app/build.html')
-
-def record(request):
-    return render(request, 'mango_disease_app/record.html')

@@ -1,3 +1,5 @@
+<!-- HTML file last updated by Snelling May 3 2025 -->
+
 {% extends 'mango_disease_app/base.html' %} 
 
 {% block page_title %}Account{% endblock %}
@@ -6,5 +8,11 @@
 {% load static %} 
 
 {% block content %}
-    <p>WIP Record page</p>
+<form action="{% url 'add_record' %}" method="post" novalidate>
+	{% csrf_token %}
+	<table>
+		{{ form.as_table }}
+	</table>
+	<input type="submit" value="Add Record">
+</form>
 {% endblock %}

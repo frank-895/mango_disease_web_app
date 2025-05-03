@@ -9,10 +9,17 @@ class User(models.Model):
 
 class Variety(models.Model):
     varietyID = models.AutoField(primary_key=True)
+    varietyName = models.CharField()
+    
+    def __str__(self):
+        return self.varietyName
 
 class Location(models.Model):
     locationID = models.AutoField(primary_key=True)
     locationName = models.CharField()
+    
+    def __str__(self):
+        return self.locationName
 
 class Orchard(models.Model):
     orchardID = models.AutoField(primary_key=True)
@@ -27,6 +34,9 @@ class Orchard(models.Model):
         Location,
         on_delete=models.PROTECT
     )
+    
+    def __str__(self):
+        return self.orchardName
 
 class Disease(models.Model):
     diseaseID = models.AutoField(primary_key=True)
