@@ -140,9 +140,9 @@ def record(request):
 
 def add_record(request):
     
-    # logic to add in database here
     
-    return render(request, 'mango_disease_app/account.html')
+    
+    return render(request, 'mango_disease_app/record_added.html', {'page_data':request.POST})
 
 def account(request):
     return render(request, 'mango_disease_app/account.html')
