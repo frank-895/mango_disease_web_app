@@ -1,6 +1,6 @@
 {% extends 'mango_disease_app/base.html' %}
 
-{% load math_filters %} <!-- to multiply by 10 -->
+{% load custom_filters %} <!-- to multiply by 10 -->
 
 {% load static %}
 
@@ -19,6 +19,7 @@
                         <label for="meter">Severity</label>
                         <div class="meter">
                             <span 
+                            class="meter {{ disease.severity|meterclass }}"
                             style="width: {{ disease.severity|multiply:10 }}%;"> <!--Disease Severity-->
                             </span>
                         </div>
@@ -27,6 +28,7 @@
                         <label for="meter">Spreadability</label>
                         <div class="meter">
                             <span 
+                            class="meter {{ disease.spreadability|meterclass }}"
                             style="width: {{disease.spreadability|multiply:10  }}%;"> <!--Disease Spreadability-->
                             </span>
                         </div>
@@ -47,5 +49,3 @@
         </div>
     </div>
 {% endblock %}
-
-<!--class = "{{ disease.severityclass }}" class = "{{ disease.spreadabilityclass }}"-->
