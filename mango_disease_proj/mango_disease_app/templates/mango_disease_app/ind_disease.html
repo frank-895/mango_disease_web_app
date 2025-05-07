@@ -1,23 +1,25 @@
 {% extends 'mango_disease_app/base.html' %}
 
+{% load math_filters %} <!-- to multiply by 10 -->
+
 {% load static %}
 
-{%block page_title%} {{disease.name}} {% endblock %}
+{%block page_title%} {{disease.diseaseName}} {% endblock %}
 
 {%block content %}
     <div class="disease-detail">
         <h2 class="disease-title">
-            {{disease.name}}    <!--Disease Name-->
+            {{disease.diseaseName}}    <!--Disease Name-->
         </h2>
         <div class ="disease-main">
             <div class="disease-image-box">
-                <img class="disease-image"src="{% static 'images/' %}{{ disease.image|default:'defualt_disease.jpg' }}"> <!--Disease Image Link-->
+                <img class="disease-image"src="{{ disease.image.url }}"> <!--Disease Image Link-->
                 <div class = "disease-stats">
                     <div class = "stat">
                         <label for="meter">Severity</label>
                         <div class="meter">
                             <span 
-                            class = "{{ disease.severityclass}}"style="width: {{disease.severity|add:'0' }}0%;"> <!--Disease Severity-->
+                            style="width: {{ disease.severity|multiply:10 }}%;"> <!--Disease Severity-->
                             </span>
                         </div>
                     </div>
@@ -25,7 +27,7 @@
                         <label for="meter">Spreadability</label>
                         <div class="meter">
                             <span 
-                            class = "{{ disease.spreadabilityclass}}" style="width: {{disease.spreadability|add:'0' }}0%;"> <!--Disease Spreadability-->
+                            style="width: {{disease.spreadability|multiply:10  }}%;"> <!--Disease Spreadability-->
                             </span>
                         </div>
                     </div>
@@ -34,14 +36,16 @@
             <div class ="disease-text">
                 <div>
                     <h3 class = "slabel">Description</h3>
-                    <p>{{disease.ldesc}}</p> <!--Disease Long Description-->
+                    <p>{{disease.longDescription}}</p> <!--Disease Long Description-->
                 </div>
                 <div>
                     <h3 class = "slabel">Control Methods</h3>
-                    <p>{{disease.control}}</p> <!--Disease Control Description-->
+                    <p>{{disease.controlMethod}}</p> <!--Disease Control Description-->
                 </p>
             </div>
 
         </div>
     </div>
 {% endblock %}
+
+<!--class = "{{ disease.severityclass }}" class = "{{ disease.spreadabilityclass }}"-->

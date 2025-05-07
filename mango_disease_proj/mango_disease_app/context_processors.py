@@ -1,6 +1,6 @@
 #https://dev.to/sarahhudaib/context-processors-in-django-15h2
 
-from .views import disease_list 
+from .models import Disease 
 
 def disease_menu(request):
-    return {'navs': disease_list}
+    return {'navs': Disease.objects.all()}

@@ -8,7 +8,7 @@
         <a href="{% url 'diseases' %}" class="dropdown-button">Diseases and Pests ⌄</a>
         <ul class="disease-dropdown">
             {% for item in navs %}
-                <li><a href="{% url 'ind_disease' name=item.name %}">{{ item.name }}</a></li>
+                <li><a href="{% url 'ind_disease' name=item.diseaseName %}">{{ item.diseaseName }}</a></li>
             {% endfor %}
         </ul>
     </div>

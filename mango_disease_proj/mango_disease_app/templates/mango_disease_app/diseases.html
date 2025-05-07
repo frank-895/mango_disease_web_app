@@ -9,25 +9,12 @@
 
 {% block content %}
     <h2>Diseases</h2>
-    {% for item in diseases %}
-        {% if item.pest == False %}
-            <a href="{% url 'ind_disease' name=item.name %}">
-            <div class="list_item">
-                <div><img class="disease_list_img" src="{% static 'images/' %}{{ item.image|default:'defualt_disease.jpg' }}"></div>
-                <div><h3>{{ item.name }}</h3>
-                <p>{{ item.sdesc }}</p></div>
-            </div></a>
-        {% endif %}
-    {% endfor %}
-    <h2>Pests</h2>
-    {% for item in diseases %}
-        {% if item.pest == True %}
-        <a href="{% url 'ind_disease' name=item.name %}">
+    {% for disease in data %}
+        <a href="{% url 'ind_disease' name=disease.diseaseName %}">
         <div class="list_item">
-            <div><img class="disease_list_img" src="{% static 'images/' %}{{ item.image|default:'defualt_disease.jpg' }}"></div>
-            <div><h3>{{ item.name }}</h3>
-            <p>{{ item.sdesc }}</p></div>
-        </div>
-        {% endif %}
+            <div><img class="disease_list_img" src="{{ disease.image.url }}"></div>
+            <div><h3>{{ disease.diseaseName }}</h3>
+            <p>{{ disease.shortDescription }}</p></div>
+        </div></a>
     {% endfor %}
 {% endblock %}

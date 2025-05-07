@@ -62,6 +62,7 @@ class Disease(models.Model):
     shortDescription = models.TextField()
     longDescription = models.TextField()
     controlMethod = models.TextField()
+    image = models.ImageField(upload_to="disease_images/", default="disease_images/default.JPG")
     
     def __str__(self):
         return self.diseaseName
