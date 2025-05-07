@@ -1,12 +1,38 @@
 {% extends 'mango_disease_app/base.html' %} 
 
-{% block page_title %}Account{% endblock %}
-{% block page_header %}Account{% endblock %}
+{% block page_title %}Account Page{% endblock %}
+
+{% block page_header %}
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        Welcome, Admin {{ user.username }}!
+    {% else %}
+        Welcome, {{ user.username }}!
+    {% endif %}
+{% else %}      
+    Welcome, guest. Please log in to access account features.
+{% endif %}
+{% endblock %}
 
 {% load static %} 
 
 {% block content %}
-    <a href="{% url 'plan' %}" class="acc-button">Planner</a><br><br><br>
-    <a href="{% url 'add_record' %}" class="acc-button">Record Findings</a><br><br><br>
-    <a href="{% url 'build' %}" class="acc-button">Build Orchards</a><br><br><br>
+
+    {% if user.is_authenticated %}
+        <h2>Planner</h2>
+        <p>View the generated planner to help manage your orchards and limit disease.</p><br>
+        <a href="{% url 'plan' %}" class="acc-button">Planner &rarr;</a>
+
+        <h2>Record</h2>
+        <p>Record details of your findings of diseases and pests in your orchards.</p><br>
+        <a href="{% url 'add_record' %}" class="acc-button">Record Findings &rarr;</a>
+
+        <h2>Orchards</h2>
+        <p>Create and manage your orchards.</p><br>
+        <a href="{% url 'build' %}" class="acc-button">Build Orchards &rarr;</a>
+
+    {% else %}
+        <p>Welcome, new user. Please log in.</p>
+    {% endif %}
+    
 {% endblock %}
