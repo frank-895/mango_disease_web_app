@@ -31,8 +31,11 @@ def home(request):
     return render(request, 'mango_disease_app/index.html')
 
 def diseases(request):
-    page_data = {'data': Disease.objects.all()}
-    return render(request, 'mango_disease_app/diseases.html', page_data)
+    categories = {
+        'diseases': Disease.objects.filter(type='disease'),
+        'pests': Disease.objects.filter(type='pest'),
+    }
+    return render(request, 'mango_disease_app/diseases.html', {'data':categories})
 
 def ind_disease(request, name):
     try:

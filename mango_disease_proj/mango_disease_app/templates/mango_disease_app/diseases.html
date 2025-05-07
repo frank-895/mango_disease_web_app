@@ -8,13 +8,15 @@
 {% block page_header %}Disease and Pest List{% endblock %}
 
 {% block content %}
-    <h2>Diseases</h2>
-    {% for disease in data %}
-        <a href="{% url 'ind_disease' name=disease.diseaseName %}">
-        <div class="list_item">
-            <div><img class="disease_list_img" src="{{ disease.image.url }}"></div>
-            <div><h3>{{ disease.diseaseName }}</h3>
-            <p>{{ disease.shortDescription }}</p></div>
-        </div></a>
+    {% for category_name, items in data.items %}
+        <h2>{{ category_name }}</h2>
+        {% for item in items %}
+            <a href="{% url 'ind_disease' name=item.diseaseName %}">
+            <div class="list_item">
+                <div><img class="disease_list_img" src="{{ item.image.url }}"></div>
+                <div><h3>{{ item.diseaseName }}</h3>
+                <p>{{ item.shortDescription }}</p></div>
+            </div></a>
+        {% endfor %}
     {% endfor %}
 {% endblock %}
