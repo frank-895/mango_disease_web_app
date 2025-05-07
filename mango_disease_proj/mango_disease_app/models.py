@@ -56,7 +56,13 @@ class Orchard(models.Model):
         return self.orchardName
 
 class Disease(models.Model):
+    DISEASE_TYPES = [
+        ('pest', 'Pest'),
+        ('disease', 'Disease')
+    ]
+    
     diseaseName = models.CharField(max_length=255)
+    type = models.CharField(choices=DISEASE_TYPES, max_length=7, default=DISEASE_TYPES[1][1])
     severity = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
     spreadability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
     shortDescription = models.TextField()
@@ -73,6 +79,10 @@ class Record(models.Model):
         ('stem', 'Stem'),
         ('fruit', 'Fruit'),
     ]
+    STATUS = [
+        ('active', 'Active'),
+        ('resolved', 'Resolved'),
+    ]
     
     orchardID = models.ForeignKey(
         Orchard,
@@ -81,6 +91,7 @@ class Record(models.Model):
     recordedAt = models.DateField(default=timezone.now)
     partOfPlant = models.CharField(choices=PLANT_PARTS, max_length=5)
     disease = models.ForeignKey(Disease, related_name='records', on_delete=models.PROTECT)
+    status = models.CharField(choices=STATUS, max_length=8, default=STATUS[0][1])
     
     def __str__(self):
         return f"Record for {self.orchardID} - Disease: {self.disease} at {self.recordedAt}"
