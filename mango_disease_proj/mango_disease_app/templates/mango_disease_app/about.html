@@ -1,6 +1,8 @@
-<!-- HTML file last updated by Snelling April 8 2025 -->
+<!-- HTML file last updated by Snelling May 7 2025 -->
 
 {% extends 'mango_disease_app/base.html' %} 
+
+{% load math_filters %} <!-- to multiply by 10 -->
 
 {% block page_title %}About Us{% endblock %}
 {% block page_header %}About Us{% endblock %}
@@ -12,36 +14,36 @@
 
 <div class="card-container">
 
-    {% for item in cards %}
+    {% for author in cards %}
 
     <div class="card">
         <div class="image-wrapper">
-            <img class="author_img" src="{% static 'images/' %}{{ item.image|default:"author_images/blank.png" }}">
-            <p class="overlay-text">{{ item.student_number }}</p>
+            <img class="author_img" src="{% static 'images/' %}{{ author.image|default:"author_images/blank.png" }}">
+            <p class="overlay-text">{{ author.student_number }}</p>
         </div>
 
         <div class="card-content">
-            <h3>{{ item.name|upper }}</h3>
-            <h4>{{ item.degree }}</h4>
-            <p>Interests: {{ item.interests }}</p>
+            <h3>{{ author.user.get_full_name|default:author.user.username|upper }}</h3>
+            <h4>{{ author.degree }}</h4>
+            <p>Interests: {{ author.interests }}</p>
 
             <div class="traits-box">
                 <h5>PERSONALITY TRAITS</h5>
                 <label for="meter">Collaborator - Independent</label>
                 <div class="meter">
-                    <span style="width: {{ item.collaborator_independent }}%"> </span>
+                    <span style="width: {{ author.collaborator_independent|multiply:10 }}%"> </span>
                 </div>
                 <label for="meter">Big Picture - Detail Oriented</label>
                 <div class="meter">
-                    <span style="width: {{ item.bigPicture_detailOriented }}%"></span>
+                    <span style="width: {{ author.bigPicture_detailOriented|multiply:10 }}%"></span>
                 </div>
                 <label for="meter">Communicator - Listener</label>
                 <div class="meter">
-                    <span style="width: {{ item.communicator_listener }}%"></span>
+                    <span style="width: {{ author.communicator_listener|multiply:10 }}%"></span>
                 </div>
                 <label for="meter">Creative - Practical</label>
                 <div class="meter">
-                    <span style="width: {{ item.creative_practical }}%"></span>
+                    <span style="width: {{ author.creative_practical|multiply:10 }}%"></span>
                 </div>
             </div>
 

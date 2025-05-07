@@ -4,6 +4,7 @@ from .data_model import data_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from .forms import *
+from .models import *
 
 ######### Define Authors #########
 frank = AuthorCard("Frank Snelling",
@@ -129,7 +130,8 @@ def ind_disease(request, name):
             page_data['disease'] = i
     return render(request, 'mango_disease_app/ind_disease.html',page_data)
 
-def about(request):       
+def about(request):    
+    authors = UserProfile.objects.all() 
     page_data = {'cards': authors}
     return render(request, 'mango_disease_app/about.html', page_data)
 

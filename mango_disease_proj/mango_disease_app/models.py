@@ -2,6 +2,26 @@ from django.db import models
 from django.core import validators
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        limit_choices_to={'is_superuser': True},
+    )
+    student_number = models.CharField(max_length=7)
+    degree = models.CharField(max_length=30)
+    interests = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="author_images/", default="author_images/blank.png")
+
+    collaborator_independent = models.SmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=5)
+    bigPicture_detailOriented = models.SmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=5)
+    communicator_listener = models.SmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=5)
+    creative_practical = models.SmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)], default=5)
+
+    def __str__(self):
+        return f"{self.user.username}'s AuthorCard"
 
 class Variety(models.Model):
     varietyName = models.CharField(max_length=255)
