@@ -3,6 +3,8 @@ from django.core import validators
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -39,6 +41,7 @@ class Orchard(models.Model):
     orchardName = models.CharField(max_length=255)
     noTreesRow = models.IntegerField()
     noTreesColumn = models.IntegerField()
+    area = models.IntegerField(validators=[validators.MinValueValidator(0)])
     variety = models.ForeignKey(
         Variety,
         on_delete=models.PROTECT
@@ -91,6 +94,8 @@ class Record(models.Model):
     recordedAt = models.DateField(default=timezone.now)
     partOfPlant = models.CharField(choices=PLANT_PARTS, max_length=5)
     disease = models.ForeignKey(Disease, related_name='records', on_delete=models.PROTECT)
+    numberOfTreesChecked = models.IntegerField(validators=[validators.MinValueValidator(1)])
+    numberOfTreesInfected = models.IntegerField(validators=[validators.MinValueValidator(1)])
     status = models.CharField(choices=STATUS, max_length=8, default=STATUS[0][1])
     
     def __str__(self):

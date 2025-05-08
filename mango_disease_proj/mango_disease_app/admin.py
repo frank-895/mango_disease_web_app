@@ -1,6 +1,5 @@
 from django.contrib import admin
 import mango_disease_app.models as models
-#from mango_disease_app.models import User, Variety, Location, Orchard, Disease, Record, LocationDisease, VarietyDiseaseSusceptible, OrchardUser, RecordDisease
 
 # Model Registration
 admin.site.register(models.UserProfile)

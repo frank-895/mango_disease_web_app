@@ -33,6 +33,7 @@ form label {
 form input[type="text"],
 form input[type="date"],
 form input[type="password"],
+form input[type="number"],
 form select {
     width: 100%;
     padding: 0.6rem 0.8rem;
