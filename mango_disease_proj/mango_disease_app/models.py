@@ -32,7 +32,12 @@ class Variety(models.Model):
         return self.varietyName
 
 class Location(models.Model):
+    HEMISPHERES = [
+        ('north', 'Northern'),
+        ('south', 'Southern'),
+    ]
     locationName = models.CharField(max_length=255)
+    hemisphere = models.CharField(choices=HEMISPHERES, max_length=5, default='south')
     
     def __str__(self):
         return self.locationName
