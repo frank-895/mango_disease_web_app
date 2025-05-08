@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User,
