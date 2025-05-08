@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from .forms import *
 from .models import *
+from .services.planner import generate_plan
 
 def userlogin(request):
     if request.method == "POST":
@@ -69,7 +70,8 @@ def account(request):
     return render(request, 'mango_disease_app/account.html')
 
 def plan(request):
-    return render(request, 'mango_disease_app/plan.html')
+    page_data = generate_plan(request.user)
+    return render(request, 'mango_disease_app/plan.html', {'page_data':page_data})
 
 def build(request):
     return render(request, 'mango_disease_app/build.html')

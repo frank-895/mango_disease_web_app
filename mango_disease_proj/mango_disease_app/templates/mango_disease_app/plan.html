@@ -6,5 +6,25 @@
 {% load static %} 
 
 {% block content %}
-    <p>WIP Planner page</p>
+  <h2>Orchard Monitoring Plan</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Orchard</th>
+        <th>Risk Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in page_data %}
+        <tr>
+          <td>{{ item.orchard }}</td>
+          <td>{{ item.risk_score }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="2">No orchard data available.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
