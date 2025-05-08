@@ -18,7 +18,7 @@
 
     <div class="card">
         <div class="image-wrapper">
-            <img class="author_img" src="{% static 'images/' %}{{ author.image|default:"author_images/blank.png" }}">
+            <img class="author_img" src="{{ author.image.url|default:"author_images/blank.png" }}">
             <p class="overlay-text">{{ author.student_number }}</p>
         </div>
 
