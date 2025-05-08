@@ -82,6 +82,7 @@ def generate_plan(user):
     
     orchards = Orchard.objects.filter(user=user)
     plan = []
+    data_used = {}
     
     for orchard in orchards:
         # records that are active and associated with the orchard
@@ -100,8 +101,8 @@ def generate_plan(user):
             variety_score = 0.5
             location_score = 0.5
         
-        stocking_score = calc_stocking_score(orchard)
-        last_check_score = calc_last_check_score(orchard)
+        stocking_score, data_used['stocking_rate'] = calc_stocking_score(orchard)
+        last_check_score, data_used['time_last_check'] = calc_last_check_score(orchard)
         season_score = calc_season_score(orchard)
         
         risk_score = (
@@ -114,9 +115,14 @@ def generate_plan(user):
             weightings['season_score'] * season_score
         )
 
+        data_used['diseases'] = diseases
+        data_used['location'] = orchard.location
+        data_used['no_trees'] = orchard.noTreesRow * orchard.noTreesColumn
+        
         plan.append({
             'orchard': orchard.orchardName,
-            'risk_score': round(risk_score, 2)
+            'risk_score': round(risk_score, 2),
+            'data_used': data_used,
         })
         
     return plan
@@ -166,17 +172,19 @@ def calc_location_score(location, diseases):
 
 def calc_stocking_score(orchard):
     """
-    Estimate tree density as a stocking score, normalized to 0-1.
+    Estimate tree density as a stocking score, normalized to 0-1. 
+    Returns stocking_score and stocking_rate
     """
     stocking_rate = (orchard.noTreesRow * orchard.noTreesColumn) / orchard.area
     
     # an ultra high-density mango plantation has a density of 1000/acre, which will define the maximum value of our stocking rate
-    return min(stocking_rate / 0.37, 1)
+    return (min(stocking_rate / 0.37, 1), stocking_rate)
 
 
 def calc_last_check_score(orchard):
     """
     Calculate how long since last check, normalized to 0-1 over 30 days.
+    Returns last_check_score and days_since_last_check
     """
     today = date.today()
     last_check_date = Record.objects.filter(orchardID=orchard).order_by('-recordedAt').first()
@@ -184,9 +192,9 @@ def calc_last_check_score(orchard):
     if not last_check_date:
         return 1 # highest risk, no record
     
-    days = (today - last_check_date.recordedAt).days
+    days_since_last_check = (today - last_check_date.recordedAt).days
     
-    return min(days / 30, 1) # no check in the last 30 days is considered highest risk
+    return (min(days_since_last_check / 30, 1), days_since_last_check) # no check in the last 30 days is considered highest risk
 
 
 def calc_season_score(orchard):
