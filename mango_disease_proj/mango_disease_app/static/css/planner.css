@@ -1,0 +1,68 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .orchard-card {
+    background: linear-gradient(to bottom right, #ffffff, #f8f9fb);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    width: 320px;
+    padding: 20px 24px;
+    transition: transform 0.2s ease-in-out;
+    border: 1px solid #e0e0e0;
+  }
+
+  .orchard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .orchard-card h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #1e3a5f;
+  }
+
+  .score {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 12px 0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  .score.low {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .score.medium {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .score.high {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .orchard-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .orchard-card li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .orchard-card li strong {
+    color: #555;
+  }

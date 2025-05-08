@@ -1,30 +1,40 @@
 {% extends 'mango_disease_app/base.html' %} 
+{% load static %} 
 
 {% block page_title %}Account{% endblock %}
 {% block page_header %}Account{% endblock %}
-
-{% load static %} 
+{% block custom_head_entries %}
+<link rel="stylesheet" href="{% static 'css/planner.css' %}">
+{% endblock %}
 
 {% block content %}
   <h2>Orchard Monitoring Plan</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Orchard</th>
-        <th>Risk Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in page_data %}
-        <tr>
-          <td>{{ item.orchard }}</td>
-          <td>{{ item.risk_score }}</td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="2">No orchard data available.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="card-container">
+    {% for item in page_data %}
+      <div class="orchard-card">
+        <h3>{{ item.orchard }}</h3>
+        {% if item.risk_score < 0.4 %}
+          <div class="score low">Low Risk ({{ item.risk_score }})</div>
+        {% elif item.risk_score < 0.7 %}
+          <div class="score medium">Moderate Risk ({{ item.risk_score }})</div>
+        {% else %}
+          <div class="score high">High Risk ({{ item.risk_score }})</div>
+        {% endif %}
+        <ul>
+          <li>
+            <strong>Diseases:</strong>
+            {% if item.data_used.diseases %}
+              {{ item.data_used.diseases|join:", " }}
+            {% else %}
+              No diseases detected
+            {% endif %}
+          </li>
+          <li><strong>Location:</strong> {{ item.data_used.location }}</li>
+          <li><strong>Stocking Rate:</strong> {{ item.data_used.stocking_rate }}</li>
+          <li><strong>Last Checked:</strong> {{ item.data_used.time_last_check }}</li>
+          <li><strong>Total Trees:</strong> {{ item.data_used.no_trees }}</li>
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

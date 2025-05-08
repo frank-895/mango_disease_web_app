@@ -96,13 +96,14 @@ def generate_plan(user):
             location_score = calc_location_score(orchard.location, diseases)
         else:
             # if there are no records, it is indicative of some risk that the diseases have just not been detected
+            diseases = []
             severity = 0.5
             spreadability = 0.5
             variety_score = 0.5
             location_score = 0.5
         
-        stocking_score, data_used['stocking_rate'] = calc_stocking_score(orchard)
-        last_check_score, data_used['time_last_check'] = calc_last_check_score(orchard)
+        stocking_score, _ = calc_stocking_score(orchard)
+        last_check_score, _ = calc_last_check_score(orchard)
         season_score = calc_season_score(orchard)
         
         risk_score = (
@@ -114,10 +115,14 @@ def generate_plan(user):
             weightings['last_check_score'] * last_check_score +
             weightings['season_score'] * season_score
         )
-
-        data_used['diseases'] = diseases
-        data_used['location'] = orchard.location
-        data_used['no_trees'] = orchard.noTreesRow * orchard.noTreesColumn
+        
+        data_used = {
+            'diseases': diseases,
+            'location': orchard.location,
+            'no_trees': orchard.noTreesRow * orchard.noTreesColumn,
+            'stocking_rate': calc_stocking_score(orchard)[1],
+            'time_last_check': calc_last_check_score(orchard)[1],
+        }
         
         plan.append({
             'orchard': orchard.orchardName,
@@ -178,7 +183,7 @@ def calc_stocking_score(orchard):
     stocking_rate = (orchard.noTreesRow * orchard.noTreesColumn) / orchard.area
     
     # an ultra high-density mango plantation has a density of 1000/acre, which will define the maximum value of our stocking rate
-    return (min(stocking_rate / 0.37, 1), stocking_rate)
+    return (min(stocking_rate / 0.37, 1), round(stocking_rate, 2))
 
 
 def calc_last_check_score(orchard):
@@ -190,7 +195,7 @@ def calc_last_check_score(orchard):
     last_check_date = Record.objects.filter(orchardID=orchard).order_by('-recordedAt').first()
     
     if not last_check_date:
-        return 1 # highest risk, no record
+        return 1, "No records." # highest risk, no record
     
     days_since_last_check = (today - last_check_date.recordedAt).days
     
