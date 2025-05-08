@@ -4,73 +4,83 @@ Table User {
   password varchar [not null]
 }
 
+Table UserProfile {
+  userId integer [primary key]
+  student_number varchar(7)
+  degree varchar(30)
+  interests varchar(100)
+  image varchar
+  collaborator_independent smallint // 0-10
+  bigPicture_detailOriented smallint // 0-10
+  communicator_listener smallint // 0-10
+  creative_practical smallint // 0-10
+}
+
 Table Orchard {
   orchardId integer [primary key]
-  name varchar
+  orchardName varchar
   noTreesRow integer
   noTreesColumn integer
+  area integer // >= 0
   varietyId integer
   locationId integer
+  userId integer
+}
+
+Table Variety {
+  varietyId integer [primary key]
+  varietyName varchar
 }
 
 Table Location {
   locationId integer [primary key]
   locationName varchar
-}
-
-Table LocationDisease {
-  // this table stores how susceptible each of the locations is to the diseases
-  locationId integer [primary key]
-  diseaseId integer [primary key]
-  susceptibility integer // 0 to 10 only
-}
-
-Table Variety {
-  varietyId integer [primary key]
-}
-
-Table VarietyDiseaseSusceptible {
-  // these are the diseases that each tree is susceptible too
-  varietyId integer [primary key]
-  diseaseId integer [primary key]
-}
-
-Table OrchardUser {
-  userId integer [primary key]
-  orchardId integer [primary key]
-}
-
-Table Record {
-  recordId integer [primary key]
-  orchardId integer
-  recordedAt timestamp [default: `now()`]
-  partOfPlant varchar // Options: 'leaf', 'stem', 'fruit'
+  hemisphere varchar // 'north' or 'south'
 }
 
 Table Disease {
   diseaseId integer [primary key]
   diseaseName varchar
+  type varchar // 'pest' or 'disease'
   severity integer // 0 to 10 only
   spreadability integer // 0 to 10 only
-  shortDescription varchar
-  longDescription varchar
-  controlMethod varchar
+  shortDescription text
+  longDescription text
+  controlMethod text
+  image varchar
 }
 
-Table RecordDisease {
+Table Record {
   recordId integer [primary key]
+  orchardId integer
+  recordedAt date [default: `now()`]
+  partOfPlant varchar // 'leaf', 'stem', 'fruit'
+  diseaseId integer
+  numberOfTreesChecked integer
+  numberOfTreesInfected integer
+  status varchar //'active', 'resolved'
+}
+
+Table LocationDisease {
+  locationId integer [primary key]
   diseaseId integer [primary key]
+  locationSusceptability integer // 0 to 10 only
+}
+
+Table VarietyDisease {
+  varietyId integer [primary key]
+  diseaseId integer [primary key]
+  varietySusceptability integer // 0 to 10 only
 }
 
 // Relationships
-Ref: OrchardUser.userId > User.userId
-Ref: OrchardUser.orchardId > Orchard.orchardId
-Ref: Record.orchardId > Orchard.orchardId
-Ref: RecordDisease.recordId > Record.recordId
-Ref: RecordDisease.diseaseId > Disease.diseaseId
+Ref: UserProfile.userId > User.userId
+Ref: Orchard.userId > User.userId
 Ref: Orchard.varietyId > Variety.varietyId
-Ref: VarietyDiseaseSusceptible.varietyId > Variety.varietyId
-Ref: VarietyDiseaseSusceptible.diseaseId > Disease.diseaseId
 Ref: Orchard.locationId > Location.locationId
+Ref: Record.orchardId > Orchard.orchardId
+Ref: Record.diseaseId > Disease.diseaseId
 Ref: LocationDisease.locationId > Location.locationId
 Ref: LocationDisease.diseaseId > Disease.diseaseId
+Ref: VarietyDisease.varietyId > Variety.varietyId
+Ref: VarietyDisease.diseaseId > Disease.diseaseId
