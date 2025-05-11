@@ -23,6 +23,10 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('userlogin/', views.userlogin, name="userlogin"),
     path('add_orchard/', views.add_orchard, name='add_orchard'),
+    path('orchard/edit/<int:orchard_id>/', views.edit_orchard, name='edit_orchard'),
+    path('orchard/delete/<int:orchard_id>/', views.delete_orchard, name='delete_orchard'),
+
+
     
     re_path(r'^$', views.home, name='home'),
     re_path(r'^diseases/$', views.diseases, name='diseases'),

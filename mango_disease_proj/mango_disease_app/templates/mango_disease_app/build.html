@@ -26,11 +26,21 @@
 {% endif %}
 
 <h2>Existing Orchards</h2>
-<ul>
-    {% for orchard in orchards %}
-        <li><strong>{{ orchard.name }}</strong> – {{ orchard.location }}</li>
-    {% empty %}
-        <li>No orchards added yet.</li>
-    {% endfor %}
-</ul>
+
+{% if orchards %}
+    <div class="orchard-grid">
+        {% for orchard in orchards %}
+            <div class="orchard-card">
+                <h3>{{ orchard.orchardName }}</h3>
+                <p><strong>Location:</strong> {{ orchard.location }}</p>
+                <div class="card-actions">
+                    <a href="{% url 'edit_orchard' orchard.id %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'delete_orchard' orchard.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this orchard?');">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No orchards added yet.</p>
+{% endif %}
 {% endblock %}

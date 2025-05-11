@@ -176,7 +176,7 @@ h2 {
 }
 
 .card {
-    width: 300px;
+    width: 400px;
     margin: 10px;
     background-color: white;
     border-radius: 16px;
@@ -187,13 +187,13 @@ h2 {
 
 @media (max-width: 820px) and (min-width: 620px) {
     .card {
-        width: 400px;
+        width: 450px;
     }
 }
 
 @media (max-width: 500px) {
     .card {
-        width: 80vw;
+        width: 90vw;
     }
 }
 
@@ -453,4 +453,21 @@ h2 {
     margin: 0;
     font-size: 1.05rem;
     line-height: 1.5;
+}
+
+.orchard-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 1em;
+}
+.orchard-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 8px;
+    width: calc(33.33% - 1em);
+}
+.card-actions {
+    margin-top: 0.5em;
 }
