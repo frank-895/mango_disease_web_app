@@ -33,18 +33,18 @@
 </form>
 
 {% if orchards %}
-    <div class="orchard-grid">
-        {% for orchard in orchards %}
-            <div class="orchard-card">
-                <h3>{{ orchard.orchardName }}</h3>
-                <p><strong>Location:</strong> {{ orchard.location }}</p>
-                <div class="card-actions">
-                    <a href="{% url 'edit_orchard' orchard.id %}" class="btn btn-sm btn-primary">Edit</a>
-                    <a href="{% url 'delete_orchard' orchard.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this orchard?');">Delete</a>
-                </div>
+<div class="orchard-grid">
+    {% for orchard in orchards %}
+        <div class="orchard-card">
+            <h3 class="orchard-name">{{ orchard.orchardName }}</h3>
+            <p><strong>Location:</strong> {{ orchard.location }}</p>
+            <div class="card-actions">
+                <a href="{% url 'edit_orchard' orchard.id %}" class="action-link">Edit</a>
+                <a href="{% url 'delete_orchard' orchard.id %}" class="action-link delete-link" onclick="return confirm('Delete this orchard?');">Delete</a>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
+</div>
 {% else %}
     <p>No orchards added yet.</p>
 {% endif %}

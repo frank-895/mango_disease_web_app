@@ -1,0 +1,43 @@
+
+.orchard-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 1em;
+}
+.orchard-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 8px;
+    width: calc(33.33% - 1em);
+}
+.card-actions {
+    margin-top: 0.5em;
+}
+
+.orchard-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card-actions {
+    margin-top: 10px;
+}
+
+.action-link {
+    color: blue;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+.delete-link {
+    color: #dc3545; /* Bootstrap red */
+}
+

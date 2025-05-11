@@ -17,22 +17,30 @@
 {% load static %} 
 
 {% block content %}
-
     {% if user.is_authenticated %}
-        <h2>Planner</h2>
-        <p>View the generated planner to help manage your orchards and limit disease.</p><br>
-        <a href="{% url 'plan' %}" class="acc-button">Planner &rarr;</a>
+        <div class="account-options">
+            <h2>Choose an Option</h2>
 
-        <h2>Record</h2>
-        <p>Record details of your findings of diseases and pests in your orchards.</p><br>
-        <a href="{% url 'add_record' %}" class="acc-button">Record Findings &rarr;</a>
+            <!-- Option 1: Planner -->
+            <a href="{% url 'plan' %}" class="option">
+                <h3>Planner</h3>
+                <p>View the generated planner to help manage your orchards and limit disease.</p>
+            </a>
 
-        <h2>Orchards</h2>
-        <p>Create and manage your orchards.</p><br>
-        <a href="{% url 'build' %}" class="acc-button">Build Orchards &rarr;</a>
+            <!-- Option 2: Record -->
+            <a href="{% url 'add_record' %}" class="option">
+                <h3>Record</h3>
+                <p>Record details of your findings of diseases and pests in your orchards.</p>
+            </a>
+
+            <!-- Option 3: Orchards -->
+            <a href="{% url 'build' %}" class="option">
+                <h3>Orchards</h3>
+                <p>Create and manage your orchards.</p>
+            </a>
+        </div>
 
     {% else %}
         <p>Welcome, new user. Please log in.</p>
     {% endif %}
-    
 {% endblock %}

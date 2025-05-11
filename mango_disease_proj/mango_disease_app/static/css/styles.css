@@ -454,20 +454,3 @@ h2 {
     font-size: 1.05rem;
     line-height: 1.5;
 }
-
-.orchard-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    margin-top: 1em;
-}
-.orchard-card {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 1em;
-    border-radius: 8px;
-    width: calc(33.33% - 1em);
-}
-.card-actions {
-    margin-top: 0.5em;
-}
