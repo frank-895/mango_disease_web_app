@@ -75,3 +75,24 @@ def plan(request):
 
 def build(request):
     return render(request, 'mango_disease_app/build.html')
+def add_orchard(request):
+    new_orchard = None
+
+    if request.method == 'POST':
+        form = OrchardForm(request.POST)
+        if form.is_valid():
+            orchard = form.save(commit=False)
+            orchard.user = request.user  # Attach the logged-in user
+            orchard.save()
+            new_orchard = orchard
+            form = OrchardForm()  # Clear the form after submission
+    else:
+        form = OrchardForm()
+
+    return render(request, 'mango_disease_app/build.html', {
+        'form': form,
+        'new_orchard': new_orchard
+    })
+ 
+
+

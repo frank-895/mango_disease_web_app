@@ -36,3 +36,33 @@ class addDiseaseRecord(forms.ModelForm):
                 self.add_error('numberofTreesChecked', f"Must be between 1 and total trees in orchard ({total_trees}).")
             if no_infected > no_checked:
                 self.add_error('numberofTreesInfected', f"Must be between 1 and number of trees checked ({no_checked}).")
+
+
+
+
+class OrchardForm(forms.ModelForm):
+    class Meta:
+        model = Orchard
+        fields = ['orchardName', 'noTreesRow', 'noTreesColumn', 'area', 'variety', 'location']
+        labels = {
+            'orchardName': "Orchard Name",
+            'noTreesRow': "Number of Rows of Trees",
+            'noTreesColumn': "Number of Columns of Trees",
+            'area': "Area (in square meters)",
+            'variety': "Mango Variety",
+            'location': "Location",
+        }
+        widgets = {
+            'orchardName': forms.TextInput(attrs={'class': 'form-control'}),
+            'noTreesRow': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
+            'noTreesColumn': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
+            'area': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'variety': forms.Select(attrs={'class': 'form-control'}),
+            'location': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+    def clean_area(self):
+        area = self.cleaned_data.get('area')
+        if area < 0:
+            raise ValidationError("Area must be a positive value.")
+        return area

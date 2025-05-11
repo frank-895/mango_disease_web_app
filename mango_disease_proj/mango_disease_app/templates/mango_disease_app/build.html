@@ -6,5 +6,31 @@
 {% load static %} 
 
 {% block content %}
-    <p>WIP Build page</p>
+<h2>Add New Orchard</h2>
+<form action="{% url 'add_orchard' %}" method="post" novalidate>
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Add Orchard">
+</form>
+
+{% if new_orchard %}
+    <div class="record-success">
+        <h2>New Orchard Added!</h2>
+        <p>
+            You added a new orchard named <strong>{{ new_orchard.name }}</strong>
+            located in <strong>{{ new_orchard.location }}</strong>.
+        </p>
+    </div>
+{% endif %}
+
+<h2>Existing Orchards</h2>
+<ul>
+    {% for orchard in orchards %}
+        <li><strong>{{ orchard.name }}</strong> – {{ orchard.location }}</li>
+    {% empty %}
+        <li>No orchards added yet.</li>
+    {% endfor %}
+</ul>
 {% endblock %}
