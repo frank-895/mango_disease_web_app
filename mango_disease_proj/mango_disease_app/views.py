@@ -152,3 +152,13 @@ def add_orchard(request):
         'new_orchard': new_orchard 
 
     }) 
+
+
+def orchard_list(request):
+    search_query = request.GET.get('search', '')
+    orchards = Orchard.objects.all()
+
+    if search_query:
+        orchards = orchards.filter(orchardName__icontains=search_query)
+
+    return render(request, 'mango_disease_app/build.html', {'orchards': orchards, 'search_query': search_query})

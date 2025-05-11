@@ -25,7 +25,7 @@ urlpatterns = [
     path('add_orchard/', views.add_orchard, name='add_orchard'),
     path('orchard/edit/<int:orchard_id>/', views.edit_orchard, name='edit_orchard'),
     path('orchard/delete/<int:orchard_id>/', views.delete_orchard, name='delete_orchard'),
-
+    path('orchards/', views.orchard_list, name='orchard_list'),
 
     
     re_path(r'^$', views.home, name='home'),

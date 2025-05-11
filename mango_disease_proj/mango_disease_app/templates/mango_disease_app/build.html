@@ -26,6 +26,11 @@
 {% endif %}
 
 <h2>Existing Orchards</h2>
+<!-- Search Bar -->
+<form method="GET" action="{% url 'orchard_list' %}">
+    <input type="text" name="search" placeholder="Search orchards" value="{{ search_query }}">
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
 
 {% if orchards %}
     <div class="orchard-grid">
