@@ -3,6 +3,12 @@ from .models import *
 from datetime import date
 
 class addDiseaseRecord(forms.ModelForm):
+    def __init__(self, *args, **kwargs): #https://stackoverflow.com/questions/74964200/limit-choices-inside-an-input-django/74965183
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        
+        if user is not None:
+            self.fields['orchardID'].queryset = Orchard.objects.filter(user=user)
     class Meta:
         model = Record
         #exclude = ['orchardID']
@@ -22,7 +28,8 @@ class addDiseaseRecord(forms.ModelForm):
                 'max': date.today().isoformat()
             }),
         }
-        
+
+            
     def clean(self): # see documentation https://docs.djangoproject.com/en/5.1/ref/forms/validation/
         cleaned_data = super().clean()
         orchard = cleaned_data.get('orchardID')

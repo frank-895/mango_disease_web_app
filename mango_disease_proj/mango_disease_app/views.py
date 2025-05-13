@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
+from django.db.models import Prefetch
 from .forms import *
 from .models import *
 from .services.planner import generate_plan
@@ -52,7 +53,7 @@ def about(request):
 
 def add_record(request):
     post_data = None
-    form = addDiseaseRecord(request.POST or None)
+    form = addDiseaseRecord(request.POST or None, user=request.user)
     
     if request.method == 'POST' and form.is_valid():
         new_record = form.save()  
@@ -67,7 +68,24 @@ def add_record(request):
     return render(request, 'mango_disease_app/record.html', {'form': form, 'new_record': post_data})
 
 def account(request):
-    return render(request, 'mango_disease_app/account.html')
+    orchards = (Orchard.objects
+                    .filter(user=request.user)
+                    .select_related('variety', 'location')
+                    .prefetch_related(
+                        Prefetch(
+                            'record_set',
+                            queryset=(
+                                Record.objects
+                                    .select_related('disease')
+                                    .order_by("-recordedAt", '-id')[:5] #Last 5 Records  https://forum.djangoproject.com/t/prefetch-top-n-most-recent-related-objects/39767
+                            ),
+                            to_attr='recent_records'
+                        )
+                    )
+                    
+                )
+                            
+    return render(request, 'mango_disease_app/account.html',{'orchards' : orchards})
 
 def admin_tools(request):
     return render(request, 'mango_disease_app/admintools.html')
