@@ -38,6 +38,13 @@
                 <h3>Orchards</h3>
                 <p>Create and manage your orchards.</p>
             </a>
+            {% if user.is_superuser %}
+                <!-- Option 4*: Admin -->
+                <a href="{% url 'admin_tools' %}" class="option">
+                    <h3>Admin Tools</h3>
+                    <p>Admin-only data entry forms.</p>
+                </a>
+            {% endif %}
         </div>
 
     {% else %}

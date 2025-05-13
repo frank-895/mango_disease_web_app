@@ -1,0 +1,25 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Admin{% endblock %}
+{% block page_header %}Admin{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+	{% if new_location %}
+		<div class="record-success">
+			<h2>New Location Added!</h2>
+			<p>
+				You have added {{ new_location.name }} as a location.
+			</p>
+		</div>
+	{% endif %}
+
+	<form action="{% url 'add_location' %}" method="post" novalidate>
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Add Location">
+	</form>
+{% endblock %}

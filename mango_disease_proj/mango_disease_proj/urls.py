@@ -35,6 +35,10 @@ urlpatterns = [
 
     re_path(r'^add_record/$', views.add_record, name='add_record'),
     re_path(r'^account/$', views.account, name='account'),
+    re_path(r'^admintools/$', views.admin_tools, name='admin_tools'),
+    re_path(r'^add_disease/$', views.add_disease, name='add_disease'),
+    re_path(r'^add_location/$', views.add_location, name='add_location'),
+    re_path(r'^add_variety/$', views.add_variety, name='add_variety'),
     re_path(r'^plan/$', views.plan, name='plan'),
     re_path(r'^build/$', views.build, name='build'),
 ]

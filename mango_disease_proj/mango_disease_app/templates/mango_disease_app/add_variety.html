@@ -1,0 +1,25 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Admin{% endblock %}
+{% block page_header %}Admin{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+	{% if new_variety %}
+		<div class="record-success">
+			<h2>New Variety Added!</h2>
+			<p>
+				You have added the {{ new_variety.name }} tree variety.
+			</p>
+		</div>
+	{% endif %}
+
+	<form action="{% url 'add_variety' %}" method="post" novalidate>
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Add Variety">
+	</form>
+{% endblock %}

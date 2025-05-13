@@ -69,6 +69,49 @@ def add_record(request):
 def account(request):
     return render(request, 'mango_disease_app/account.html')
 
+def admin_tools(request):
+    return render(request, 'mango_disease_app/admintools.html')
+
+def add_disease(request):
+    post_data = None
+    form = DiseaseForm(request.POST or None)
+    
+    if request.method == 'POST' and form.is_valid():
+        new_disease = form.save()  
+        post_data = {
+            'name':new_disease.diseaseName,
+            'type':new_disease.type,
+        }
+        form = DiseaseForm()
+    
+    return render(request, 'mango_disease_app/add_disease.html', {'form': form, 'new_disease': post_data})
+
+def add_location(request):
+    post_data = None
+    form = LocationForm(request.POST or None)
+    
+    if request.method == 'POST' and form.is_valid():
+        new_location = form.save()  
+        post_data = {
+            'name':new_location.locationName,
+        }
+        form = LocationForm()
+    
+    return render(request, 'mango_disease_app/add_location.html', {'form': form, 'new_location': post_data})
+
+def add_variety(request):
+    post_data = None
+    form = VarietyForm(request.POST or None)
+    
+    if request.method == 'POST' and form.is_valid():
+        new_variety = form.save()  
+        post_data = {
+            'name':new_variety.varietyName,
+        }
+        form = VarietyForm()
+    
+    return render(request, 'mango_disease_app/add_variety.html', {'form': form, 'new_variety': post_data})
+
 def plan(request):
     page_data = generate_plan(request.user)
     return render(request, 'mango_disease_app/plan.html', {'page_data':page_data})

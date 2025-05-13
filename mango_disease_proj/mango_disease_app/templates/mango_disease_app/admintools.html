@@ -1,0 +1,43 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Account Page{% endblock %}
+
+{% block page_header %}
+{% if user.is_authenticated %}
+        Welcome, Admin {{ user.username }}!
+{% else %}      
+    Admin Only
+{% endif %}
+{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+            <div class="account-options">
+                <h2>Choose an Option</h2>
+
+                <!-- Option 1: Disease -->
+                <a href="{% url 'add_disease' %}" class="option">
+                    <h3>Disease</h3>
+                    <p>Add a new disease entry to the database.</p>
+                </a>
+
+                <!-- Option 2: Location -->
+                <a href="{% url 'add_location' %}" class="option">
+                    <h3>Location</h3>
+                    <p>Add a new location entry to the database.</p>
+                </a>
+
+                <!-- Option 3: Variety -->
+                <a href="{% url 'add_variety' %}" class="option">
+                    <h3>Variety</h3>
+                    <p>Add a new mango variety to the database.</p>
+                </a>
+            </div>
+        {% endif %}
+    {% else %}
+        <p>You do not have authorisation to view this page.</p>
+    {% endif %}
+{% endblock %}

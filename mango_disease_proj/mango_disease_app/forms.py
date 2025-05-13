@@ -66,3 +66,40 @@ class OrchardForm(forms.ModelForm):
         if area < 0:
             raise ValidationError("Area must be a positive value.")
         return area
+    
+
+
+class DiseaseForm(forms.ModelForm):
+    class Meta:
+        model = Disease
+        fields = ['diseaseName','type','severity','spreadability','shortDescription','longDescription','controlMethod','image']
+        labels = {
+            'diseaseName': "Name of the disease / pest",
+            'type': "Whether it is a disease or a pest",
+            'severity': "How severe the disease / pest is",
+            'spreadability': "How easily the disease / pest spreads between trees",
+            'shortDescription': "Short snippet to describe the disease / pest",
+            'longDescription': "Full description of the disease / pest",
+            'controlMethod': "How the disease / pest can be controlled or managed",
+            'image': "Example image of the disease / pest",
+        }
+        
+        
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ['locationName','hemisphere']
+        labels = {
+            'locationName': "Name of the location",
+            'hemisphere': "Which hemisphere the location is in",
+        }
+        
+        
+        
+class VarietyForm(forms.ModelForm):
+    class Meta:
+        model = Variety
+        fields = ['varietyName']
+        labels = {
+            'varietyName': "Name of the tree variety",
+        }
