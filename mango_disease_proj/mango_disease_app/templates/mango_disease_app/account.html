@@ -18,6 +18,33 @@
 
 {% block content %}
     {% if user.is_authenticated %}
+        <div class ='account-dashboard'>
+            {% if orchards %}
+            <h1>Dashboard</h1>
+            <div class='tab'>
+            {%for orchard in orchards%}
+                <button class='tablink' onclick="orchardTab(event, 'orchard-{{ orchard.id }}')">{{orchard.orchardName}}</button>
+            {% endfor %}
+            </div>
+            {%for orchard in orchards%}
+                <div id="orchard-{{ orchard.id }}" class="tabcontent">
+                    <h3>{{orchard.orchardName}}</h3>
+                    <h3>{{orchard.variety}}</h3>
+                    <h3>Recent Reports</h3>
+                    <table>
+                    {% for record in orchard.recent_records%}
+                        <tr>
+                            <td>{{record.recordedAt}}</td>
+                            <td>{{record.disease.diseaseName}}</td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="2">No records yet.</td></tr>
+                    {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
         <div class="account-options">
             <h2>Choose an Option</h2>
 
@@ -39,7 +66,7 @@
                 <p>Create and manage your orchards.</p>
             </a>
         </div>
-
+    <script src="{% static 'js/dashboard.js' %}"></script>
     {% else %}
         <p>Welcome, new user. Please log in.</p>
     {% endif %}
