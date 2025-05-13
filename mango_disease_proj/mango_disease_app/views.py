@@ -53,7 +53,7 @@ def about(request):
 
 def add_record(request):
     post_data = None
-    form = addDiseaseRecord(request.POST or None)
+    form = addDiseaseRecord(request.POST or None, user=request.user)
     
     if request.method == 'POST' and form.is_valid():
         new_record = form.save()  

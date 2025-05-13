@@ -18,8 +18,9 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <div class ='account-dashboard'>
-            {% if orchards %}
+        {% if orchards %}
+        <div class ='account-dashboard option' >
+            
             <h1>Dashboard</h1>
             <div class='tab'>
             {%for orchard in orchards%}
@@ -43,8 +44,8 @@
                     </table>
                 </div>
             {% endfor %}
-            {% endif %}
         </div>
+        {% endif %}
         <div class="account-options">
             <h2>Choose an Option</h2>
 
