@@ -176,7 +176,7 @@ h2 {
 }
 
 .card {
-    width: 400px;
+    width: 350px;
     margin: 10px;
     background-color: white;
     border-radius: 16px;
@@ -185,17 +185,12 @@ h2 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-@media (max-width: 820px) and (min-width: 620px) {
+@media (max-width: 990px) and (min-width: 620px) {
     .card {
         width: 450px;
     }
 }
 
-@media (max-width: 500px) {
-    .card {
-        width: 90vw;
-    }
-}
 
 .card:hover {
     transform: translateY(-5px);
