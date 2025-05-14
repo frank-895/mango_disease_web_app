@@ -156,6 +156,7 @@ def build(request):
         'new_orchard': new_orchard,
         'orchards': orchards,
     })
+
 def edit_orchard(request, orchard_id):
     orchard = Orchard.objects.get(id=orchard_id, user=request.user)
     form = OrchardForm(request.POST or None, instance=orchard)

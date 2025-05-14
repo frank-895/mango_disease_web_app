@@ -110,6 +110,8 @@ class Record(models.Model):
     case = models.ForeignKey(
         Case,
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
     
     recordedAt = models.DateField(default=timezone.now)
