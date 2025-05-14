@@ -18,6 +18,9 @@
 
 {% block content %}
     {% if user.is_authenticated %}
+
+    <!-- COMMENT STARTS HERE-->
+    {% comment %}
         {% if orchards %}
         <div class ='account-dashboard option' >
             
@@ -46,6 +49,9 @@
             {% endfor %}
         </div>
         {% endif %}
+    {% endcomment %}
+    <!-- COMMENT ENDS HERE-->
+     
         <div class="account-options">
             <h2>Choose an Option</h2>
 

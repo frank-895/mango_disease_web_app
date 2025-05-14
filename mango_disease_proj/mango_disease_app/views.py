@@ -53,7 +53,7 @@ def about(request):
 
 def add_record(request):
     post_data = None
-    form = addDiseaseRecord(request.POST or None, user=request.user)
+    # form = addDiseaseRecord(request.POST or None, user=request.user)
     
     if request.method == 'POST' and form.is_valid():
         new_record = form.save()  
@@ -63,9 +63,12 @@ def add_record(request):
             'partOfPlant':new_record.partOfPlant,
             'disease':new_record.disease,
         }
-        form = addDiseaseRecord()
+        # form = addDiseaseRecord()
     
-    return render(request, 'mango_disease_app/record.html', {'form': form, 'new_record': post_data})
+    return render(request, 'mango_disease_app/record.html', {
+        #'form': form, 
+        'new_record': post_data
+        })
 
 def account(request):
     orchards = (Orchard.objects

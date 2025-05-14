@@ -1,11 +1,14 @@
 <!-- HTML file last updated by Snelling May 3 2025 -->
 
+
 {% extends 'mango_disease_app/base.html' %} 
 
 {% block page_title %}Account{% endblock %}
 {% block page_header %}Account{% endblock %}
 
 {% load static %} 
+
+{% comment %}
 
 {% block content %}
 	<form action="{% url 'add_record' %}" method="post" novalidate>
@@ -26,3 +29,5 @@
 		</div>
 	{% endif %}
 {% endblock %}
+
+{% endcomment %}

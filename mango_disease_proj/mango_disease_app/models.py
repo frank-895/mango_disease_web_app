@@ -79,30 +79,45 @@ class Disease(models.Model):
     def __str__(self):
         return self.diseaseName
 
-class Record(models.Model):
+class Case(models.Model):
+    STATUS = [
+        ('active', 'Active'),
+        ('resolved', 'Resolved'),
+    ]
     PLANT_PARTS = [
         ('leaf', 'Leaf'),
         ('stem', 'Stem'),
         ('fruit', 'Fruit'),
     ]
-    STATUS = [
-        ('active', 'Active'),
-        ('resolved', 'Resolved'),
-    ]
     
-    orchardID = models.ForeignKey(
-        Orchard,
-        on_delete=models.CASCADE
+    disease = models.ForeignKey(
+        Disease,
+        on_delete=models.CASCADE,
+        null=True
     )
+    orchard = models.ForeignKey(
+        Orchard,
+        on_delete=models.CASCADE,
+        null=True
+    )
+    status = models.CharField(choices=STATUS, max_length=8, default=STATUS[0][1], null=True)
+    partOfPlant = models.CharField(choices=PLANT_PARTS, max_length=5, null=True)
+
+    def __str__(self):
+        return f"Case for {self.orchard} - Disease: {self.disease} on the {self.partOfPlant}"
+    
+class Record(models.Model):
+    case = models.ForeignKey(
+        Case,
+        on_delete=models.CASCADE,
+    )
+    
     recordedAt = models.DateField(default=timezone.now)
-    partOfPlant = models.CharField(choices=PLANT_PARTS, max_length=5)
-    disease = models.ForeignKey(Disease, related_name='records', on_delete=models.PROTECT)
     numberOfTreesChecked = models.IntegerField(validators=[validators.MinValueValidator(1)])
     numberOfTreesInfected = models.IntegerField(validators=[validators.MinValueValidator(1)])
-    status = models.CharField(choices=STATUS, max_length=8, default=STATUS[0][1])
     
     def __str__(self):
-        return f"Record for {self.orchardID} - Disease: {self.disease} at {self.recordedAt}"
+        return f"Record for {self.caseId} - Recorded at: {self.recordedAt}"
     
 class LocationDisease(models.Model):
     location = models.ForeignKey(
