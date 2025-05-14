@@ -50,15 +50,20 @@ Table Disease {
   image varchar
 }
 
+Table Case {
+  caseId integer [primary key]
+  diseaseId integer
+  orchardId integer
+  status varchar //'active', 'resolved'
+  partOfPlant varchar // 'leaf', 'stem', 'fruit'
+}
+
 Table Record {
   recordId integer [primary key]
-  orchardId integer
+  caseId integer
   recordedAt date [default: `now()`]
-  partOfPlant varchar // 'leaf', 'stem', 'fruit'
-  diseaseId integer
   numberOfTreesChecked integer
   numberOfTreesInfected integer
-  status varchar //'active', 'resolved'
 }
 
 Table LocationDisease {
@@ -78,8 +83,9 @@ Ref: UserProfile.userId > User.userId
 Ref: Orchard.userId > User.userId
 Ref: Orchard.varietyId > Variety.varietyId
 Ref: Orchard.locationId > Location.locationId
-Ref: Record.orchardId > Orchard.orchardId
-Ref: Record.diseaseId > Disease.diseaseId
+Ref: Case.orchardId > Orchard.orchardId
+Ref: Case.diseaseId > Disease.diseaseId
+Ref: Record.caseId > Case.caseId
 Ref: LocationDisease.locationId > Location.locationId
 Ref: LocationDisease.diseaseId > Disease.diseaseId
 Ref: VarietyDisease.varietyId > Variety.varietyId
