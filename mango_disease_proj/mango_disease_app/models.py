@@ -128,7 +128,7 @@ class Record(models.Model):
     numberOfTreesInfected = models.IntegerField(validators=[validators.MinValueValidator(1)])
     
     def __str__(self):
-        return f"Record for {self.caseId} - Recorded at: {self.recordedAt}"
+        return f"Record for {self.case} - Recorded at: {self.recordedAt}"
 
     def clean(self): # https://docs.djangoproject.com/en/5.1/ref/forms/validation/
         if not self.case and not self.orchard:

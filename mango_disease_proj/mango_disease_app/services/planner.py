@@ -133,7 +133,7 @@ def generate_plan(user):
             'stocking_rate': stocking_rate,
             'season_info': season_info,
             'time_last_check': time_last_check,
-            'sensitivity_score': sensitivity_score if getattr(orchard, 'record', None) else "No records",
+            'sensitivity_score': round(sensitivity_score,2),
             'variety':orchard.variety,
         }
         

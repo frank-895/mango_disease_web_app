@@ -1,5 +1,5 @@
 from django import template
-import calendar
+from datetime import date, timedelta
 
 register = template.Library()
 
@@ -23,17 +23,17 @@ def meterclass(value):
     except Exception:
         return ''
 
-LOW_THRESHOLD = 0.8
-MODERATE_THRESHOLD = 0.9
+LOW_THRESHOLD = 0.4
+MODERATE_THRESHOLD = 0.7
 
 @register.filter
 def check_frequency_format(risk_score):
-    if risk_score < 0.8:
-        return f"Check this orchard once per week."
-    elif risk_score < 0.9:
-        return f"Check this orchard once every 3 days."
+    if risk_score < LOW_THRESHOLD:
+        return f"Once per week."
+    elif risk_score < MODERATE_THRESHOLD:
+        return f"Every 3 days."
     else:
-        return f"Check this orcahrd once per day."
+        return f"Every day."
     
 @register.filter
 def risk_factor_format(risk_score):
@@ -52,3 +52,28 @@ def risk_factor_class(risk_score):
         return "medium"
     else:
         return "high"
+    
+@register.filter
+def next_dates(risk_score, time_last_check):
+    time_last_check = int(time_last_check) if str(time_last_check).isdigit() else 99
+    today = date.today()
+
+    # calculate frequency days
+    if risk_score < LOW_THRESHOLD:
+        frequency_days = timedelta(days=7)
+    elif risk_score < MODERATE_THRESHOLD:
+        frequency_days = timedelta(days=3)
+    else:
+        frequency_days = timedelta(days=1)
+    
+    last_check_date = today - timedelta(days=time_last_check)
+    next_date = last_check_date + frequency_days
+    
+    if next_date < today:
+        next_date = today
+        
+    next_next_date = next_date + frequency_days
+    next_next_next_date = next_next_date + frequency_days
+
+    return f"{next_date.strftime('%B %d, %Y')} | {next_next_date.strftime('%B %d, %Y') } | {next_next_next_date.strftime('%B %d, %Y') }"
+

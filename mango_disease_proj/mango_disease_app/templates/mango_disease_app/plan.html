@@ -11,11 +11,29 @@
 
 {% block content %}
   <h2>Orchard Monitoring Plan</h2>
+  <table class="inspection-summary">
+    <thead>
+      <tr>
+        <th>Orchard Name</th>
+          <th>Inspection Frequency</th>
+          <th>Next 3 Inspection Dates</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for item in page_data %}
+      <tr class="{{ item.risk_score|risk_factor_class }}">
+        <td>{{ item.orchard }}</td>
+        <td>{{ item.risk_score|check_frequency_format }}</td>
+        <td>{{ item.risk_score|next_dates:item.data_used.time_last_check }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
   <div class="card-container">
     {% for item in page_data %}
       <div class="orchard-risk-card">
         <div class="header">
-          <h2>{{ item.orchard }}</h2>
+          <h3>{{ item.orchard }}</h3>
             <div class="risk-label {{ item.risk_score|risk_factor_class }}">{{ item.risk_score|risk_factor_format }}</div>
         </div>
       
