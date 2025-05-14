@@ -1,9 +1,11 @@
 {% extends 'mango_disease_app/base.html' %} 
 {% load static %} 
+{% load custom_filters %}
 
 {% block page_title %}Account{% endblock %}
 {% block page_header %}Account{% endblock %}
 {% block custom_head_entries %}
+
 <link rel="stylesheet" href="{% static 'css/planner.css' %}">
 {% endblock %}
 
@@ -11,30 +13,41 @@
   <h2>Orchard Monitoring Plan</h2>
   <div class="card-container">
     {% for item in page_data %}
-      <div class="orchard-card">
-        <h3>{{ item.orchard }}</h3>
-        {% if item.risk_score < 0.4 %}
-          <div class="score low">Low Risk ({{ item.risk_score }})</div>
-        {% elif item.risk_score < 0.7 %}
-          <div class="score medium">Moderate Risk ({{ item.risk_score }})</div>
-        {% else %}
-          <div class="score high">High Risk ({{ item.risk_score }})</div>
-        {% endif %}
-        <ul>
-          <li>
-            <strong>Diseases:</strong>
-            {% if item.data_used.diseases %}
-              {{ item.data_used.diseases|join:", " }}
-            {% else %}
-              No diseases detected
-            {% endif %}
-          </li>
-          <li><strong>Location:</strong> {{ item.data_used.location }}</li>
-          <li><strong>Stocking Rate:</strong> {{ item.data_used.stocking_rate }}</li>
-          <li><strong>Last Checked:</strong> {{ item.data_used.time_last_check }}</li>
-          <li><strong>Total Trees:</strong> {{ item.data_used.no_trees }}</li>
-        </ul>
-      </div>
+      <div class="orchard-risk-card">
+        <div class="header">
+          <h2>{{ item.orchard }}</h2>
+            <div class="risk-label {{ item.risk_score|risk_factor_class }}">{{ item.risk_score|risk_factor_format }}</div>
+        </div>
+      
+        <div class="check-frequency">
+          <strong>Recommended Check Frequency:</strong>
+          <span>{{ item.risk_score|check_frequency_format }}</span>
+        </div>
+      
+        <div class="calculation-explanation">
+          <details>
+            <summary>How did we calculate this score?</summary>
+            <div class="score-details">
+              <h4>Factors Contributing to This Risk Score:</h4>
+              <ul>
+                <li><strong>Detected Diseases:</strong>
+                  {% if item.data_used.diseases %}
+                    {{ item.data_used.diseases|join:", " }}
+                  {% else %}
+                    No diseases detected
+                  {% endif %}
+                </li>
+                <li><strong>Location:</strong> {{ item.data_used.location }}</li>
+                <li><strong>Stocking Rate:</strong> {{ item.data_used.stocking_rate }}</li>
+                <li><strong>Seasonal Risk:</strong> {{ item.data_used.season_info }}</li>
+                <li><strong>Days Since Last Record:</strong> {{ item.data_used.time_last_check }}</li>
+                <li><strong>Sensitivity of Most Recent Record:</strong> {{ item.data_used.sensitivity_score }}</li>
+                <li><strong>Variety of Trees:</strong> {{ item.data_used.variety }}</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>    
     {% endfor %}
   </div>
 {% endblock %}

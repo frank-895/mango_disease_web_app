@@ -61,6 +61,7 @@ Table Case {
 Table Record {
   recordId integer [primary key]
   caseId integer
+  orchardId integer
   recordedAt date [default: `now()`]
   numberOfTreesChecked integer
   numberOfTreesInfected integer
@@ -86,6 +87,7 @@ Ref: Orchard.locationId > Location.locationId
 Ref: Case.orchardId > Orchard.orchardId
 Ref: Case.diseaseId > Disease.diseaseId
 Ref: Record.caseId > Case.caseId
+Ref: Record.orchardId > Orchard.orchardId
 Ref: LocationDisease.locationId > Location.locationId
 Ref: LocationDisease.diseaseId > Disease.diseaseId
 Ref: VarietyDisease.varietyId > Variety.varietyId

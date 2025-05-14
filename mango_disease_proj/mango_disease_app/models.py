@@ -3,6 +3,7 @@ from django.core import validators
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -107,10 +108,18 @@ class Case(models.Model):
         return f"Case for {self.orchard} - Disease: {self.disease} on the {self.partOfPlant}"
     
 class Record(models.Model):
+    # clean method handles validation for case and orchard foreign keys
     case = models.ForeignKey(
         Case,
         on_delete=models.CASCADE,
         null=True,
+        blank=True,
+    )
+    
+    orchard = models.ForeignKey(
+        Orchard,
+        on_delete=models.CASCADE,
+        null=True, # clean method handles validation
         blank=True,
     )
     
@@ -120,6 +129,12 @@ class Record(models.Model):
     
     def __str__(self):
         return f"Record for {self.caseId} - Recorded at: {self.recordedAt}"
+
+    def clean(self): # https://docs.djangoproject.com/en/5.1/ref/forms/validation/
+        if not self.case and not self.orchard:
+            raise ValidationError('Record must be linked to a Case or an Orchard.')
+        if self.case and not self.orchard: # automatically link case to Orchard too
+            self.orchard = self.case.orchard
     
 class LocationDisease(models.Model):
     location = models.ForeignKey(

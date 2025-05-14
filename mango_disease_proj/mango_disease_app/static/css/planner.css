@@ -6,63 +6,104 @@
     margin-top: 20px;
   }
 
-  .orchard-card {
-    background: linear-gradient(to bottom right, #ffffff, #f8f9fb);
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    width: 320px;
-    padding: 20px 24px;
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid #e0e0e0;
+  .orchard-risk-card {
+    border: 2px solid #ccc;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    background: #fafafa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
   }
-
-  .orchard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  
+  .orchard-risk-card .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-
-  .orchard-card h3 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: #1e3a5f;
-  }
-
-  .score {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 12px 0;
+  
+  .orchard-risk-card .risk-label {
     padding: 6px 12px;
-    border-radius: 20px;
-    display: inline-block;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
   }
-
-  .score.low {
-    background-color: #d4edda;
+  
+  .risk-label.low {
+    background: #d4edda;
     color: #155724;
   }
-
-  .score.medium {
-    background-color: #fff3cd;
+  
+  .risk-label.medium {
+    background: #fff3cd;
     color: #856404;
   }
-
-  .score.high {
-    background-color: #f8d7da;
+  
+  .risk-label.high {
+    background: #f8d7da;
     color: #721c24;
   }
-
-  .orchard-card ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
+  
+  .check-frequency {
+    margin-top: 16px;
+    font-size: 1.1rem;
   }
-
-  .orchard-card li {
+  
+  .calculation-explanation {
+    margin-top: 24px;
+  }
+  
+  .calculation-explanation h3 {
     margin-bottom: 8px;
-    font-size: 0.95rem;
-    color: #333;
   }
-
-  .orchard-card li strong {
-    color: #555;
+  
+  .score-details {
+    margin-top: 24px;
   }
+  
+  .score-details h4 {
+    margin-bottom: 12px;
+  }
+  
+  .score-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .score-details li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  
+  details summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 12px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  details[open] summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  details .score-details {
+    background: #f8f9fa;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+  }
+  
+  details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  details li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  
