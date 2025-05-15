@@ -29,7 +29,7 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 if DEBUG:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 else:
-    ALLOWED_HOSTS = ['franksnelling.pythonanywhere.com']
+    ALLOWED_HOSTS = ['franksnelling.eu.pythonanywhere.com']
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
