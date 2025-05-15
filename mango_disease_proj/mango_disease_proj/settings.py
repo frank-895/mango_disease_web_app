@@ -24,7 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-vz87vf643uq3gp%-8i)q+l=n51n%z^+639ya1o3)k5vark@yf-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ALLOWED_HOSTS = ['franksnelling.pythonanywhere.com']
 
@@ -134,5 +137,3 @@ import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
