@@ -36,10 +36,6 @@ if not DEBUG:
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'mango_disease_app', 'static'), 
-]
-
 # Application definition
 
 INSTALLED_APPS = [
