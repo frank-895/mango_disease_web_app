@@ -1,75 +1,130 @@
-# Mango Disease Web App 🥭
+# 🥭🥭🥭 MangoDiseaseOrg
 
-This static web application is designed to provide farmers with information about various mango diseases that are present in top-end of Australia. This will enable farmers to detect, diagnose and treat diseases and pests that are present in the orchards.
+MangoDiseaseOrg is a web-based orchard management platform designed to assist mango growers in identifying, recording, and planning for diseases and pests affecting their orchards. The application supports data entry, automated orchard inspection planning, and risk-based recommendations.
 
-## Table of Contents
+## 🌱 Features
 
-1. [Information Included](#information-included)
-2. [Technologies Used](#technologies-used)
-3. [Getting Started](#getting-started)
-4. [Disclaimer](#disclaimer)
-5. [Acknowledgments](#acknowledgments)
-6. [License](#license)
+- **Admin Dashboard**
+  Log in as an admin to access advanced features for managing diseases, locations, and mango varieties.
+- **Planner**
+  Automatically generate orchard inspection schedules based on disease/pest risk levels.
+- **Record Findings**
+  Log disease and pest findings for each orchard to track orchard health over time.
+- **Orchard Management**
+  Add and manage multiple orchards with specific locations and mango varieties.
+- **Disease & Pest Database**
+  Maintain a centralized knowledge base of mango diseases, their symptoms, and regional impact.
 
-## Information Included
+## 🚀 Live Demo
 
-### Diseases
+Visit the live application:
+🔗 [MangoDiseaseOrg on PythonAnywhere](https://franksnelling.eu.pythonanywhere.com)
 
-1. Bacterial Black Spot
-2. Mango Scab
-3. Mango Anthracnose
+## 🔐 Roles & Access
 
-### Pests
+- **Admin**: Full access to disease entry, location and variety management.
+- **Registered Users**: Can create and manage orchards, and record findings.
 
-1. Mango Pink Scale
-2. Mango Seed Weevil
-3. Mango Shoot Caterpillar
-4. Mango Planthopper
+## ⚙️ Tech Stack
 
-## Technologies Used
+- **Framework**: Django (Python)
+- **Frontend**: HTML, CSS
+- **Database**: SQLite (default, easily swappable)
+- **Forms**: Django's built-in forms and `ModelForm`s
+- **Authentication**: Django Auth system
+- **Image Handling**: Pillow
+- **Scientific Computation**: SciPy (for risk modeling and scheduling)
 
-- **Django** - a web framework for Python, serving as the backbone of the application.
-- **HTML, CSS** - standard web design technologies.
+## 🚀 Getting Started
 
-## Getting Started
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/mango-disease-app.git
+cd mango-disease-app
+```
 
-### Prerequisites
-- Python 3.6+
-- pip (Python package installer)
+### 2. Create and activate a virtual environment
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-### Installation
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+### 4. Run migrations
+```bash
+python manage.py migrate
+```
 
-2. **Set up a virtual environment (optional but recommended):**
-   ```python
-   python -m venv venv
-   source venv/bin/activate  # On Windows use venv\Scripts\activate
+### 5. Create a superuser (for admin tools)
+```bash
+python manage.py createsuperuser
+```
 
-3. **Install the required packages:**
-   ```python
-   pip install -r requirements.txt
+### 6. Run the server
+```bash
+python manage.py runserver
+```
+Visit `http://127.0.0.1:8000` in your browser.
 
-### Usage
-1. **Navigate into the `mango_disease_proj` directory.**
-2. **Start the Django server.**
-   ```python
-   python manage.py runserver
-   
-3. **Access the application.** Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) on your browser.
+## 🔍 Example Use Cases
 
-## Disclaimer
+Farmers can view recommended inspection intervals and plan field visits.
+Agricultural researchers can analyze disease spread by location and mango variety.
+Admins can update the disease database with new findings and recommendations.
+
+## 🧠 Risk Planning Logic
+The app uses a weighted risk score algorithm to determine which orchards require more frequent inspections. Key components:
+
+| Factor                  | Description                                            | Weight |
+| ----------------------- | ------------------------------------------------------ | ------ |
+| Severity                | Max disease severity among active cases                | 0.15   |
+| Spreadability           | Max disease spreadability                              | 0.15   |
+| Variety Susceptibility  | Variety's susceptibility to observed diseases          | 0.025  |
+| Location Susceptibility | Region-specific disease risk                           | 0.025  |
+| Stocking Rate           | Tree density (trees per area)                          | 0.20   |
+| Last Inspection         | Time since last inspection                             | 0.05   |
+| Seasonal Risk           | Seasonal disease/pest likelihood (based on hemisphere) | 0.25   |
+| Sensitivity             | % of orchard sampled in last check                     | 0.15   |
+
+All inputs are normalized to a 0–1 scale. The final risk score helps prioritize inspections.
+
+## 🛠 Admin Tools
+Once logged in as a superuser, you can:
+- Add/edit/delete diseases, varieties, and orchard locations.
+- Manage user-submitted records and orchards.
+
+## 🧪 Sample Test Users
+- Username: `demo_user`
+- Password: `password123`
+> You can use this account to explore the app without affecting real data.
+
+## 📂 Project Structure
+```bash
+mango_disease_app/
+├── models.py           # Core database models
+├── views.py            # View logic
+├── forms.py            # Form classes
+├── templates/          # HTML templates and templatetags
+├── services/planner.py # Risk calculation logic
+├── static/             # CSS, JS, images
+```
+
+## 📝  Disclaimer
 
 *This website is for learning purposes only, for a university project. It is not constructed to be used in industry.*
 
-## Acknowledgments
+## 👥 Authors
+
+This project was developed by students at Charles Darwin Univeristy as a learning project. See About page for more credits. 
+
+## 🙏 Acknowledgments
 
 Special thanks to the open-source community for providing invaluable libraries and tools that made this project possible. Thanks to resources online for providing the information about mango diseases and pests.
 
-## License
+## 📄 License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](/LICENSE) file for details.
- something
