@@ -26,10 +26,13 @@ SECRET_KEY = 'django-insecure-vz87vf643uq3gp%-8i)q+l=n51n%z^+639ya1o3)k5vark@yf-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+else:
+    ALLOWED_HOSTS = ['franksnelling.pythonanywhere.com']
 
-ALLOWED_HOSTS = ['franksnelling.pythonanywhere.com']
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 
 
 # Application definition
@@ -133,7 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # To store images in database
 # Code Adapted from https://how.dev/answers/how-to-upload-images-in-django
-import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
