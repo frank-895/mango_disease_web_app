@@ -98,8 +98,8 @@ Once logged in as a superuser, you can:
 - Manage user-submitted records and orchards.
 
 ## 🧪 Sample Test Users
-- Username: `demo_user`
-- Password: `password123`
+- Username: `testuser`
+- Password: `testpass`
 > You can use this account to explore the app without affecting real data.
 
 ## 📂 Project Structure
