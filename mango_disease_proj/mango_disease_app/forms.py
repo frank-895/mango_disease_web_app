@@ -2,6 +2,7 @@ from django import forms
 from .models import *
 from datetime import date
 
+
 # class addDiseaseRecord(forms.ModelForm):
 #     def __init__(self, *args, **kwargs): #https://stackoverflow.com/questions/74964200/limit-choices-inside-an-input-django/74965183
 #         user = kwargs.pop('user', None)
@@ -110,3 +111,5 @@ class VarietyForm(forms.ModelForm):
         labels = {
             'varietyName': "Name of the tree variety",
         }
+        
+    

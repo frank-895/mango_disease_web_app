@@ -11,6 +11,8 @@
 {% comment %}
 
 {% block content %}
+<a href="javascript:history.back()" class="back-button">← Back</a>
+
 	<form action="{% url 'add_record' %}" method="post" novalidate>
 		{% csrf_token %}
 		<table>

@@ -6,6 +6,8 @@ from .forms import *
 from .models import *
 from .services.planner import generate_plan
 
+
+
 def userlogin(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -218,12 +220,17 @@ def add_orchard(request):
 
     }) 
 
-
 def orchard_list(request):
     search_query = request.GET.get('search', '')
-    orchards = Orchard.objects.all()
 
+    # Filter only orchards created by the logged-in user
+    orchards = Orchard.objects.filter(user=request.user)
+
+    # Apply search if a query is given
     if search_query:
         orchards = orchards.filter(orchardName__icontains=search_query)
 
-    return render(request, 'mango_disease_app/build.html', {'orchards': orchards, 'search_query': search_query})
+    return render(request, 'mango_disease_app/build.html', {
+        'orchards': orchards,
+        'search_query': search_query
+    })

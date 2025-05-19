@@ -6,6 +6,8 @@
 {% load static %} 
 
 {% block content %}
+<a href="javascript:history.back()" class="back-button">← Back</a>
+
 <h2>Add New Orchard</h2>
 <form action="{% url 'add_orchard' %}" method="post" novalidate>
     {% csrf_token %}
