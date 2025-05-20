@@ -6,6 +6,7 @@ from .forms import *
 from .models import *
 from .services.planner import generate_plan
 
+
 def userlogin(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -95,17 +96,28 @@ def admin_tools(request):
 
 def add_disease(request):
     post_data = None
-    form = DiseaseForm(request.POST or None)
+    locations=Location.objects.count()
     
-    if request.method == 'POST' and form.is_valid():
-        new_disease = form.save()  
-        post_data = {
-            'name':new_disease.diseaseName,
-            'type':new_disease.type,
-        }
+    if request.method == "POST":
+        formset = DLocationDiseaseFormset(request.POST, request.FILES)
+        form = DiseaseForm(request.POST)
+        if form.is_valid():
+            new_disease = form.save()  
+            post_data = {
+                'name':new_disease.diseaseName,
+                'type':new_disease.type,
+            }
+            form = DiseaseForm()
+            for i in formset:
+                new_DL = i.save(commit=False)
+                new_DL.disease = new_disease
+                new_DL.save()
+            pass  
+    else:
         form = DiseaseForm()
+        formset = DLocationDiseaseFormset({"form-TOTAL_FORMS": str(locations),"form-INITIAL_FORMS": "0",})
     
-    return render(request, 'mango_disease_app/add_disease.html', {'form': form, 'new_disease': post_data})
+    return render(request, 'mango_disease_app/add_disease.html', {'form': form, 'formset': formset, 'new_disease': post_data})
 
 def add_location(request):
     post_data = None

@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from datetime import date
+from django.forms import modelformset_factory
 
 # class addDiseaseRecord(forms.ModelForm):
 #     def __init__(self, *args, **kwargs): #https://stackoverflow.com/questions/74964200/limit-choices-inside-an-input-django/74965183
@@ -110,3 +111,16 @@ class VarietyForm(forms.ModelForm):
         labels = {
             'varietyName': "Name of the tree variety",
         }
+        
+        
+class LocationDiseaseForm(forms.ModelForm):
+    class Meta:
+        model = LocationDisease
+        fields = ['disease','location','locationSusceptability']
+        labels = {
+            'disease': "Use each disease only once",
+            'location': "Use each location only once",
+            'locationSusceptability': "How prevelant the disease is in this location",
+        }
+
+DLocationDiseaseFormset = modelformset_factory(LocationDisease, form=LocationDiseaseForm, exclude=['disease'])
