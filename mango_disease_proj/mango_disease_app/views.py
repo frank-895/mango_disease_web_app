@@ -6,8 +6,6 @@ from .forms import *
 from .models import *
 from .services.planner import generate_plan
 
-
-
 def userlogin(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -170,37 +168,20 @@ def delete_orchard(request, orchard_id):
 def add_orchard(request): 
 
     new_orchard = None 
-
- 
-
     if request.method == 'POST': 
-
         form = OrchardForm(request.POST) 
-
         if form.is_valid(): 
-
             orchard = form.save(commit=False) 
-
             orchard.user = request.user  # Attach the logged-in user 
-
             orchard.save() 
-
             new_orchard = orchard 
-
             form = OrchardForm()  # Clear the form after submission 
-
     else: 
-
         form = OrchardForm() 
 
- 
-
     return render(request, 'mango_disease_app/build.html', { 
-
         'form': form, 
-
         'new_orchard': new_orchard 
-
     }) 
 
 def orchard_list(request):

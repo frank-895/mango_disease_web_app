@@ -2,52 +2,6 @@ from django import forms
 from .models import *
 from datetime import date
 
-
-# class addDiseaseRecord(forms.ModelForm):
-#     def __init__(self, *args, **kwargs): #https://stackoverflow.com/questions/74964200/limit-choices-inside-an-input-django/74965183
-#         user = kwargs.pop('user', None)
-#         super().__init__(*args, **kwargs)
-        
-#         if user is not None:
-#             self.fields['orchardID'].queryset = Orchard.objects.filter(user=user)
-#     class Meta:
-#         model = Record
-#         #exclude = ['orchardID']
-#         fields = ['orchardID', 'recordedAt', 'partOfPlant', 'disease', 'numberOfTreesChecked', 'numberOfTreesInfected']
-#         labels = {
-#             'orchardID':"Choose your orchard",
-#             'recordedAt': "Enter date of recording",
-#             'partOfPlant': "Choose which part of plant was impacted",
-#             'disease': "Choose the disease affecting the plant",
-#             'numberOfTreesChecked': "Enter the number of trees you checked",
-#             'numberOfTreesInfected': "Enter how many trees you checked were infected",
-#         }
-#         widgets = {
-#             'recordedAt': forms.DateInput(attrs={
-#                 'type': 'date',
-#                 'class': 'form-control',
-#                 'max': date.today().isoformat()
-#             }),
-#         }
-
-            
-#     def clean(self): # see documentation https://docs.djangoproject.com/en/5.1/ref/forms/validation/
-#         cleaned_data = super().clean()
-#         orchard = cleaned_data.get('orchardID')
-#         no_checked = cleaned_data.get('numberOfTreesChecked')
-#         no_infected = cleaned_data.get('numberOfTreesInfected')
-#         total_trees = orchard.noTreesRow * orchard.noTreesColumn
-        
-#         if  orchard and no_checked and no_infected:
-#             total_trees = orchard.noTreesRow * orchard.noTreesColumn
-#             if no_checked > total_trees:
-#                 self.add_error('numberofTreesChecked', f"Must be between 1 and total trees in orchard ({total_trees}).")
-#             if no_infected > no_checked:
-#                 self.add_error('numberofTreesInfected', f"Must be between 1 and number of trees checked ({no_checked}).")
-
-
-
-
 class OrchardForm(forms.ModelForm):
     class Meta:
         model = Orchard
@@ -74,8 +28,6 @@ class OrchardForm(forms.ModelForm):
         if area < 0:
             raise ValidationError("Area must be a positive value.")
         return area
-    
-
 
 class DiseaseForm(forms.ModelForm):
     class Meta:
@@ -96,20 +48,20 @@ class DiseaseForm(forms.ModelForm):
 class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
-        fields = ['locationName','hemisphere']
+        fields = ['locationName','hemisphere', 'locationSusceptability']
         labels = {
             'locationName': "Name of the location",
             'hemisphere': "Which hemisphere the location is in",
+            'locationSusceptability': "How suscpetible is this location to disease?"
         }
-        
-        
         
 class VarietyForm(forms.ModelForm):
     class Meta:
         model = Variety
-        fields = ['varietyName']
+        fields = ['varietyName', 'varietySusceptability']
         labels = {
             'varietyName': "Name of the tree variety",
+            'varietySusceptability': "How susceptible is this variety to disease?"
         }
         
 class CaseForm(forms.ModelForm):
@@ -125,9 +77,31 @@ class CaseForm(forms.ModelForm):
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ['case','orchard','recordedAt','numberOfTreesChecked','numberOfTreesInfected']
+        fields = ['case','recordedAt','numberOfTreesChecked','numberOfTreesInfected']
         labels = {
-            'recordedAt': "Time of recording",
+            'recordedAt': "Date of recording",
             'numberOfTreesChecked': "Number of trees checked",
             'numberOfTreesInfected': "Number of trees infected",
         }
+        widgets = {
+            'recordedAt': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control',
+                'max': date.today().isoformat()
+            }),
+        }
+        
+    ### NOTE FOR PATRICK - THIS MIGHT BE HELPFUL, I WROTE IT FOR THE OLD RECORD FUNCTION TO VALIDATE IF THE NUMBER CHECKED AND NUMBER INFECTED IS LESS THAN THE NUMBER OF TREES IN THE ORCHARD
+    # def clean(self): # see documentation https://docs.djangoproject.com/en/5.1/ref/forms/validation/
+    #     cleaned_data = super().clean()
+    #     orchard = cleaned_data.get('orchardID')
+    #     no_checked = cleaned_data.get('numberOfTreesChecked')
+    #     no_infected = cleaned_data.get('numberOfTreesInfected')
+    #     total_trees = orchard.noTreesRow * orchard.noTreesColumn
+
+    #     if  orchard and no_checked and no_infected:
+    #         total_trees = orchard.noTreesRow * orchard.noTreesColumn
+    #         if no_checked > total_trees:
+    #             self.add_error('numberofTreesChecked', f"Must be between 1 and total trees in orchard ({total_trees}).")
+    #         if no_infected > no_checked:
+    #             self.add_error('numberofTreesInfected', f"Must be between 1 and number of trees checked ({no_checked}).")

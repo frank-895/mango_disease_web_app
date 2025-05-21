@@ -26,6 +26,7 @@ class UserProfile(models.Model):
 
 class Variety(models.Model):
     varietyName = models.CharField(max_length=255)
+    varietySusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)], default=5)
     
     def __str__(self):
         return self.varietyName
@@ -37,6 +38,7 @@ class Location(models.Model):
     ]
     locationName = models.CharField(max_length=255)
     hemisphere = models.CharField(choices=HEMISPHERES, max_length=5, default='south')
+    locationSusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)], default=5)
     
     def __str__(self):
         return self.locationName
@@ -135,31 +137,3 @@ class Record(models.Model):
             raise ValidationError('Record must be linked to a Case or an Orchard.')
         if self.case and not self.orchard: # automatically link case to Orchard too
             self.orchard = self.case.orchard
-    
-class LocationDisease(models.Model):
-    location = models.ForeignKey(
-        Location,
-        on_delete=models.CASCADE
-    )
-    disease = models.ForeignKey(
-        Disease,
-        on_delete=models.CASCADE
-    )
-    locationSusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
-    
-    def __str__(self):
-        return f"{self.location} susceptibility to {self.disease}"
-
-class VarietyDisease(models.Model):
-    variety = models.ForeignKey(
-        Variety,
-        on_delete=models.CASCADE
-    )
-    disease = models.ForeignKey(
-        Disease,
-        on_delete=models.CASCADE
-    )
-    varietySusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
-    
-    def __str__(self):
-        return f"{self.variety} susceptibility to {self.disease}"
