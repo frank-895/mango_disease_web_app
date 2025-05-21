@@ -26,7 +26,7 @@ class UserProfile(models.Model):
 
 class Variety(models.Model):
     varietyName = models.CharField(max_length=255)
-    varietySusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)], default=5)
+    varietySusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
     
     def __str__(self):
         return self.varietyName

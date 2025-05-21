@@ -24,4 +24,21 @@
 		</table>
 		<input type="submit" value="Add Variety">
 	</form>
+
+	<h2>Existing Varities</h2>
+	{% if varieties %}
+	<div class="orchard-grid">
+		{% for variety in varieties %}
+			<div class="orchard-card">
+				<h3 class="orchard-name">{{ variety.varietyName }}</h3>
+				<div class="card-actions">
+					<a href="{% url 'edit_variety' variety.id %}" class="action-link">Edit</a>
+					<a href="{% url 'delete_variety' variety.id %}" class="action-link delete-link" onclick="return confirm('Delete this variety?');">Delete</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>No varieties added yet.</p>
+	{% endif %}
 {% endblock %}

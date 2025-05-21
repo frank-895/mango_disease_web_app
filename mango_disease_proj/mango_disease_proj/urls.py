@@ -62,7 +62,9 @@ urlpatterns = [
     
     # VARIETY PATHS
     re_path(r'^add_variety/$', views.add_variety, name='add_variety'),
-    
+    path('variety/edit/<int:variety_id>/', views.edit_variety, name='edit_variety'),
+    path('variety/delete/<int:variety_id>/', views.delete_variety, name='delete_variety'),   
+        
     # OTHER ACCOUNT PATHS
     re_path(r'^plan/$', views.plan, name='plan'),
     re_path(r'^admintools/$', views.admin_tools, name='admin_tools'),

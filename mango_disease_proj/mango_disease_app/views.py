@@ -161,6 +161,7 @@ def delete_location(request, location_id):
 def add_variety(request):
     post_data = None
     form = VarietyForm(request.POST or None)
+    varieties = Variety.objects.all()
     
     if request.method == 'POST' and form.is_valid():
         new_variety = form.save()  
@@ -169,7 +170,29 @@ def add_variety(request):
         }
         form = VarietyForm()
     
-    return render(request, 'mango_disease_app/admin_forms/add_variety.html', {'form': form, 'new_variety': post_data})
+    return render(request, 'mango_disease_app/admin_forms/add_variety.html', {
+        'form': form,
+        'new_variety': post_data,
+        'varieties':varieties,
+    })
+
+def edit_variety(request, variety_id):
+    variety = get_object_or_404(Variety, id=variety_id)
+    form = VarietyForm(request.POST or None, instance=variety)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('add_variety')
+
+    return render(request, 'mango_disease_app/admin_forms/edit_form_base.html', {
+        'form': form,
+        'entity_name': variety,
+    })
+
+def delete_variety(request, variety_id):
+    variety = get_object_or_404(Variety, id=variety_id)
+    variety.delete()
+    return redirect('add_variety')
 
 # ----- MANAGE ORCHARDS ---------
 def build(request):
@@ -191,6 +214,24 @@ def build(request):
         'new_orchard': new_orchard,
         'orchards': orchards,
     })
+    
+def add_orchard(request): 
+    new_orchard = None 
+    if request.method == 'POST': 
+        form = OrchardForm(request.POST) 
+        if form.is_valid(): 
+            orchard = form.save(commit=False) 
+            orchard.user = request.user  # Attach the logged-in user 
+            orchard.save() 
+            new_orchard = orchard 
+            form = OrchardForm()  # Clear the form after submission 
+    else: 
+        form = OrchardForm() 
+
+    return render(request, 'mango_disease_app/build.html', { 
+        'form': form, 
+        'new_orchard': new_orchard 
+    }) 
 
 def edit_orchard(request, orchard_id):
     orchard = Orchard.objects.get(id=orchard_id, user=request.user)
@@ -214,25 +255,6 @@ def delete_orchard(request, orchard_id):
 
     return render(request, 'mango_disease_app/confirm_delete.html', {'orchard': orchard})
 
-def add_orchard(request): 
-
-    new_orchard = None 
-    if request.method == 'POST': 
-        form = OrchardForm(request.POST) 
-        if form.is_valid(): 
-            orchard = form.save(commit=False) 
-            orchard.user = request.user  # Attach the logged-in user 
-            orchard.save() 
-            new_orchard = orchard 
-            form = OrchardForm()  # Clear the form after submission 
-    else: 
-        form = OrchardForm() 
-
-    return render(request, 'mango_disease_app/build.html', { 
-        'form': form, 
-        'new_orchard': new_orchard 
-    }) 
-
 def orchard_list(request):
     search_query = request.GET.get('search', '')
 
@@ -248,6 +270,7 @@ def orchard_list(request):
         'search_query': search_query
     })
 
+# ----- MANAGE CASES ---------
 def cases(request):
     cases = Case.objects.filter(orchard__user=request.user)
     
@@ -269,6 +292,7 @@ def new_case(request):
     
     return render(request, 'mango_disease_app/new_case.html', {'form': form, 'new_case': post_data})
     
+# ----- MANAGE RECORDS ---------
 def records(request, case_id):
     case = Case.objects.get(id=case_id)
     cRecords = Record.objects.filter(case=case)
