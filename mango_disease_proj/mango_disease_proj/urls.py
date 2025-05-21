@@ -57,6 +57,8 @@ urlpatterns = [
     
     # LOCATION PATHS
     re_path(r'^add_location/$', views.add_location, name='add_location'),
+    path('location/edit/<int:location_id>/', views.edit_location, name='edit_location'),
+    path('location/delete/<int:location_id>/', views.delete_location, name='delete_location'),   
     
     # VARIETY PATHS
     re_path(r'^add_variety/$', views.add_variety, name='add_variety'),

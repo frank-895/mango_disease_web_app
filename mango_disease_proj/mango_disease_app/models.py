@@ -38,7 +38,7 @@ class Location(models.Model):
     ]
     locationName = models.CharField(max_length=255)
     hemisphere = models.CharField(choices=HEMISPHERES, max_length=5, default='south')
-    locationSusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)], default=5)
+    locationSusceptability = models.IntegerField(validators=[validators.MinValueValidator(0),validators.MaxValueValidator(10)])
     
     def __str__(self):
         return self.locationName

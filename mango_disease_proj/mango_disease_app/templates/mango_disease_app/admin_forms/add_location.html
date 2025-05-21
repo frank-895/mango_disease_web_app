@@ -24,4 +24,21 @@
 		</table>
 		<input type="submit" value="Add Location">
 	</form>
+
+	<h2>Existing Locations</h2>
+	{% if locations %}
+	<div class="orchard-grid">
+		{% for location in locations %}
+			<div class="orchard-card">
+				<h3 class="orchard-name">{{ location.locationName }}</h3>
+				<div class="card-actions">
+					<a href="{% url 'edit_location' location.id %}" class="action-link">Edit</a>
+					<a href="{% url 'delete_location' location.id %}" class="action-link delete-link" onclick="return confirm('Delete this location?');">Delete</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>No locations added yet.</p>
+	{% endif %}
 {% endblock %}
