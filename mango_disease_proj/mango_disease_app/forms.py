@@ -112,4 +112,22 @@ class VarietyForm(forms.ModelForm):
             'varietyName': "Name of the tree variety",
         }
         
-    
+class CaseForm(forms.ModelForm):
+    class Meta:
+        model = Case
+        fields = ['disease','orchard','partOfPlant']
+        labels = {
+            'disease': 'The disease or pest found',
+            'orchard': 'The orchard it was found in',
+            'partOfPlant': 'The part of the plant affected',
+        }
+        
+class RecordForm(forms.ModelForm):
+    class Meta:
+        model = Record
+        fields = ['case','orchard','recordedAt','numberOfTreesChecked','numberOfTreesInfected']
+        labels = {
+            'recordedAt': "Time of recording",
+            'numberOfTreesChecked': "Number of trees checked",
+            'numberOfTreesInfected': "Number of trees infected",
+        }

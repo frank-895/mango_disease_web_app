@@ -1,0 +1,28 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}New Case{% endblock %}
+{% block page_header %}New Case{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+<a href="javascript:history.back()" class="back-button">← Back</a>
+
+	{% if new_case %}
+		<div class="record-success">
+			<h2>New Case Added!</h2>
+			<p>
+				You have opened a case of {{ new_case.disease }} in {{ new_case.orchard}}.
+			</p>
+            <a href="{% url 'cases' %}">Return to Cases</a>
+		</div>
+	{% endif %}
+
+	<form action="{% url 'new_case' %}" method="post" novalidate>
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Open Case">
+	</form>
+{% endblock %}

@@ -31,6 +31,8 @@ urlpatterns = [
     path('reset-password/done/', auth_views.PasswordResetDoneView.as_view(template_name='mango_disease_app/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='mango_disease_app/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='mango_disease_app/password_reset_complete.html'), name='password_reset_complete'),
+    path('cases/records/<int:case_id>/', views.records, name='records'),
+    path('cases/add_record/<int:case_id>/', views.add_record, name='add_record'),
 
 
     
@@ -39,7 +41,8 @@ urlpatterns = [
     re_path(r'^about/$', views.about, name='about'),
     re_path(r'^disease/(?P<name>.+)/$', views.ind_disease, name='ind_disease'),
 
-    re_path(r'^add_record/$', views.add_record, name='add_record'),
+    re_path(r'^cases/$', views.cases, name='cases'),
+    re_path(r'^new_case/$', views.new_case, name='new_case'),
     re_path(r'^account/$', views.account, name='account'),
     re_path(r'^admintools/$', views.admin_tools, name='admin_tools'),
     re_path(r'^add_disease/$', views.add_disease, name='add_disease'),

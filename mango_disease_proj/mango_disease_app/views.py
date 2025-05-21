@@ -53,24 +53,7 @@ def about(request):
     page_data = {'cards': authors}
     return render(request, 'mango_disease_app/about.html', page_data)
 
-def add_record(request):
-    post_data = None
-    # form = addDiseaseRecord(request.POST or None, user=request.user)
-    
-    if request.method == 'POST' and form.is_valid():
-        new_record = form.save()  
-        post_data = {
-            'orchard':new_record.orchardID,
-            'time':new_record.recordedAt,
-            'partOfPlant':new_record.partOfPlant,
-            'disease':new_record.disease,
-        }
-        # form = addDiseaseRecord()
-    
-    return render(request, 'mango_disease_app/record.html', {
-        #'form': form, 
-        'new_record': post_data
-        })
+
 
 def account(request):
     orchards = (Orchard.objects
@@ -234,3 +217,51 @@ def orchard_list(request):
         'orchards': orchards,
         'search_query': search_query
     })
+
+def cases(request):
+    cases = Case.objects.filter(orchard__user=request.user)
+    
+    return render(request, 'mango_disease_app/cases.html', {
+        'cases': cases,
+    })
+    
+def new_case(request):
+    post_data = None
+    form = CaseForm(request.POST or None)
+    
+    if request.method == 'POST' and form.is_valid():
+        new_case = form.save()  
+        post_data = {
+            'disease': new_case.disease.diseaseName,
+            'orchard': new_case.orchard.orchardName
+        }
+        form = CaseForm()
+    
+    return render(request, 'mango_disease_app/new_case.html', {'form': form, 'new_case': post_data})
+    
+def records(request, case_id):
+    case = Case.objects.get(id=case_id)
+    cRecords = Record.objects.filter(case=case)
+    
+    return render(request, 'mango_disease_app/record.html', {
+        'records': cRecords,
+        'caseID': case_id,
+    })
+    
+def add_record(request, case_id):
+    post_data = None
+    rCase = Case.objects.get(id=case_id)
+    form = RecordForm(request.POST or None, initial={'case':rCase,'orchard':rCase.orchard})
+
+    if request.method == 'POST' and form.is_valid():
+        new_record = form.save()
+        post_data = {
+            'time':new_record.recordedAt,
+        }
+        form = RecordForm()
+
+    return render(request, 'mango_disease_app/add_record.html', {
+        'form': form, 
+        'new_record': post_data,
+        'caseID': case_id,
+        })

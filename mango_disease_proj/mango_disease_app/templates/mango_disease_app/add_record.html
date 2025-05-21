@@ -1,0 +1,27 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Account{% endblock %}
+{% block page_header %}Account{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+	{% if new_record %}
+		<div class="record-success">
+			<h2>New Record Added!</h2>
+			<p>
+				You have added a record from {{ new_record.time }}
+			</p>
+            <a href="{% url 'records' caseID %}">Return to Records</a>
+        </div>
+	{% endif %}
+
+
+<form action="{% url 'add_record' caseID %}" method="post" novalidate>
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Add Record">
+	</form>
+{% endblock %}
