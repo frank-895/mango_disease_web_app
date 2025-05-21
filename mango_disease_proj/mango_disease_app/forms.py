@@ -66,6 +66,7 @@ class VarietyForm(forms.ModelForm):
         
 class CaseForm(forms.ModelForm):
     class Meta:
+        ## NOTE FOR PATRICK :) - orchard needs to be limited to the user's orchards only. 
         model = Case
         fields = ['disease','orchard','partOfPlant']
         labels = {

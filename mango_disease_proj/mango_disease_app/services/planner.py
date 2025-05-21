@@ -7,8 +7,7 @@ import calendar
 
 ### ------ THE IDEA BEHIND THIS PLANNER ALGORITHM -------
 # This planner defines numerous factors that interplay when deciding how often an orchard needs to be checked
-# While the weightings have only been loosely chosen based on heuristics, 
-# it is very easy to redefine them based on expert advice.
+# While the weightings have only been loosely chosen based on heuristics, it is very easy to redefine them based on expert advice.
 
 def generate_plan(user):
     """    
@@ -24,14 +23,15 @@ def generate_plan(user):
     Decision Logic:
     ---------------
     - If there are active Cases for an orchard:
-        - The risk is calculated using disease severity, spreadability,
-          and susceptibility factors (variety and location).
+        - The risk is calculated using disease severity, spreadability.
         - The function uses worst-case values across all active Cases.
     - If no active Cases are present:
         - The risk is calculated only from environmental factors (stocking rate, season)
-          and recent general inspection history.
+          and recent general inspection history
 
     Regardless of Cases, all orchards consider:
+    - Variety susceptability (variety score)
+    - Location susceptability (location score)
     - Tree density (stocking score)
     - Time since last inspection (last check score)
     - Inspection sensitivity (portion of trees checked)
@@ -49,9 +49,9 @@ def generate_plan(user):
     - spreadability : float
         Max spreadability across active Cases' diseases.
     - variety_score : float
-        Variety's highest susceptibility to active Cases' diseases.
+        Variety's susceptibility score.
     - location_score : float
-        Location's highest susceptibility to active Cases' diseases.
+        Location's susceptibility score.
     - stocking_score : float
         Orchard tree density normalized against max density.
     - last_check_score : float
@@ -102,8 +102,6 @@ def generate_plan(user):
             diseases = [case.disease for case in active_cases]
             severity = calc_severity(diseases)
             spreadability = calc_spreadability(diseases)
-            variety_score = calc_variety_score(orchard.variety, diseases)
-            location_score = calc_location_score(orchard.location, diseases)
         else: # diseases have NOT been found (still some risk that diseases are present)
             diseases = []
             severity = 0.5
@@ -111,6 +109,8 @@ def generate_plan(user):
             variety_score = 0.5
             location_score = 0.5
         
+        variety_score = calc_variety_score(orchard.variety)
+        location_score = calc_location_score(orchard.location)
         stocking_score, stocking_rate = calc_stocking_score(orchard)
         last_check_score, time_last_check = calc_last_check_score(orchard)
         season_score, season_info = calc_season_score(orchard)
@@ -130,11 +130,11 @@ def generate_plan(user):
         data_used = {
             'diseases': diseases,
             'location': orchard.location,
+            'variety':orchard.variety,
             'stocking_rate': stocking_rate,
             'season_info': season_info,
             'time_last_check': time_last_check,
             'sensitivity_score': round(sensitivity_score,2),
-            'variety':orchard.variety,
         }
         
         plan.append({
@@ -162,30 +162,19 @@ def calc_spreadability(diseases):
     return max([disease.spreadability for disease in diseases]) / 10
 
 
-def calc_variety_score(variety, diseases):
+def calc_variety_score(variety):
     """
     Get the variety's susceptibility to the disease, normalized to 0-1.
     """
-    suscpetibilities = [
-        vd.varietySusceptability
-        for disease in diseases
-        if (vd := VarietyDisease.objects.filter(variety=variety, disease=disease).first()) # := is the walrus operator for in-line assignment
-    ]
-    
-    return max(suscpetibilities, default=0) / 10
+    return variety.varietySusceptability / 10
 
 
-def calc_location_score(location, diseases):
+def calc_location_score(location):
     """
     Get the location's susceptibility to the disease, normalized to 0-1.
     """
-    suscpetibilities = [
-        vd.locationSusceptability
-        for disease in diseases
-        if (vd := LocationDisease.objects.filter(location=location, disease=disease).first()) # := is the walrus operator for in-line assignment
-    ]
-        
-    return max(suscpetibilities, default=0) / 10
+
+    return location.locationSusceptability / 10
 
 
 def calc_stocking_score(orchard):
