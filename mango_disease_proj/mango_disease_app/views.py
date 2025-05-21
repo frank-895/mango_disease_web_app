@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
 from django.db.models import Prefetch
-from .forms import *
+
+from .forms import * 
 from .models import *
 from .services.planner import generate_plan
 
+# ----- USER AUTHENTICATION ------
 def userlogin(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -29,6 +31,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'mango_disease_app/register.html', {'form':form})
 
+# ----- CORE PAGES ------
 def home(request):
     return render(request, 'mango_disease_app/index.html')
 
@@ -50,8 +53,6 @@ def about(request):
     authors = UserProfile.objects.all() 
     page_data = {'cards': authors}
     return render(request, 'mango_disease_app/about.html', page_data)
-
-
 
 def account(request):
     orchards = (Orchard.objects
@@ -76,9 +77,16 @@ def account(request):
 def admin_tools(request):
     return render(request, 'mango_disease_app/admintools.html')
 
+def plan(request):
+    page_data = generate_plan(request.user)
+    return render(request, 'mango_disease_app/plan.html', {'page_data':page_data})
+
+# ----- MANAGE DISEASES ------
+
 def add_disease(request):
     post_data = None
     form = DiseaseForm(request.POST or None)
+    diseases = Disease.objects.all()
     
     if request.method == 'POST' and form.is_valid():
         new_disease = form.save()  
@@ -88,7 +96,31 @@ def add_disease(request):
         }
         form = DiseaseForm()
     
-    return render(request, 'mango_disease_app/add_disease.html', {'form': form, 'new_disease': post_data})
+    return render(request, 'mango_disease_app/admin_forms/add_disease.html', {
+        'form': form, 
+        'new_disease': post_data,
+        'diseases':diseases,
+    })
+
+def edit_disease(request, disease_id):
+    disease = get_object_or_404(Disease, id=disease_id)
+    form = DiseaseForm(request.POST or None, instance=disease)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('add_disease')
+
+    return render(request, 'mango_disease_app/admin_forms/edit_form_base.html', {
+        'form': form,
+        'disease': disease,
+    })
+
+def delete_disease(request, disease_id):
+    disease = get_object_or_404(Disease, id=disease_id)
+    disease.delete()
+    return redirect('add_disease')
+
+# ----- MANAGE LOCATIONS ---------
 
 def add_location(request):
     post_data = None
@@ -101,7 +133,7 @@ def add_location(request):
         }
         form = LocationForm()
     
-    return render(request, 'mango_disease_app/add_location.html', {'form': form, 'new_location': post_data})
+    return render(request, 'mango_disease_app/admin_forms/add_location.html', {'form': form, 'new_location': post_data})
 
 def add_variety(request):
     post_data = None
@@ -114,11 +146,7 @@ def add_variety(request):
         }
         form = VarietyForm()
     
-    return render(request, 'mango_disease_app/add_variety.html', {'form': form, 'new_variety': post_data})
-
-def plan(request):
-    page_data = generate_plan(request.user)
-    return render(request, 'mango_disease_app/plan.html', {'page_data':page_data})
+    return render(request, 'mango_disease_app/admin_forms/add_variety.html', {'form': form, 'new_variety': post_data})
 
 def build(request):
     new_orchard = None
@@ -153,8 +181,6 @@ def edit_orchard(request, orchard_id):
         'orchard': orchard,
     })
 
-from django.shortcuts import get_object_or_404
-
 def delete_orchard(request, orchard_id):
     orchard = get_object_or_404(Orchard, id=orchard_id, user=request.user)
 
@@ -163,7 +189,6 @@ def delete_orchard(request, orchard_id):
         return redirect('build')
 
     return render(request, 'mango_disease_app/confirm_delete.html', {'orchard': orchard})
-
 
 def add_orchard(request): 
 

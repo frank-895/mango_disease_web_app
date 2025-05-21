@@ -24,4 +24,21 @@
 		</table>
 		<input type="submit" value="Add Disease">
 	</form>
+
+	<h2>Existing Diseases</h2>
+	{% if diseases %}
+	<div class="orchard-grid">
+		{% for disease in diseases %}
+			<div class="orchard-card">
+				<h3 class="orchard-name">{{ disease.diseaseName }}</h3>
+				<div class="card-actions">
+					<a href="{% url 'edit_disease' disease.id %}" class="action-link">Edit</a>
+					<a href="{% url 'delete_disease' disease.id %}" class="action-link delete-link" onclick="return confirm('Delete this disease?');">Delete</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>No diseases added yet.</p>
+	{% endif %}
 {% endblock %}
