@@ -9,7 +9,7 @@
 <a href="javascript:history.back()" class="back-button">← Back</a>
 
 <h2>Edit {{ entity_name }}</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     <table>
         {{ form.as_table }}

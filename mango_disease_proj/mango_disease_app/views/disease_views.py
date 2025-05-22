@@ -6,7 +6,7 @@ from mango_disease_app.models import Disease
 
 def add_disease(request):
     post_data = None
-    form = DiseaseForm(request.POST or None)
+    form = DiseaseForm(request.POST or None, request.FILES or None)
     diseases = Disease.objects.all()
     
     if request.method == 'POST' and form.is_valid():
@@ -25,7 +25,7 @@ def add_disease(request):
 
 def edit_disease(request, disease_id):
     disease = get_object_or_404(Disease, id=disease_id)
-    form = DiseaseForm(request.POST or None, instance=disease)
+    form = DiseaseForm(request.POST or None, request.FILES or None, instance=disease)
 
     if request.method == 'POST' and form.is_valid():
         form.save()
