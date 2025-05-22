@@ -1,0 +1,35 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Admin{% endblock %}
+{% block page_header %}Admin{% endblock %}
+
+{% load static %} 
+
+{% block content %}
+<a href="javascript:history.back()" class="back-button">← Back</a> 
+
+	<form action="{% url 'add_admin' %}" method="post" novalidate enctype="multipart/form-data">
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="Add Admin">
+	</form>
+
+	<h2>Existing Admins</h2>
+	{% if admins %}
+	<div class="orchard-grid">
+		{% for admin in admins %}
+			<div class="orchard-card">
+				<h3 class="orchard-name">{{ admin.user.get_full_name|default:admin.user.username }}</h3>
+				<div class="card-actions">
+					<a href="{% url 'edit_admin' admin.id %}" class="action-link">Edit</a>
+					<a href="{% url 'delete_admin' admin.id %}" class="action-link delete-link" onclick="return confirm('Revoke admin permissions for this user?');">Revoke Admin</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>No admins added yet.</p>
+	{% endif %}
+{% endblock %}

@@ -46,7 +46,7 @@ def account(request):
     return render(request, 'mango_disease_app/account.html',{'orchards' : orchards})
 
 def admin_tools(request):
-    return render(request, 'mango_disease_app/admintools.html')
+    return render(request, 'mango_disease_app/admin_forms/admintools.html')
 
 def plan(request):
     page_data = generate_plan(request.user)

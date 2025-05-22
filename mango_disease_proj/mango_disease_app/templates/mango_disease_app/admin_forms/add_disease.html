@@ -8,15 +8,6 @@
 {% block content %}
 <a href="javascript:history.back()" class="back-button">← Back</a> 
 
-	{% if new_disease %}
-		<div class="record-success">
-			<h2>New Disease Added!</h2>
-			<p>
-				You have added the {{ new_disease.type }}, {{ new_disease.name }}.
-			</p>
-		</div>
-	{% endif %}
-
 	<form action="{% url 'add_disease' %}" method="post" novalidate enctype="multipart/form-data">
 		{% csrf_token %}
 		<table>

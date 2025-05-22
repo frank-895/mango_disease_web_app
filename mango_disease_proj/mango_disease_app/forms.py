@@ -44,7 +44,6 @@ class DiseaseForm(forms.ModelForm):
             'image': "Example image of the disease / pest",
         }
         
-        
 class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
@@ -106,3 +105,39 @@ class RecordForm(forms.ModelForm):
     #             self.add_error('numberofTreesChecked', f"Must be between 1 and total trees in orchard ({total_trees}).")
     #         if no_infected > no_checked:
     #             self.add_error('numberofTreesInfected', f"Must be between 1 and number of trees checked ({no_checked}).")
+    
+class AddUserProfileForm(forms.ModelForm):
+    user = forms.ModelChoiceField(
+        queryset=User.objects.filter(is_superuser=False).exclude(userprofile__isnull=False),
+        label="Select an existing user to promote to superuser"
+    )
+    
+    class Meta:
+        model = UserProfile
+        fields = ['student_number','degree','interests','image', 'collaborator_independent','bigPicture_detailOriented','communicator_listener','creative_practical']
+        labels = {
+            'student_number': "Enter the student number of the author",
+            'degree': "Enter the degree of the author",
+            'interests': "List a few interests",
+            'collaborator_independent': "Rate the author between 1 and 10, where 1 is strong collaborator and 10 is more independent",
+            'bigPicture_detailOriented': "Rate the author between 1 and 10, where 1 is big picture and 10 is detail oriented",
+            'communicator_listener': "Rate the author between 1 and 10, where 1 is a great communicator and 10 is a great listener",
+            'creative_practical': "Rate the author between 1 and 10, where 1 is most creative and 10 is most practical",
+            'image': "Image of the author (optional)",
+        }
+
+class EditUserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['user']
+        labels = {
+            'student_number': "Enter the student number of the author",
+            'degree': "Enter the degree of the author",
+            'interests': "List a few interests",
+            'collaborator_independent': "Rate the author between 1 and 10, where 1 is strong collaborator and 10 is more independent",
+            'bigPicture_detailOriented': "Rate the author between 1 and 10, where 1 is big picture and 10 is detail oriented",
+            'communicator_listener': "Rate the author between 1 and 10, where 1 is a great communicator and 10 is a great listener",
+            'creative_practical': "Rate the author between 1 and 10, where 1 is most creative and 10 is most practical",
+            'image': "Image of the author (optional)",
+        }
+        

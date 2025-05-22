@@ -449,3 +449,32 @@ h2 {
     font-size: 1.05rem;
     line-height: 1.5;
 }
+
+/* ChatGPT Generated*/
+.message-container {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .message {
+    padding: 0.75em 1.5em;
+    border-radius: 6px;
+    margin-bottom: 0.5em;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  

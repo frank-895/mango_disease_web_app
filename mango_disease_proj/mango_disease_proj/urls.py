@@ -69,7 +69,10 @@ urlpatterns = [
     # OTHER ACCOUNT PATHS
     re_path(r'^plan/$', views.plan, name='plan'),
     re_path(r'^admintools/$', views.admin_tools, name='admin_tools'),
-   
+    path('custom-admin/add/', views.add_admin, name='add_admin'),
+    path('custom-admin/edit/<int:admin_id>/', views.edit_admin, name='edit_admin'),
+    path('custom-admin/delete/<int:admin_id>/', views.delete_admin, name='delete_admin'),   
+
 ]
 
 # Code from https://how.dev/answers/how-to-upload-images-in-django
