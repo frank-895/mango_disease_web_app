@@ -33,7 +33,6 @@ urlpatterns = [
     path('orchard/edit/<int:orchard_id>/', views.edit_orchard, name='edit_orchard'),
     path('orchard/delete/<int:orchard_id>/', views.delete_orchard, name='delete_orchard'),
     path('orchards/', views.orchard_list, name='orchard_list'),
-    re_path(r'^build/$', views.build, name='build'),
     
     # USER AUTHENTICATION PATHS
     path('userlogin/', views.userlogin, name="userlogin"),
@@ -47,6 +46,8 @@ urlpatterns = [
     # CASES PATHS
     path('cases/records/<int:case_id>/', views.records, name='records'),
     path('cases/add_record/<int:case_id>/', views.add_record, name='add_record'),
+    
+    # RECORDS PATHS
     re_path(r'^cases/$', views.cases, name='cases'),
     re_path(r'^new_case/$', views.new_case, name='new_case'),
     
@@ -68,7 +69,7 @@ urlpatterns = [
     # OTHER ACCOUNT PATHS
     re_path(r'^plan/$', views.plan, name='plan'),
     re_path(r'^admintools/$', views.admin_tools, name='admin_tools'),
-    
+   
 ]
 
 # Code from https://how.dev/answers/how-to-upload-images-in-django
