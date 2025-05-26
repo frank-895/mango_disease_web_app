@@ -63,7 +63,14 @@ class VarietyForm(forms.ModelForm):
             'varietySusceptability': "How susceptible is this variety to disease?"
         }
         
-class CaseForm(forms.ModelForm):
+class CaseForm(forms.ModelForm):    
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user is not None:
+            self.fields['orchard'].queryset = Orchard.objects.filter(
+                user=user
+            )
+    
     class Meta:
         ## NOTE FOR PATRICK :) - orchard needs to be limited to the user's orchards only. 
         model = Case

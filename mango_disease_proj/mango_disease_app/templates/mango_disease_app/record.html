@@ -12,11 +12,18 @@
 <a href="javascript:history.back()" class="back-button">← Back</a>
 
 <h2>Case Records</h2>
-<a href="{% url 'add_record' caseID %}" class="new-button">+ Add New Record</a>
+<a href="{% url 'add_record' id %}" class="new-button">+ Add New Record</a>
 
 {% for record in records %}
 	<div class="list_item">
-		<div><p>{{ record.recordedAt }}</p></div>
+		<div>
+			<p><strong>Trees infected: </strong>{{ record.numberOfTreesInfected }} / {{ record.numberOfTreesChecked }}</p>
+			<p>Recorded on {{ record.recordedAt }}</p>
+		</div>
+		<div class="list_end">
+			<a href="{% url 'edit_record' record.id %}" class="action-link">Edit</a>
+			<a href="{% url 'delete_record' record.id %}" class="action-link delete-link">Delete</a>
+		</div>
 	</div>
 {% endfor %}
 	

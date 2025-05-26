@@ -42,7 +42,7 @@ def delete_orchard(request, orchard_id):
 
     if request.method == 'POST':
         orchard.delete()
-        return redirect('build')
+        return redirect('add_orchard')
 
     return render(request, 'mango_disease_app/confirm_delete.html', {'orchard': orchard})
 

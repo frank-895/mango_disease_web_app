@@ -1,0 +1,17 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Account{% endblock %}
+{% block page_header %}Account{% endblock %}
+
+{% load static %} 
+{% block content %}
+<h2>Delete Record</h2>
+<p>Are you sure you wish to delete this record?</p>
+<p>(Note: this action is final and cannot be reversed)</p>
+
+<form method="post" id="managecase">
+    {% csrf_token %}
+    <input type="submit" value="Confirm delete" onclick="return confirm('Delete record?');">
+    <a href="{% url 'records' record.case.id %}">Cancel</a>
+</form>
+{% endblock %}

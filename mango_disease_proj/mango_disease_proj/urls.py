@@ -46,10 +46,14 @@ urlpatterns = [
     # CASES PATHS
     path('cases/records/<int:case_id>/', views.records, name='records'),
     path('cases/add_record/<int:case_id>/', views.add_record, name='add_record'),
+    path('cases/delete_record/<int:record_id>/', views.delete_record, name='delete_record'),
+    path('cases/edit_record/<int:record_id>/', views.edit_record, name='edit_record'),
     
     # RECORDS PATHS
     re_path(r'^cases/$', views.cases, name='cases'),
     re_path(r'^new_case/$', views.new_case, name='new_case'),
+    path('cases/manage/<int:case_id>/', views.manage_case, name='manage_case'),
+    path('cases/edit/<int:case_id>/', views.edit_case, name='edit_case'),
     
     # DISEASE PATHS
     re_path(r'^add_disease/$', views.add_disease, name='add_disease'),

@@ -325,13 +325,21 @@ h2 {
 
 .list_item {
     display: flex;
+    flex-direction: column;
     border-radius: 2px;
     transition: 0.2s;
-    margin: 10px 0;
+    margin: 15px 0;
+    padding: 5px 0;
+    line-height: 150%;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.list_item >.list_end {
+    align-self: flex-end 
 }
 
 .list_item:hover {
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .disease-detail{
@@ -478,3 +486,8 @@ h2 {
     border: 1px solid #f5c6cb;
   }
   
+
+.card-actions-cases {
+    margin-top: 0.5em;
+    line-height: 150%;
+}

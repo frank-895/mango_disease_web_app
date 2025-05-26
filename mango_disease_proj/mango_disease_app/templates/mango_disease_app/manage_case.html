@@ -1,0 +1,22 @@
+{% extends 'mango_disease_app/base.html' %} 
+
+{% block page_title %}Account{% endblock %}
+{% block page_header %}Account{% endblock %}
+
+{% load static %} 
+{% block content %}
+<h2>Manage Case</h2>
+<p>What would you like to do with the case of <strong>{{ case.disease }}</strong> in {{ case.orchard.orchardName }}?</p>
+<p>(Note: all actions are final and cannot be reversed)</p>
+
+<form method="post" id="managecase">
+    {% csrf_token %}
+    <label for="action">Select an action:</label>
+    <select name="action" id="action" form="managecase">
+        <option value="resolve">Resolve</option>
+        <option value="delete">Delete</option>
+    </select>
+    <input type="submit" value="Confirm" onclick="return confirm('Confirm this action?');">
+    <a href="{% url 'cases' %}">Cancel</a>
+</form>
+{% endblock %}

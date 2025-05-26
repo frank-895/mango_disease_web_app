@@ -6,27 +6,33 @@
 {% load static %} 
 
 {% block content %}
-<h2>Your cases</h2>
+    <h2>Your cases</h2>
 
-<a href="{% url 'new_case' %}" class="new-button">+ Add Case</a>
-
-{% if cases %}
-<div class="orchard-grid">
-    {% for case in cases %}
-        <div class="orchard-card">
-            <div class="image-wrapper">
-                <img class="author_img" src="{{ case.disease.image.url|default:"diseasse_images/defualt.png" }}">
+    <a href="{% url 'new_case' %}" class="new-button">+ Add Case</a>
+    {% if data %}
+        {% for category_name, items in data.items %}
+            <h3>{{ category_name }}</h3>
+            <div class="orchard-grid">
+                {% for item in items %}
+                    <div class="orchard-card">
+                        <div class="image-wrapper">
+                            <img class="author_img" src="{{ item.disease.image.url|default:"diseasse_images/defualt.png" }}">
+                        </div>
+                        <h3 class="orchard-name">{{ item.disease.diseaseName }} in {{ item.orchard.orchardName}}</h3>
+                        <p><strong>Part of Plant:</strong> {{ item.partOfPlant }}</p>
+                        {% if item.status == 'resolved' %}
+                        <p>resolved</p>
+                        {% endif %}
+                        <div class="card-actions-cases">
+                            <a href="{% url 'records' item.id %}" class="action-link">Records</a><br>
+                            <a href="{% url 'edit_case' item.id %}" class="action-link">Edit Case Details</a><br>
+                            <a href="{% url 'manage_case' item.id %}" class="action-link delete-link">Manage Case Status</a>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <h3 class="orchard-name">{{ case.disease.diseaseName }} in {{ case.orchard.orchardName}}</h3>
-            <p><strong>Part of Plant:</strong> {{ case.partOfPlant }}</p>
-            <div class="card-actions">
-                <a href="{% url 'records' case.id %}" class="action-link">Edit</a>
-                <a href="{% url 'account' %}" class="action-link delete-link" onclick="return confirm('Delete this orchard?');">Resolve</a>
-            </div>
-        </div>
-    {% endfor %}
-</div>
-{% else %}
-    <p>No orchards added yet.</p>
-{% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No currently open cases</p>
+    {% endif %}
 {% endblock %}
