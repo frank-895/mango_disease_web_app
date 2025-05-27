@@ -22,7 +22,7 @@
         {% if orchards %}
         <div class ='account-dashboard option' >
             
-            <h1>Dashboard</h1>
+            <h1>Orchard Dashboard</h1>
             <div class='tabbuttons'>
             {%for orchard in orchards%}
                 <button class='tablink' onclick="orchardTab(event, 'orchard-{{ orchard.id }}')">{{orchard.orchardName}}</button>
@@ -62,6 +62,12 @@
                                     {% endfor %}
                                     </tbody>
                                 </table>
+                                <div class='button-holder'>
+                                    <a href="{% url 'add_record' case.id %}"
+                                        class="new-button">
+                                        + Add record for this case
+                                    </a>
+                                </div>
                             </div>
                         {% endfor %}
                     {%else%}    
