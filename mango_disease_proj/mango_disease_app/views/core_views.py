@@ -26,31 +26,31 @@ def about(request):
     return render(request, 'mango_disease_app/about.html', page_data)
 
 def account(request):
-    #Query for 5 most recent records
+    #Get Records
     record_qs = (
-        Record.objects
+        Record.objects 
             .select_related("case")
-            .order_by("-recordedAt", "-id")
+            .order_by("-recordedAt", "-id") #Order by Newest first
     )
-    #Query for active cases
+    #Query for active cases and their records
     active_cases_qs = (
         Case.objects
-            .filter(status__iexact="active")
-            .select_related('disease')
-            .prefetch_related(
-                Prefetch("record_set",
+            .filter(status__iexact="active") #Get active cases regardless of capitalisation
+            .select_related('disease')  #join on disease
+            .prefetch_related(          #look for records
+                Prefetch("record_set",  
                         queryset=record_qs,
-                        to_attr="records")
+                        to_attr="records") #save as cases.records
             )
     )
     #Main Orchard Query
     orchards = (Orchard.objects
-                    .filter(user=request.user)
-                    .select_related('variety', 'location')
-                    .prefetch_related(
+                    .filter(user=request.user) #Restrict Orchard Access
+                    .select_related('variety', 'location') #Join with variet and location
+                    .prefetch_related(      #Look for cases next
                         Prefetch("case_set",
                                  queryset=active_cases_qs,
-                                 to_attr="active_cases")
+                                 to_attr="active_cases") #save as orchards.active_cases
                     )
                 )
                             
