@@ -6,13 +6,13 @@
     <a href="{% url 'about' %}" class="nav-item">About</a>
     <a href="{% url 'userlogin' %}" class="nav-item">Login</a>
     {% if user.is_authenticated%}
-    <a href="{% url 'account' %}" class="nav-item">Account</a>
-    <form class="btn-logout"action="{% url 'logout' %}" method="post" style="display:inline;">
+    <a href="{% url 'account' %}" class="nav-item right">Account</a>
+    <form class="btn-logout right"action="{% url 'logout' %}" method="post" style="display:inline;">
         {% csrf_token %}
         <button type="submit" class="nav-item btn-logout">Logout</button>
     </form>
     {% else %}
-    <a href="{% url 'register' %}" class="nav-item">Register</a>
-    <a href="{% url 'userlogin' %}" class="nav-item">Login</a>
+    <a href="{% url 'register' %}" class="nav-item right">Register</a>
+    <a href="{% url 'userlogin' %}" class="nav-item right">Login</a>
     {% endif %}
 </nav>
