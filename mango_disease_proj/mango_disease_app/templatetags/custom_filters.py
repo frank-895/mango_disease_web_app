@@ -53,7 +53,7 @@ def risk_factor_class(risk_score):
     else:
         return "high"
     
-@register.filter
+@register.filter #I THINK THIS CAN BE DELETED
 def next_dates(risk_score, time_last_check):
     time_last_check = int(time_last_check) if str(time_last_check).isdigit() else 99
     today = date.today()
@@ -76,4 +76,24 @@ def next_dates(risk_score, time_last_check):
     next_next_next_date = next_next_date + frequency_days
 
     return f"{next_date.strftime('%B %d, %Y')} | {next_next_date.strftime('%B %d, %Y') } | {next_next_next_date.strftime('%B %d, %Y') }"
+
+@register.filter #Remade to have the dates organised into a list
+def next_dates_list(risk_score, time_last_check):
+    time_last_check = int(time_last_check) if str(time_last_check).isdigit() else 99
+    today = date.today()
+
+    # calculate frequency days
+    if risk_score < LOW_THRESHOLD:
+        frequency_days = timedelta(days=7)
+    elif risk_score < MODERATE_THRESHOLD:
+        frequency_days = timedelta(days=3)
+    else:
+        frequency_days = timedelta(days=1)
+    
+    last_check_date = today - timedelta(days=time_last_check)
+    first_date = last_check_date + frequency_days
+    second_date = first_date + frequency_days
+    third_date = second_date + frequency_days
+
+    return [first_date, second_date, third_date]
 

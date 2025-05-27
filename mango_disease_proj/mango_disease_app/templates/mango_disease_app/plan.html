@@ -26,8 +26,8 @@
       <tr class="{{ item.risk_score|risk_factor_class }}">
         <td>{{ item.orchard }}</td>
         <td>{{ item.risk_score|check_frequency_format }}</td>
-        <td>{{ item.risk_score|next_dates:item.data_used.time_last_check }}</td>
-      </tr>
+        <td>{% with item.risk_score|next_dates_list:item.data_used.time_last_check as dates %}{{ dates.0|date:"M d, Y" }} | {{ dates.1|date:"M d, Y" }} | {{ dates.2|date:"M d, Y" }}{% endwith %}</td>
+        </tr>
       {% endfor %}
     </tbody>
   </table>

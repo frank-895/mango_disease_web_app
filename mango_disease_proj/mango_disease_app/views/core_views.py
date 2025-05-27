@@ -26,6 +26,8 @@ def about(request):
     return render(request, 'mango_disease_app/about.html', page_data)
 
 def account(request):
+    plan_items = generate_plan(request.user) #Use Franks generate_plan
+    plan_by_orchard = {item['orchard']: item for item in plan_items} #Organise each orharcd into an array
     #Get Records
     record_qs = (
         Record.objects 
@@ -53,6 +55,9 @@ def account(request):
                                  to_attr="active_cases") #save as orchards.active_cases
                     )
                 )
+    for o in orchards:
+        o.plan = plan_by_orchard.get(o.orchardName)
+    
                             
     return render(request, 'mango_disease_app/account.html',{'orchards' : orchards})
 
