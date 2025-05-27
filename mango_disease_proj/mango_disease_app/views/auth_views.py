@@ -15,7 +15,7 @@ def userlogin(request):
             return redirect('home')
     else:
         form = AuthenticationForm()
-    return render(request, 'mango_disease_app/userlogin.html', {'form':form})
+    return render(request, 'mango_disease_app/auth/userlogin.html', {'form':form})
 
 def register(request):
     #Register form posts to itself on submit
@@ -28,7 +28,7 @@ def register(request):
             return redirect("home")
     else:
         form = UserCreationForm()
-    return render(request, 'mango_disease_app/register.html', {'form':form})
+    return render(request, 'mango_disease_app/auth/register.html', {'form':form})
 
 def add_admin(request):
     post_data = None

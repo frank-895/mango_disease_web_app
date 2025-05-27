@@ -7,7 +7,7 @@ def records(request, case_id):
     case = Case.objects.get(id=case_id)
     cRecords = Record.objects.filter(case=case)
     
-    return render(request, 'mango_disease_app/record.html', {
+    return render(request, 'mango_disease_app/account/record.html', {
         'records': cRecords,
         'id': case_id,
     })
@@ -24,7 +24,7 @@ def add_record(request, case_id):
         }
         form = RecordForm()
 
-    return render(request, 'mango_disease_app/add_record.html', {
+    return render(request, 'mango_disease_app/account/forms/add_record.html', {
         'form': form, 
         'new_record': post_data,
         'caseID': case_id,
