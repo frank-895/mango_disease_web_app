@@ -8,26 +8,27 @@
 {% block content %}
     <h2>Your cases</h2>
 
-    <a href="{% url 'new_case' %}" class="new-button">+ Add Case</a>
+    <a href="{% url 'new_case' %}" class="new-button">+ Add Case</a><br>
     {% if data %}
         {% for category_name, items in data.items %}
             <h3>{{ category_name }}</h3>
             <div class="orchard-grid">
                 {% for item in items %}
                     <div class="orchard-card">
+                        {% if category_name == 'Active' %}
                         <div class="image-wrapper">
                             <img class="author_img" src="{{ item.disease.image.url|default:"diseasse_images/defualt.png" }}">
                         </div>
+                        {% endif %}
                         <h3 class="orchard-name">{{ item.disease.diseaseName }} in {{ item.orchard.orchardName}}</h3>
                         <p><strong>Part of Plant:</strong> {{ item.partOfPlant }}</p>
-                        {% if item.status == 'resolved' %}
-                        <p>resolved</p>
-                        {% endif %}
+                        {% if category_name == 'Active' %}
                         <div class="card-actions-cases">
                             <a href="{% url 'records' item.id %}" class="action-link">Records</a><br>
                             <a href="{% url 'edit_case' item.id %}" class="action-link">Edit Case Details</a><br>
                             <a href="{% url 'manage_case' item.id %}" class="action-link delete-link">Manage Case Status</a>
                         </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
