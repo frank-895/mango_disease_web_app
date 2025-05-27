@@ -1,10 +1,11 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib import messages
 
 from mango_disease_app.forms import AddUserProfileForm, EditUserProfileForm
 from mango_disease_app.models import UserProfile
+from mango_disease_app.forms import CustomUserCreationForm
 
 
 def userlogin(request):
@@ -20,14 +21,14 @@ def userlogin(request):
 def register(request):
     #Register form posts to itself on submit
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         #Info Validation
         if form.is_valid():
             #Save to User DD and Login
             login(request, form.save())
             return redirect("home")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'mango_disease_app/register.html', {'form':form})
 
 def add_admin(request):
