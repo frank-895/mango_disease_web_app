@@ -1,6 +1,6 @@
-from mango_disease_app.models import Disease, Orchard, Record, UserProfile
+from mango_disease_app.models import Disease, Orchard, Record, UserProfile, Case
 from django.shortcuts import render
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Max
 from mango_disease_app.services.planner import generate_plan
 
 def home(request):
@@ -26,21 +26,32 @@ def about(request):
     return render(request, 'mango_disease_app/about.html', page_data)
 
 def account(request):
+    #Query for 5 most recent records
+    record_qs = (
+        Record.objects
+            .select_related("case")
+            .order_by("-recordedAt", "-id")
+    )
+    #Query for active cases
+    active_cases_qs = (
+        Case.objects
+            .filter(status__iexact="active")
+            .select_related('disease')
+            .prefetch_related(
+                Prefetch("record_set",
+                        queryset=record_qs,
+                        to_attr="records")
+            )
+    )
+    #Main Orchard Query
     orchards = (Orchard.objects
                     .filter(user=request.user)
                     .select_related('variety', 'location')
                     .prefetch_related(
-                        Prefetch(
-                            'record_set',
-                            queryset=(
-                                Record.objects
-                                    .select_related('disease')
-                                    .order_by("-recordedAt", '-id')[:5] #Last 5 Records  https://forum.djangoproject.com/t/prefetch-top-n-most-recent-related-objects/39767
-                            ),
-                            to_attr='recent_records'
-                        )
+                        Prefetch("case_set",
+                                 queryset=active_cases_qs,
+                                 to_attr="active_cases")
                     )
-                    
                 )
                             
     return render(request, 'mango_disease_app/account.html',{'orchards' : orchards})

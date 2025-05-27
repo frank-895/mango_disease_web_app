@@ -15,42 +15,60 @@
 {% endblock %}
 
 {% load static %} 
-
-{% block content %}
+{%block content %}
     {% if user.is_authenticated %}
-
-    <!-- COMMENT STARTS HERE-->
-    {% comment %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
         {% if orchards %}
         <div class ='account-dashboard option' >
             
             <h1>Dashboard</h1>
-            <div class='tab'>
+            <div class='tabbuttons'>
             {%for orchard in orchards%}
                 <button class='tablink' onclick="orchardTab(event, 'orchard-{{ orchard.id }}')">{{orchard.orchardName}}</button>
             {% endfor %}
             </div>
             {%for orchard in orchards%}
                 <div id="orchard-{{ orchard.id }}" class="tabcontent">
-                    <h3>{{orchard.orchardName}}</h3>
-                    <h3>{{orchard.variety}}</h3>
-                    <h3>Recent Reports</h3>
-                    <table>
-                    {% for record in orchard.recent_records%}
-                        <tr>
-                            <td>{{record.recordedAt}}</td>
-                            <td>{{record.disease.diseaseName}}</td>
-                        </tr>
-                    {% empty %}
-                        <tr><td colspan="2">No records yet.</td></tr>
-                    {% endfor %}
-                    </table>
+                    <h2>{{orchard.orchardName}}</h3>
+                    <p>
+                        Variety: {{orchard.variety}} |
+                        Location: {{orchard.location}}
+                    </p>
+                    {% if orchard.active_cases %}
+                        <div class="casetabbuttons">
+                            {% for case in orchard.active_cases %}
+                                <button class="caselink" onclick="caseTab(event,'case-{{ case.id }}-orchard-{{ orchard.id }}')">
+                                    {{case.disease.diseaseName}} ({{case.partOfPlant}})
+                                </button>
+                            {% endfor %}
+                        </div>
+                        {% for case in orchard.active_cases %}
+                            <div id="case-{{ case.id }}-orchard-{{ orchard.id }}" class="casecontent">
+                                <table>
+                                    <thead>
+                                    <tr><th>Date</th><th>Checked</th><th>Infected</th></tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for rec in case.records|slice:":5" %}
+                                        <tr>
+                                        <td>{{ rec.recordedAt }}</td>
+                                        <td>{{ rec.numberOfTreesChecked }}</td>
+                                        <td>{{ rec.numberOfTreesInfected }}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr><td colspan="3">No records yet.</td></tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endfor %}
+                    {%else%}    
+                    <h2>No Active Disease Cases</h3>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
         {% endif %}
-    {% endcomment %}
-    <!-- COMMENT ENDS HERE-->
      
         <div class="account-options">
             <h2>Choose an Option</h2>
