@@ -100,7 +100,7 @@ Once logged in as a superuser, you can:
 ## 🧪 Sample Test Users
 - Username: `testuser`
 - Password: `testpass`
-> You can use this account to explore the app without affecting real data.
+> You can use this account to explore the app without affecting real data
 
 ## 📂 Project Structure
 ```bash
