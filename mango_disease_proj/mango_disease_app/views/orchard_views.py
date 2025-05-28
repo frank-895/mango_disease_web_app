@@ -30,7 +30,7 @@ def edit_orchard(request, orchard_id):
 
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect('build')
+        return redirect('account')
 
     return render(request, 'mango_disease_app/account/forms/edit_orchard.html', {
         'form': form,
