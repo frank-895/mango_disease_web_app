@@ -23,7 +23,7 @@ Visit the live application:
 ## 🔐 Roles & Access
 
 - **Admin**: Full access to disease entry, location and variety management.
-- **Registered Users**: Can create and manage orchards, and record findings.
+- **Registered Users**: Can create and manage orchards, open cases, record findings, and generate inspection schedules.
 
 ## ⚙️ Tech Stack
 
@@ -93,9 +93,9 @@ The app uses a weighted risk score algorithm to determine which orchards require
 All inputs are normalized to a 0–1 scale. The final risk score helps prioritize inspections.
 
 ## 🛠 Admin Tools
-Once logged in as a superuser, you can:
+Once logged in as a superuser (admin), you can:
 - Add/edit/delete diseases, varieties, and orchard locations.
-- Manage user-submitted records and orchards.
+- Promote other people to be admins and add them to the authors page.
 
 ## 🧪 Sample Test Users
 ### Normal User Test
@@ -111,11 +111,11 @@ Once logged in as a superuser, you can:
 ```bash
 mango_disease_app/
 ├── models.py           # Core database models
-├── views.py            # View logic
+├── views/              # View logic
 ├── forms.py            # Form classes
 ├── templates/          # HTML templates and templatetags
 ├── services/planner.py # Risk calculation logic
-├── static/             # CSS, JS, images
+├── static/             # CSS, images
 ```
 
 ## 📝  Disclaimer
