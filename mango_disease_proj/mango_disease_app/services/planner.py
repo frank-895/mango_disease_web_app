@@ -96,8 +96,8 @@ def generate_plan(user):
     
     for orchard in orchards:
         # records that are active and associated with the orchard
-        active_cases = Case.objects.filter(orchard=orchard, status='active')
-        
+        active_cases = Case.objects.filter(orchard=orchard, status__iexact='active')
+                
         if active_cases.exists(): # diseases have been found
             diseases = [case.disease for case in active_cases]
             severity = calc_severity(diseases)
@@ -142,6 +142,7 @@ def generate_plan(user):
             'risk_score': round(risk_score, 2),
             'data_used': data_used,
         })
+    
         
     return plan
 
