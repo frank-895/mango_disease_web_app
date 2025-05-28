@@ -6,6 +6,9 @@
 {% load static %} 
 
 {% block content %}
+ <!-- BACK BUTTON -->
+    <a href="{% url 'account' %}" class="back-button">← Back</a>
+
     <h2>Your cases</h2>
 
     <a href="{% url 'new_case' %}" class="new-button">+ Add Case</a><br>

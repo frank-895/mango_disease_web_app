@@ -6,8 +6,10 @@
 {% load static %} 
 
 {% block content %}
-<a href="javascript:history.back()" class="back-button">← Back</a> 
+ <!-- BACK BUTTON -->
+   <a href="{% url 'admin_tools' %}" class="back-button">← Back</a>
 
+	
 	<form action="{% url 'add_admin' %}" method="post" novalidate enctype="multipart/form-data">
 		{% csrf_token %}
 		<table>

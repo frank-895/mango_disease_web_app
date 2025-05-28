@@ -9,7 +9,8 @@
 {% load static %} 
 
 {% block content %}
-<a href="javascript:history.back()" class="back-button">← Back</a>
+ <!-- BACK BUTTON -->
+    <a href="{% url 'account' %}" class="back-button">← Back</a>
 
 <h2>Case Records</h2>
 <a href="{% url 'add_record' id %}" class="new-button">+ Add New Record</a>

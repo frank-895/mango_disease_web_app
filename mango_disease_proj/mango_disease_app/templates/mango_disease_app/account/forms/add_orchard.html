@@ -6,7 +6,8 @@
 {% load static %} 
 
 {% block content %}
-<a href="javascript:history.back()" class="back-button">← Back</a>
+ <!-- BACK BUTTON -->
+    <a href="{% url 'account' %}" class="back-button">← Back</a>
 
 {% if new_orchard %}
     <div class="record-success">

@@ -6,6 +6,9 @@
 {% load static %} 
 
 {% block content %}
+ <!-- BACK BUTTON -->
+    <a href="{% url 'account' %}" class="back-button">← Back</a>
+	
 	{% if new_record %}
 		<div class="record-success">
 			<h2>New Record Added!</h2>
