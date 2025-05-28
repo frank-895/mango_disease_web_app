@@ -14,6 +14,8 @@
     <a href="{% url 'account' %}" class="back-button">← Back</a>
 
   <h2>Orchard Monitoring Plan</h2>
+
+  {% if page_data %}
   <table class="inspection-summary">
     <thead>
       <tr>
@@ -71,4 +73,7 @@
       </div>    
     {% endfor %}
   </div>
+  {% else %}
+  <h3 style="text-align:center;">You have no orchards, so no monitoring plan can be generated!</h3>
+  {% endif %}
 {% endblock %}

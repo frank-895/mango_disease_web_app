@@ -12,7 +12,7 @@
     <h2>Your cases</h2>
 
     <a href="{% url 'new_case' %}" class="new-button">+ Add Case</a><br>
-    {% if data %}
+    {% if data.Active or data.Resolved %}
         {% for category_name, items in data.items %}
             <h3>{{ category_name }}</h3>
             <div class="orchard-grid">
@@ -37,6 +37,6 @@
             </div>
         {% endfor %}
     {% else %}
-        <p>No currently open cases</p>
+        <h3>No current cases</h3>
     {% endif %}
 {% endblock %}
