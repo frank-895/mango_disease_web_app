@@ -18,7 +18,7 @@ def add_orchard(request):
     # Get the orchards for the current user
     orchards = Orchard.objects.filter(user=request.user)
 
-    return render(request, 'mango_disease_app/add_orchard.html', {
+    return render(request, 'mango_disease_app/account/forms/add_orchard.html', {
         'form': form,
         'new_orchard': new_orchard,
         'orchards': orchards,
@@ -32,7 +32,7 @@ def edit_orchard(request, orchard_id):
         form.save()
         return redirect('build')
 
-    return render(request, 'mango_disease_app/edit_orchard.html', {
+    return render(request, 'mango_disease_app/account/forms/edit_orchard.html', {
         'form': form,
         'orchard': orchard,
     })
@@ -44,7 +44,7 @@ def delete_orchard(request, orchard_id):
         orchard.delete()
         return redirect('add_orchard')
 
-    return render(request, 'mango_disease_app/confirm_delete.html', {'orchard': orchard})
+    return render(request, 'mango_disease_app/account/forms/confirm_delete.html', {'orchard': orchard})
 
 def orchard_list(request):
     search_query = request.GET.get('search', '')
@@ -56,7 +56,7 @@ def orchard_list(request):
     if search_query:
         orchards = orchards.filter(orchardName__icontains=search_query)
 
-    return render(request, 'mango_disease_app/add_orchard.html', {
+    return render(request, 'mango_disease_app/account/forms/add_orchard.html', {
         'orchards': orchards,
         'search_query': search_query
     })

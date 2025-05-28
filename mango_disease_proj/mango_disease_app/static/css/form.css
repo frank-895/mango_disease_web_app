@@ -57,7 +57,7 @@ form .errorlist {
     padding: 0;
 }
 
-input[type="submit"] {
+input[type="submit"], form button {
     display: inline-block;
     background-color: #007bff;
     color: white;
@@ -69,6 +69,6 @@ input[type="submit"] {
     margin-top: 1rem;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, form button:hover  {
     background-color: #0056b3;
 }

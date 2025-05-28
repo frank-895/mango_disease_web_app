@@ -83,10 +83,14 @@
 }
 
 /* ───── Case table re-skins your inspection-summary rules ── */
+.casecontent div>div {
+    padding: 10px;
+}
 .casecontent table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 18px;
+    margin-bottom: 15px;   
 }
 
 .casecontent th,

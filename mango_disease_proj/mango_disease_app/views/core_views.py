@@ -11,19 +11,19 @@ def diseases(request):
         'diseases': Disease.objects.filter(type='disease'),
         'pests': Disease.objects.filter(type='pest'),
     }
-    return render(request, 'mango_disease_app/diseases.html', {'data':categories})
+    return render(request, 'mango_disease_app/site_base/diseases.html', {'data':categories})
 
 def ind_disease(request, name):
     try:
         disease = Disease.objects.get(diseaseName=name)
     except Disease.DoesNotExist:
         return render(request, 'mango_disease_app/ind_disease.html')
-    return render(request, 'mango_disease_app/ind_disease.html',{'disease':disease})
+    return render(request, 'mango_disease_app/site_base/ind_disease.html',{'disease':disease})
 
 def about(request):    
     authors = UserProfile.objects.all() 
     page_data = {'cards': authors}
-    return render(request, 'mango_disease_app/about.html', page_data)
+    return render(request, 'mango_disease_app/site_base/about.html', page_data)
 
 def account(request):
     plan_items = generate_plan(request.user) #Use Franks generate_plan
@@ -59,11 +59,11 @@ def account(request):
         o.plan = plan_by_orchard.get(o.orchardName)
     
                             
-    return render(request, 'mango_disease_app/account.html',{'orchards' : orchards})
+    return render(request, 'mango_disease_app/account/account.html',{'orchards' : orchards})
 
 def admin_tools(request):
     return render(request, 'mango_disease_app/admin_forms/admintools.html')
 
 def plan(request):
     page_data = generate_plan(request.user)
-    return render(request, 'mango_disease_app/plan.html', {'page_data':page_data})
+    return render(request, 'mango_disease_app/account/plan.html', {'page_data':page_data})

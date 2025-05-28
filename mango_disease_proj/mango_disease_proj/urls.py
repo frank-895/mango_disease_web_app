@@ -37,10 +37,11 @@ urlpatterns = [
     # USER AUTHENTICATION PATHS
     path('userlogin/', views.userlogin, name="userlogin"),
     path('register/', views.register, name="register"),
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='mango_disease_app/password_reset.html'), name='password_reset'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='mango_disease_app/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='mango_disease_app/password_reset_confirm.html'), name='password_reset_confirm'),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='mango_disease_app/password_reset_complete.html'), name='password_reset_complete'),
+    path('logout/', auth_views.LogoutView.as_view(next_page="home"), name='logout',),
+    path('reset-password/', auth_views.PasswordResetView.as_view(template_name='mango_disease_app/auth/forms/password_reset.html'), name='password_reset'),
+    path('reset-password/done/', auth_views.PasswordResetDoneView.as_view(template_name='mango_disease_app/auth/forms/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='mango_disease_app/auth/forms/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='mango_disease_app/auth/forms/password_reset_complete.html'), name='password_reset_complete'),
     re_path(r'^account/$', views.account, name='account'),
     
     # CASES PATHS

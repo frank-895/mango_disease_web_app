@@ -35,10 +35,11 @@ a {
 /* End Reference */
 
 .large-nav {
-    display: block;
+    display: flex;
 }
 
 .small-nav {
+    display: flex;
     display: none;
 }
 
@@ -52,6 +53,11 @@ a {
         align-items: center;
         height: 60px;
     }
+}
+
+.btn-logout {
+    all: unset;
+    height:100%;
 }
 
 /* CSS adapted from https://www.w3schools.com/howto/howto_js_topnav.asp */
@@ -78,7 +84,7 @@ nav {
     font-size: 17px;
 }
 
-nav a:hover:not(.img-logo), .dropdown-button:hover, .disease-dropdown li a:hover, .dropdown:hover .dropdown-button {
+nav a:hover:not(.img-logo), .dropdown-button:hover, .disease-dropdown li a:hover, .dropdown:hover .dropdown-button, .btn-logout:hover{
     background-color: #ddd;
     color: black;
 }
@@ -86,6 +92,21 @@ nav a:hover:not(.img-logo), .dropdown-button:hover, .disease-dropdown li a:hover
 nav .logo {
     height: 40px;
 }
+
+.nav-right {
+    height: 60px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logout-form{
+    all: unset;
+    height:100%;
+    cursor: pointer;
+}
+
+
 /* End Reference */
 
 .dropdown {
@@ -366,6 +387,7 @@ h3 {
     gap: 30px;
     align-items: flex-start;
 }
+
 
 .disease-image-box {
     flex: 0 1 300px;

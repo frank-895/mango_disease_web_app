@@ -11,7 +11,7 @@ def cases(request):
         'Resolved': cases.filter(status__iexact='resolved'),
     }
     
-    return render(request, 'mango_disease_app/cases.html', {
+    return render(request, 'mango_disease_app/account/cases.html', {
         'cases': cases,
         'data': categories,
     })
@@ -29,7 +29,7 @@ def new_case(request):
         }
         form = CaseForm(user=request.user)
     
-    return render(request, 'mango_disease_app/new_case.html', {'form': form, 'new_case': post_data})
+    return render(request, 'mango_disease_app/account/forms/new_case.html', {'form': form, 'new_case': post_data})
 
 def manage_case(request, case_id):
     case = Case.objects.get(id=case_id,orchard__user=request.user)
@@ -44,7 +44,7 @@ def manage_case(request, case_id):
             case.delete()
             return redirect('cases')
     
-    return render(request, 'mango_disease_app/manage_case.html', {'case':case})
+    return render(request, 'mango_disease_app/account/forms/manage_case.html', {'case':case})
 
 def edit_case(request, case_id):
     post_data = None
@@ -60,7 +60,7 @@ def edit_case(request, case_id):
         }
         form = CaseForm(user=request.user)
 
-    return render(request, 'mango_disease_app/edit_case.html', {
+    return render(request, 'mango_disease_app/account/forms/edit_case.html', {
         'form': form,
         'new_case': post_data,
         'id': case.id
