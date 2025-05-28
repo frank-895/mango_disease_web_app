@@ -47,7 +47,10 @@ class Orchard(models.Model):
     orchardName = models.CharField(max_length=255)
     noTreesRow = models.IntegerField()
     noTreesColumn = models.IntegerField()
-    area = models.IntegerField(validators=[validators.MinValueValidator(0)])
+    area = models.FloatField(
+        validators=[validators.MinValueValidator(0)],
+        help_text="Enter in acres."
+        )
     variety = models.ForeignKey(
         Variety,
         on_delete=models.PROTECT

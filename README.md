@@ -98,9 +98,14 @@ Once logged in as a superuser, you can:
 - Manage user-submitted records and orchards.
 
 ## 🧪 Sample Test Users
+### Normal User Test
 - Username: `testuser`
 - Password: `testpass`
 > You can use this account to explore the app without affecting real data
+
+### Admin User Test
+- Username: `testadmin`
+- Password: `testadmin`
 
 ## 📂 Project Structure
 ```bash
