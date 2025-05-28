@@ -83,7 +83,15 @@ class CaseForm(forms.ModelForm):
             'partOfPlant': 'The part of the plant affected',
         }
         
-class RecordForm(forms.ModelForm):
+class RecordForm(forms.ModelForm):    
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user is not None:
+            self.fields['case'].queryset = Case.objects.filter(
+                orchard__user=user,
+                status__iexact='active',
+            )
+            
     class Meta:
         model = Record
         fields = ['case','recordedAt','numberOfTreesChecked','numberOfTreesInfected']

@@ -15,7 +15,7 @@ def records(request, case_id):
 def add_record(request, case_id):
     post_data = None
     rCase = Case.objects.get(id=case_id)
-    form = RecordForm(request.POST or None, initial={'case':rCase,'orchard':rCase.orchard})
+    form = RecordForm(request.POST or None, initial={'case':rCase,'orchard':rCase.orchard}, user=request.user)
 
     if request.method == 'POST' and form.is_valid():
         new_record = form.save()
