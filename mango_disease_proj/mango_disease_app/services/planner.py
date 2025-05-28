@@ -186,7 +186,7 @@ def calc_stocking_score(orchard):
     stocking_rate = (orchard.noTreesRow * orchard.noTreesColumn) / orchard.area
     
     # an ultra high-density mango plantation has a density of 1000/acre, which will define the maximum value of our stocking rate
-    return (min(stocking_rate / 0.37, 1), round(stocking_rate, 2))
+    return (min(stocking_rate / 0.37, 1), round(stocking_rate / 0.37, 2))
 
 
 def calc_last_check_score(orchard):

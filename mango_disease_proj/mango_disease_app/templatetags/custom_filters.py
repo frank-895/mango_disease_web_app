@@ -23,7 +23,7 @@ def meterclass(value):
     except Exception:
         return ''
 
-LOW_THRESHOLD = 0.4
+LOW_THRESHOLD = 0.45
 MODERATE_THRESHOLD = 0.7
 
 @register.filter
