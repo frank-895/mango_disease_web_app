@@ -37,7 +37,7 @@ def delete_record(request, record_id):
         record.delete()
         return redirect("cases")
     
-    return render(request, 'mango_disease_app/delete_record.html', {'record':record})
+    return render(request, 'mango_disease_app/account/forms/delete_record.html', {'record':record})
 
 def edit_record(request, record_id):
     post_data = None
@@ -53,7 +53,7 @@ def edit_record(request, record_id):
         }
         form = RecordForm()
 
-    return render(request, 'mango_disease_app/edit_record.html', {
+    return render(request, 'mango_disease_app/account/forms/edit_record.html', {
         'form': form,
         'new_record': post_data,
         'id': record.id
