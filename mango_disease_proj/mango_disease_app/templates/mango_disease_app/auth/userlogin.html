@@ -10,14 +10,6 @@
         {% csrf_token %}
         {{form}}
         <button>Submit</button>
-
-   <button><p><a href="#" onclick="redirectToReset()">Forgot your password?</a></p></button>
-
-<script>
-  function redirectToReset() {
-    window.location.href = "{% url 'password_reset' %}";
-  }
-</script>
 </form>
 
 {% endblock %}
