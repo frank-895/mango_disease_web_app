@@ -22,7 +22,7 @@ def add_record(request, case_id):
         post_data = {
             'time':new_record.recordedAt,
         }
-        form = RecordForm()
+        form = RecordForm(initial={'case':rCase,'orchard':rCase.orchard}, user=request.user)
 
     return render(request, 'mango_disease_app/account/forms/add_record.html', {
         'form': form, 
