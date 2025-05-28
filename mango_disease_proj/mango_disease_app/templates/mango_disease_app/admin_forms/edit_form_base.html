@@ -6,7 +6,7 @@
 {% load static %} 
 
 {% block content %}
-<a href="javascript:history.back()" class="back-button">← Back</a>
+<a href="{% url 'admin_tools' %}" class="back-button">← Back</a>
 
 <h2>Edit {{ entity_name }}</h2>
 <form method="post" enctype="multipart/form-data" novalidate>

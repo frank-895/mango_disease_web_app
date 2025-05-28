@@ -8,6 +8,7 @@
 <h2>Delete Record</h2>
 <p>Are you sure you wish to delete this record?</p>
 <p>(Note: this action is final and cannot be reversed)</p>
+<a href="{% url 'account' %}" class="back-button">← Back</a>
 
 <form method="post" id="managecase">
     {% csrf_token %}
